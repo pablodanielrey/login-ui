@@ -18,13 +18,6 @@ COPY docker/supervisor/apache.conf /etc/supervisor/conf.d
 COPY docker/apache/000-default.conf /etc/apache2/sites-available
 COPY docker/entrypoint.sh /
 
-#para evitar problemas con la instalacion del angular
-#USER node
-#RUN mkdir -p /home/node/.npm-global
-#ENV PATH=/home/node/.npm-global/bin:$PATH
-#ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
-#RUN npm install -g --unsafe @angular/cli
-
 RUN curl -o- -L https://yarnpkg.com/install.sh | bash
 RUN yarn global add @angular/cli
 RUN ng set --global packageManager=yarn
@@ -32,8 +25,9 @@ RUN ng set --global packageManager=yarn
 COPY src /src
 WORKDIR /src
 
-#RUN cd /src/login && yarn install
-#RUN cd /src/login && ng build --configuration=econo --build-optimizer --aot --i18n-file src/messages.xlf --i18n-format xlf --i18n-locale es
+RUN cd /src/login-ui && yarn install
+#RUN cd /src/login-ui && ng build --configuration=econo --build-optimizer --aot --i18n-file src/messages.xlf --i18n-format xlf --i18n-locale es
+RUN cd /src/login-ui && ng build --prod --build-optimizer --aot
 EXPOSE 80
 
 ENTRYPOINT ["/entrypoint.sh"]
