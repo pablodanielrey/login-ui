@@ -4,11 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
+import { RecuperarClaveComponent } from './recuperar-clave/recuperar-clave.component';
 
 @NgModule({
   declarations: [
     AppComponent,    
-    LoginComponent
+    LoginComponent, RecuperarClaveComponent
   ],
   imports: [
     BrowserModule,
