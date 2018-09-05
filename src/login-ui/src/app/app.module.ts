@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from './material.module';
+
 import { LoginComponent } from './login/login.component';
 import { RecuperarClaveComponent } from './recuperar-clave/recuperar-clave.component';
 
@@ -13,7 +15,8 @@ import { RecuperarClaveComponent } from './recuperar-clave/recuperar-clave.compo
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

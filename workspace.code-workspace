@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "/src/github/assistance"
+		},
+		{
+			"path": "/src/github/apps"
 		}
 	],
 	"settings": {}
