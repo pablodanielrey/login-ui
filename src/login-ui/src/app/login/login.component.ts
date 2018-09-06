@@ -11,6 +11,8 @@ export class LoginComponent implements OnInit {
 
   consent_id: string = null;
   hide: boolean = true;
+  usuario: string = "";
+  clave: string = "";
 
   constructor(private route: ActivatedRoute) { }
 
@@ -19,6 +21,11 @@ export class LoginComponent implements OnInit {
       this.consent_id = params['consent'];
       console.log(this.consent_id);
     });
+  }
+
+  acceder() {
+    console.log(this.usuario);
+    console.log(this.clave);
   }
 
 }
