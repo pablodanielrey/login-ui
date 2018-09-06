@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   consent_id: string = null;
+  hide: boolean = true;
 
   constructor(private route: ActivatedRoute) { }
 
