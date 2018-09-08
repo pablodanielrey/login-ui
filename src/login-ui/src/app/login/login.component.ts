@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-
 import { ActivatedRoute } from '@angular/router';
+
+import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'; 
+
+import { map } from 'rxjs/operators';
+
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-login',
@@ -10,11 +15,24 @@ import { ActivatedRoute } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   consent_id: string = null;
-  hide: boolean = true;
-  usuario: string = "";
-  clave: string = "";
 
-  constructor(private route: ActivatedRoute) { }
+  formulario: FormGroup;
+
+  hide: boolean = true;
+  usuario = new FormControl('', Validators.required);
+  clave = new FormControl('', Validators.required);
+
+  subscriptions = [];
+
+  constructor(private fb: FormBuilder, 
+              private route: ActivatedRoute, 
+              private service: LoginService) { 
+
+    this.formulario = fb.group({
+      'usuario': this.usuario,
+      'clave': this.clave
+    });
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -23,7 +41,24 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  cambiar_tipo(input: any): any {
+    input.type = input.type === 'password' ?  'text' : 'password';
+  }
+
   acceder() {
+    console.log(this.formulario);
+    if (!this.formulario.valid) {
+      return;
+    }
+
+    this.subscriptions.push(this.service.login(this.usuario.value, this.clave.value).subscribe(
+      r => {
+        console.log(r);
+        this.formulario.reset();
+      },
+      e => {
+        console.log(e);
+      }));
     console.log(this.usuario);
     console.log(this.clave);
   }

@@ -9,28 +9,27 @@
           <div>Iniciar sesión</div>
       </div>
       <div class="contenedorLogin">
-        <form class="formulario" (ngSubmit)='acceder()'>
+        <form class="formulario" [formGroup]='formulario' (ngSubmit)='acceder()'>
               <mat-form-field class="example-full-width">
                 <mat-icon class="iconoFormulario" matPrefix>person</mat-icon>
-                <input class="itemInput" matInput placeholder="Usuario" name='usuario' [(ngModel)]="usuario">
-                <mat-error> nombre de usuario incorrecto</mat-error>
+                <input class="itemInput" matInput placeholder="Usuario" formControlName='usuario'>
+                <mat-error *ngIf='usuario.invalid'> nombre de usuario incorrecto</mat-error>
               </mat-form-field>
               <mat-form-field class="example-full-width">
                 <mat-icon class="iconoFormulario" matPrefix>lock</mat-icon>
-                <input *ngIf='hide' type="password" matInput placeholder="Contraseña" name='clave' [(ngModel)]="clave">
-                <input *ngIf='!hide' type="text" matInput placeholder="Contraseña" name='clave' [(ngModel)]="clave">
-                <mat-icon class="iconoVerContrasena" matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-                <mat-error> contraseña incorrecta</mat-error>
+                <input #clave type="password" matInput placeholder="Contraseña" formControlName='clave'>
+                <mat-icon class="iconoVerContrasena" matSuffix (click)="cambiar_tipo(clave)">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                <mat-error *ngIf='clave.invalid'> contraseña incorrecta</mat-error>
               </mat-form-field>
               <div class="contenedorBtnAcceder">
                   <button class="btnAcceder" type='submit' mat-raised-button>ACCEDER</button>
               </div>
               <mat-checkbox class="checkboxRecordar">Recordar contraseña</mat-checkbox>
-          </form>
-          <div class="contenedorAyuda">
-              <div><a routerLink='/recuperar_clave'>Olvidé mi contraseña</a></div>
-              <div><a href="" target="_blank">Ayuda y preguntas frecuentes</a></div>
-          </div>
+        </form>
+        <div class="contenedorAyuda">
+            <div><a routerLink='/recuperar_clave'>Olvidé mi contraseña</a></div>
+            <div><a href="" target="_blank">Ayuda y preguntas frecuentes</a></div>
+        </div>
       </div>
 
       <div class="logoFCE">

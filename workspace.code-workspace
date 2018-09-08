@@ -10,7 +10,7 @@
 			"path": "/src/github/assistance"
 		},
 		{
-			"path": "/src/github/apps"
+			"path": "/src/github/login-api"
 		}
 	],
 	"settings": {}
