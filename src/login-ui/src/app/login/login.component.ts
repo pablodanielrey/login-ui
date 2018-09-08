@@ -15,10 +15,8 @@ import { LoginService } from '../login.service';
 export class LoginComponent implements OnInit {
 
   consent_id: string = null;
-
+  estado : number = 200;
   formulario: FormGroup;
-
-  hide: boolean = true;
   usuario = new FormControl('', Validators.required);
   clave = new FormControl('', Validators.required);
 
@@ -54,10 +52,12 @@ export class LoginComponent implements OnInit {
     this.subscriptions.push(this.service.login(this.usuario.value, this.clave.value).subscribe(
       r => {
         console.log(r);
+        this.estado = 200;
         this.formulario.reset();
       },
       e => {
         console.log(e);
+        this.estado = e.status;
       }));
     console.log(this.usuario);
     console.log(this.clave);
