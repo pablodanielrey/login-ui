@@ -27,7 +27,10 @@ export class AppComponent {
         this.router.navigate(['consent',challenge]);
       }
 
-      this.router.navigate['error'];
+      this.router.navigate(['error']);
+    },
+    e => {
+      this.router.navigate(['error']);
     });
   }
 }
