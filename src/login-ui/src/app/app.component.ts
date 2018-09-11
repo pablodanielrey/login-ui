@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
 
 import { LoginService } from './login.service';
 
@@ -12,26 +13,61 @@ import { LoginService } from './login.service';
 export class AppComponent {
   title = 'login-ui';
 
-  constructor(private router: Router, private service:LoginService) {}
+  constructor(@Inject(DOCUMENT) private document: any, private router: Router, private service: LoginService) { }
 
   ngOnInit() {
-    /*
-    this.service.chequear_sesion().subscribe(
-      s => {
-        console.log(s);
-      },
-      e => {
-        console.log('error obteniendo la sesión');
-        this.router.navigate(['login']);
+    this.router.routerState.root.queryParamMap.subscribe(p => {
+      if (p.has('login_challenge')) {
+        let challenge = p.get('login_challenge');
+        this.service.login_challenge(challenge).subscribe(
+          r => {
+            console.log(r);
+            // si skip == True no debo mostrar login
+            if (!r['skip']) {
+              this.router.navigate(['login']);
+            } else {
+              this.service.aceptar_login_challenge(challenge).subscribe(
+                r => {
+                  console.log('redireccionando a ' + r);
+                  this.document.location.href = r;
+                },
+                e => {
+                  console.log(e);
+                }
+              );
+            }
+          },
+          e => {
+            console.log(e);
+          });
       }
-    );
-    */
-    this.service.login_challenge('sfsdfs').subscribe(
-      l => {
-        console.log(l);
-      },
-      e => {
-        console.log(e);
-      });
+
+      if (p.has('consent_challenge')) {
+        let challenge = p.get('consent_challenge');
+        this.service.consent_challenge(challenge).subscribe(
+          r => {
+            console.log(r);
+            // si skip == True no debo mostrar la pantalla de aceptación de nuevos permisos
+            if (!r['skip']) {
+              this.router.navigate(['consent',r]);
+            } else {
+              this.service.aceptar_consent_challenge(challenge).subscribe(
+                r => {
+                  console.log('redireccionando a ' + r);
+                  this.document.location.href = r;
+                },
+                e => {
+                  console.log(e);
+                }
+              );
+            }
+          },
+          e => {
+            console.log(e);
+          });
+      }
+
+      this.router.navigate['error'];
+    });
   }
 }

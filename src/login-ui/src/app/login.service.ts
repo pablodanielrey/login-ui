@@ -18,7 +18,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login_challenge(challenge:string):Observable<string> {
-    let url = `${LOGIN_API_URL}/login_challenge/` + challenge;
+    let url = `${LOGIN_API_URL}/login/` + challenge;
     let h = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'
@@ -26,6 +26,37 @@ export class LoginService {
     }
     return this.http.get<string>(url, h);
   }
+
+  aceptar_login_challenge(challenge:string):Observable<string> {
+    let url = `${LOGIN_API_URL}/login/` + challenge + '/accept';
+    let h = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    return this.http.put<string>(url, h);
+  }
+
+  consent_challenge(challenge:string):Observable<string> {
+    let url = `${LOGIN_API_URL}/consent/` + challenge;
+    let h = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    }
+    return this.http.get<string>(url, h);
+  }
+
+  aceptar_consent_challenge(challenge:string):Observable<string> {
+    let url = `${LOGIN_API_URL}/consent/` + challenge + '/accept';
+    let h = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    return this.http.put<string>(url, h);
+  }
+
 
   login(usuario:string, clave:string):Observable<Sesion> {
     return this._login(usuario,clave).pipe(flatMap(s => this._crear_sesion(s)));

@@ -9,11 +9,13 @@ import { MaterialModule } from './material.module';
 
 import { LoginComponent } from './login/login.component';
 import { RecuperarClaveComponent } from './recuperar-clave/recuperar-clave.component';
+import { ErrorComponent } from './error/error.component';
+import { ConsentComponent } from './consent/consent.component';
 
 @NgModule({
   declarations: [
     AppComponent,    
-    LoginComponent, RecuperarClaveComponent
+    LoginComponent, RecuperarClaveComponent, ErrorComponent, ConsentComponent
   ],
   imports: [
     BrowserModule,
