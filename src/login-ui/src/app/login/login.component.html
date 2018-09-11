@@ -3,7 +3,10 @@
       <div><span>FCE | Login</span></div>
   </mat-toolbar>
 
-  <div class="contenido">
+  <div *ngIf="login_challenge == ''">
+      obteniendo datos de login
+  </div>
+  <div *ngIf="login_challenge != ''" class="contenido">
       <div class="contenedorTitulo">
           <div>Iniciar sesión</div>
       </div>

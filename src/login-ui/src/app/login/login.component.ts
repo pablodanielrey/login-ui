@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
+    this.route.params.subscribe(params => {
       this.login_challenge = params['login_challenge'];
       console.log(this.login_challenge);
 

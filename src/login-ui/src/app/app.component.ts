@@ -24,27 +24,7 @@ export class AppComponent {
 
       if (p.has('consent_challenge')) {
         let challenge = p.get('consent_challenge');
-        this.service.consent_challenge(challenge).subscribe(
-          r => {
-            console.log(r);
-            // si skip == True no debo mostrar la pantalla de aceptación de nuevos permisos
-            if (!r['skip']) {
-              this.router.navigate(['consent',r]);
-            } else {
-              this.service.aceptar_consent_challenge(challenge).subscribe(
-                r => {
-                  console.log('redireccionando a ' + r);
-                  this.document.location.href = r;
-                },
-                e => {
-                  console.log(e);
-                }
-              );
-            }
-          },
-          e => {
-            console.log(e);
-          });
+        this.router.navigate(['consent',challenge]);
       }
 
       this.router.navigate['error'];

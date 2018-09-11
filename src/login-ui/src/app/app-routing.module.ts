@@ -8,7 +8,7 @@ import { RecuperarClaveComponent } from './recuperar-clave/recuperar-clave.compo
 
 const routes: Routes = [
   { path: 'login/:login_challenge', component: LoginComponent },
-  { path: 'consent/:consent', component: ConsentComponent },
+  { path: 'consent/:consent_challenge', component: ConsentComponent },
   { path: 'recuperar_clave', component: RecuperarClaveComponent },
   { path: 'error', component: ErrorComponent }
   //{ path: '**', redirectTo: '/login', pathMatch: 'full' }
