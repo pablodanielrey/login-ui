@@ -19,27 +19,7 @@ export class AppComponent {
     this.router.routerState.root.queryParamMap.subscribe(p => {
       if (p.has('login_challenge')) {
         let challenge = p.get('login_challenge');
-        this.service.login_challenge(challenge).subscribe(
-          r => {
-            console.log(r);
-            // si skip == True no debo mostrar login
-            if (!r['skip']) {
-              this.router.navigate(['login',challenge]);
-            } else {
-              this.service.aceptar_login_challenge(challenge).subscribe(
-                r => {
-                  console.log('redireccionando a ' + r);
-                  this.document.location.href = r;
-                },
-                e => {
-                  console.log(e);
-                }
-              );
-            }
-          },
-          e => {
-            console.log(e);
-          });
+        this.router.navigate(['login',challenge]);
       }
 
       if (p.has('consent_challenge')) {

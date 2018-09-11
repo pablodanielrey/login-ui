@@ -38,6 +38,28 @@ export class LoginComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.login_challenge = params['login_challenge'];
       console.log(this.login_challenge);
+
+      this.service.login_challenge(this.login_challenge).subscribe(
+          r => {
+            console.log(r);
+            // si skip == True no debo mostrar login
+            if (r['skip']) {
+              this.service.aceptar_login_challenge(this.login_challenge).subscribe(
+                r => {
+                  console.log('redireccionando a ' + r);
+                  this.document.location.href = r;
+                },
+                e => {
+                  console.log(e);
+                }
+              );
+            }
+          },
+          e => {
+            console.log(e);
+          });
+
+
     });
   }
 
@@ -56,7 +78,7 @@ export class LoginComponent implements OnInit {
         console.log(r);
         this.estado = 200;
         this.formulario.reset();
-        
+
         console.log('redireccionando a ' + r);
         this.document.location.href = r;
       },
