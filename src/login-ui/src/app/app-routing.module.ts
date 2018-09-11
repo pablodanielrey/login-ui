@@ -6,8 +6,8 @@ import { RecuperarClaveComponent } from './recuperar-clave/recuperar-clave.compo
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'recuperar_clave', component: RecuperarClaveComponent },
-  { path: '**', redirectTo: '/login', pathMatch: 'full' }
+  { path: 'recuperar_clave', component: RecuperarClaveComponent }
+  //{ path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 

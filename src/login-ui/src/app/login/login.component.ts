@@ -13,7 +13,7 @@ import { LoginService } from '../login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  
   consent_id: string = null;
   estado : number = 200;
   formulario: FormGroup;
@@ -58,9 +58,9 @@ export class LoginComponent implements OnInit {
       e => {
         console.log(e);
         this.estado = e.status;
-      }));
-    console.log(this.usuario);
-    console.log(this.clave);
+      }
+    ));
+
   }
 
 }
