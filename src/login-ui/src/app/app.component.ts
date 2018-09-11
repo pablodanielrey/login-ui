@@ -24,7 +24,7 @@ export class AppComponent {
             console.log(r);
             // si skip == True no debo mostrar login
             if (!r['skip']) {
-              this.router.navigate(['login']);
+              this.router.navigate(['login',challenge]);
             } else {
               this.service.aceptar_login_challenge(challenge).subscribe(
                 r => {

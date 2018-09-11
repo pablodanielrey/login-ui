@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
 
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'; 
 
@@ -14,7 +15,7 @@ import { LoginService } from '../login.service';
 })
 export class LoginComponent implements OnInit {
   
-  consent_id: string = null;
+  login_challenge: string = '';
   estado : number = 200;
   formulario: FormGroup;
   usuario = new FormControl('', Validators.required);
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
 
   subscriptions = [];
 
-  constructor(private fb: FormBuilder, 
+  constructor(@Inject(DOCUMENT) private document: any,
+              private fb: FormBuilder, 
               private route: ActivatedRoute, 
               private service: LoginService) { 
 
@@ -34,8 +36,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.consent_id = params['consent'];
-      console.log(this.consent_id);
+      this.login_challenge = params['login_challenge'];
+      console.log(this.login_challenge);
     });
   }
 
@@ -49,11 +51,14 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.subscriptions.push(this.service.login(this.usuario.value, this.clave.value).subscribe(
+    this.subscriptions.push(this.service.login(this.usuario.value, this.clave.value, this.login_challenge).subscribe(
       r => {
         console.log(r);
         this.estado = 200;
         this.formulario.reset();
+        
+        console.log('redireccionando a ' + r);
+        this.document.location.href = r;
       },
       e => {
         console.log(e);

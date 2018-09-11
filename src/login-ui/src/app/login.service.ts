@@ -58,11 +58,7 @@ export class LoginService {
   }
 
 
-  login(usuario:string, clave:string):Observable<Sesion> {
-    return this._login(usuario,clave).pipe(flatMap(s => this._crear_sesion(s)));
-  }
-
-  _login(usuario:string, clave:string):Observable<Sesion> {
+  login(usuario:string, clave:string, challenge:string):Observable<string> {
     let url = `${LOGIN_API_URL}/login`;
     let h = {
       headers: new HttpHeaders({
@@ -71,23 +67,10 @@ export class LoginService {
     }
     let data = {
       'usuario': usuario,
-      'clave': clave
+      'clave': clave,
+      'challenge': challenge
     }
-    return this.http.post<Sesion>(url, data, h);
+    return this.http.post<string>(url, data, h);
   }
 
-  _crear_sesion(s:Sesion):Observable<Sesion> {
-    console.log('creando sesion');
-    console.log(s);
-    localStorage.setItem(SID, s.session);
-    return of(s);
-  }
-
-  chequear_sesion():Observable<string> {
-    let sid = localStorage.getItem(SID);
-    if (sid) {
-      return of(sid);
-    }
-    return throwError('sesión no definida');
-  }
 }
