@@ -13,11 +13,12 @@ import { ErrorComponent } from './error/error.component';
 import { ConsentComponent } from './consent/consent.component';
 import { SistemaComponent } from './sistema/sistema.component';
 import { SesionesComponent } from './sistema/sesiones/sesiones.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,    
-    LoginComponent, RecuperarClaveComponent, ErrorComponent, ConsentComponent, SistemaComponent, SesionesComponent
+    LoginComponent, RecuperarClaveComponent, ErrorComponent, ConsentComponent, SistemaComponent, SesionesComponent, LogoutComponent
   ],
   imports: [
     BrowserModule,
