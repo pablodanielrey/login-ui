@@ -5,6 +5,7 @@ import { map, flatMap } from 'rxjs/operators';
 
 import { environment } from '../environments/environment';
 
+import { LoginFlow, ConsentFlow } from './entities/login';
 import { Sesion } from './entities/sesion';
 
 const LOGIN_API_URL = environment.loginApiUrl;
@@ -17,6 +18,46 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
+  /*
+    Método que inicia el flujo de login. solo es para reducir las idas y vueltas al servidor.
+  */
+  init_login_flow(challenge:string):Observable<LoginFlow> {
+    let url = `${LOGIN_API_URL}/init_login_flow/` + challenge;
+    let h = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    }
+    return this.http.get<LoginFlow>(url, h);
+  }
+
+  login(usuario:string, clave:string, challenge:string):Observable<LoginFlow> {
+    let url = `${LOGIN_API_URL}/login`;
+    let h = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    }
+    let data = {
+      'usuario': usuario,
+      'clave': clave,
+      'challenge': challenge
+    }
+    return this.http.post<LoginFlow>(url, data, h);
+  }
+
+  init_consent_flow(challenge:string):Observable<ConsentFlow> {
+    let url = `${LOGIN_API_URL}/init_consent_flow/` + challenge;
+    let h = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    }
+    return this.http.get<ConsentFlow>(url, h);
+  }
+
+
+  /*
   login_challenge(challenge:string):Observable<string> {
     let url = `${LOGIN_API_URL}/login/` + challenge;
     let h = {
@@ -56,21 +97,8 @@ export class LoginService {
     };
     return this.http.put<string>(url, h);
   }
+  */
 
 
-  login(usuario:string, clave:string, challenge:string):Observable<string> {
-    let url = `${LOGIN_API_URL}/login`;
-    let h = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
-    }
-    let data = {
-      'usuario': usuario,
-      'clave': clave,
-      'challenge': challenge
-    }
-    return this.http.post<string>(url, data, h);
-  }
 
 }

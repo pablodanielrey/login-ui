@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 
 import { LoginService } from '../login.service';
@@ -15,38 +15,27 @@ export class ConsentComponent implements OnInit {
   consent: string = '';
 
   constructor(@Inject(DOCUMENT) private document: any,
+              private router: Router,
               private route: ActivatedRoute,
               private service: LoginService) { }
 
   ngOnInit() {
     this.route.params.subscribe(p => {
       this.consent_challenge = p['consent_challenge'];
-      this.service.consent_challenge(this.consent_challenge).subscribe(
+      this.service.init_consent_flow(this.consent_challenge).subscribe(
         r => {
-          console.log(r);
-          this.consent = r;
-          // si skip == True no debo mostrar la pantalla de aceptación de nuevos permisos
-          if (r['skip']) {
-            this.aceptar();
-          }
+          this.redireccionar(r.redirect_to);
         },
         e => {
-          console.log(e);
+          this.router.navigate(['error'], {'queryParams':{'error':'consent_error','error_description':e}});
         });      
       
     });
   }
 
-  aceptar() {
-    this.service.aceptar_consent_challenge(this.consent_challenge).subscribe(
-      r => {
-        console.log('redireccionando a ' + r);
-        this.document.location.href = r;
-      },
-      e => {
-        console.log(e);
-      }
-    );
+  redireccionar(url:string) {
+    console.log('redireccionando a ' + url);
+    this.document.location.href = url;
   }
 
 }

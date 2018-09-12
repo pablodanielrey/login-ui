@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'; 
@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
 
   constructor(@Inject(DOCUMENT) private document: any,
               private fb: FormBuilder, 
+              private router: Router,
               private route: ActivatedRoute, 
               private service: LoginService) { 
 
@@ -37,30 +38,16 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.login_challenge = params['login_challenge'];
-      console.log(this.login_challenge);
-
-      this.service.login_challenge(this.login_challenge).subscribe(
+      this.service.init_login_flow(this.login_challenge).subscribe(
           r => {
-            console.log(r);
-            // si skip == True no debo mostrar login
-            if (r['skip']) {
-              this.service.aceptar_login_challenge(this.login_challenge).subscribe(
-                r => {
-                  console.log('redireccionando a ' + r);
-                  this.document.location.href = r;
-                },
-                e => {
-                  console.log(e);
-                }
-              );
+            if (r.redirect_to != null) {
+              this.redireccionar(r.redirect_to);
             }
           },
           e => {
-            console.log(e);
+            this.router.navigate(['error'],{queryParams:{'error':'error login','error_description':e}});
           });
-
-
-    });
+     });
   }
 
   cambiar_tipo(input: any): any {
@@ -75,19 +62,18 @@ export class LoginComponent implements OnInit {
 
     this.subscriptions.push(this.service.login(this.usuario.value, this.clave.value, this.login_challenge).subscribe(
       r => {
-        console.log(r);
-        this.estado = 200;
-        this.formulario.reset();
-
-        console.log('redireccionando a ' + r);
-        this.document.location.href = r;
+        this.redireccionar(r.redirect_to);
       },
       e => {
-        console.log(e);
-        this.estado = e.status;
+        this.router.navigate(['error'],{queryParams:{'error':'error login','error_description':e}});
       }
     ));
 
+  }
+
+  redireccionar(url:string) {
+    console.log('redireccionando a ' + url);
+    this.document.location.href = url;
   }
 
 }
