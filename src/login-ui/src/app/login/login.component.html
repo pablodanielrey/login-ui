@@ -3,9 +3,12 @@
       <div><span>FCE | Login</span></div>
   </mat-toolbar>
 
+  <!-- esto se muestra mientras esta procesando los datos el servidor, para analizar si es necesario loguearse nuevamente. -->
   <div *ngIf="login_challenge == ''">
-      obteniendo datos de login
+      Procesando datos de identificación. Por favor espere.
   </div>
+
+  <!-- se muestra solo en el caso de que sea necesario loguearse -->
   <div *ngIf="login_challenge != ''" class="contenido">
       <div class="contenedorTitulo">
           <div>Iniciar sesión</div>

@@ -1,0 +1,16 @@
+
+<div>
+  <form class="formulario" [formGroup]='formulario' (ngSubmit)='obtener_sesiones()'>
+      <input class="itemInput" matInput placeholder="Usuario" formControlName='uid'>
+      <button class="btnAcceder" type='submit' mat-raised-button>ACCEDER</button>
+  </form>
+  <button (click)='obtener_sesiones()'>obtener</button>
+</div>
+
+<div *ngFor='let s of sesiones'>
+  {{s | json}}
+  <div>
+    <button (click)='eliminar_cliente(s.consent_request.subject, s.consent_request.client.client_id)'>elminar cliente {{s.consent_request.client.client_id}}</button>  
+  </div>
+</div>
+<button (click)='eliminar_sesiones()'>elminar todas las sesiones</button>

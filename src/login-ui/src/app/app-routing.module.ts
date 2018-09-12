@@ -5,15 +5,25 @@ import { AppComponent } from './app.component';
 import { ErrorComponent } from './error/error.component';
 import { LoginComponent } from './login/login.component';
 import { ConsentComponent } from './consent/consent.component';
+
 import { RecuperarClaveComponent } from './recuperar-clave/recuperar-clave.component';
+
+import { SesionesComponent } from './sistema/sesiones/sesiones.component';
 
 const routes: Routes = [
   { path: 'login/:login_challenge', component: LoginComponent },
   { path: 'consent/:consent_challenge', component: ConsentComponent },
   { path: 'recuperar_clave', component: RecuperarClaveComponent },
   { path: 'error', component: ErrorComponent },
+
+  { 
+    path: 'sistema',
+    children: [
+      { path: 'sesiones', component: SesionesComponent }
+    ]
+  },
+
   { path: '**', component: AppComponent }
-  //{ path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 

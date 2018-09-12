@@ -56,6 +56,42 @@ export class LoginService {
     return this.http.get<ConsentFlow>(url, h);
   }
 
+  /*
+    funciones de adminsitracion
+  */
+
+  user_sessions(uid:string):Observable<string[]> {
+    let url = `${LOGIN_API_URL}/sessions/` + uid;
+    let h = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    }
+    return this.http.get<string[]>(url, h);
+  }
+
+  delete_user_sessions(uid:string):Observable<string[]> {
+    let url = `${LOGIN_API_URL}/sessions/` + uid;
+    let h = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    }
+    return this.http.delete<string[]>(url, h);
+  }
+
+  delete_user_client_sessions(uid:string, cid:string):Observable<string[]> {
+    let url = `${LOGIN_API_URL}/sessions/` + uid + '/' + cid;
+    let h = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    }
+    return this.http.delete<string[]>(url, h);
+  }
+
+
+
 
   /*
   login_challenge(challenge:string):Observable<string> {

@@ -37,11 +37,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.login_challenge = params['login_challenge'];
-      this.service.init_login_flow(this.login_challenge).subscribe(
+      let login_challenge = params['login_challenge'];
+      this.service.init_login_flow(login_challenge).subscribe(
           r => {
             if (r.redirect_to != null) {
               this.redireccionar(r.redirect_to);
+            } else {
+              /*
+                lo seteo para poder usarlo cuando se realice el login
+              */
+              this.login_challenge = login_challenge;
             }
           },
           e => {

@@ -11,11 +11,13 @@ import { LoginComponent } from './login/login.component';
 import { RecuperarClaveComponent } from './recuperar-clave/recuperar-clave.component';
 import { ErrorComponent } from './error/error.component';
 import { ConsentComponent } from './consent/consent.component';
+import { SistemaComponent } from './sistema/sistema.component';
+import { SesionesComponent } from './sistema/sesiones/sesiones.component';
 
 @NgModule({
   declarations: [
     AppComponent,    
-    LoginComponent, RecuperarClaveComponent, ErrorComponent, ConsentComponent
+    LoginComponent, RecuperarClaveComponent, ErrorComponent, ConsentComponent, SistemaComponent, SesionesComponent
   ],
   imports: [
     BrowserModule,
