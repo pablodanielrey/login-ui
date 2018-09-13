@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'; 
+import { OAuthService } from 'angular-oauth2-oidc';
 
 import { LoginService } from '../../login.service';
 
@@ -15,7 +16,8 @@ export class SesionesComponent implements OnInit {
   sesiones: string[] = [];
 
   constructor(private fb: FormBuilder,
-              private service: LoginService) { 
+              private service: LoginService,
+              private oauthService: OAuthService) { 
 
       this.formulario = fb.group({
         'uid': this.uid
@@ -23,6 +25,7 @@ export class SesionesComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.oauthService.getAccessToken());
   }
 
   obtener_sesiones() {

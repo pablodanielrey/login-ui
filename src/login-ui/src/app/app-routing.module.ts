@@ -9,6 +9,8 @@ import { ConsentComponent } from './consent/consent.component';
 
 import { RecuperarClaveComponent } from './recuperar-clave/recuperar-clave.component';
 
+import { Oauth2Component } from './oauth2/oauth2.component';
+
 import { SesionesComponent } from './sistema/sesiones/sesiones.component';
 
 const routes: Routes = [
@@ -17,6 +19,8 @@ const routes: Routes = [
   { path: 'consent/:consent_challenge', component: ConsentComponent },
   { path: 'recuperar_clave', component: RecuperarClaveComponent },
   { path: 'error', component: ErrorComponent },
+
+  { path: 'oauth2', component: Oauth2Component },
 
   { 
     path: 'sistema',
