@@ -7,9 +7,6 @@
 			"path": "/src/github/login-hydra-ory"
 		},
 		{
-			"path": "/src/github/assistance"
-		},
-		{
 			"path": "/src/github/login-api"
 		}
 	],
