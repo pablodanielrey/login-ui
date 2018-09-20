@@ -9,6 +9,7 @@ import { ConsentComponent } from './consent/consent.component';
 
 import { RecuperarClaveComponent } from './recuperar-clave/recuperar-clave.component';
 
+import { OidpGuard } from './oauth2/oidp.guard';
 import { Oauth2Component } from './oauth2/oauth2.component';
 
 import { SesionesComponent } from './sistema/sesiones/sesiones.component';
@@ -31,13 +32,14 @@ const routes: Routes = [
     ]},
 
   { path: 'error', component: ErrorComponent },
-
   { path: 'oauth2', component: Oauth2Component },
+
 
   { 
     path: 'sistema',
+    canActivate: [OidpGuard],
     children: [
-      { path: 'sesiones', component: SesionesComponent }
+      { path: 'sesiones', component: SesionesComponent, canActivate: [OidpGuard] }
     ]
   },
 
