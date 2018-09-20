@@ -11,6 +11,7 @@ import { LoginService } from '../../login.service';
 })
 export class SesionesComponent implements OnInit {
 
+  usuario_id: string = null;
   formulario: FormGroup = null;
   uid = new FormControl('');
   sesiones: string[] = [];
@@ -26,6 +27,9 @@ export class SesionesComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.oauthService.getAccessToken());
+    let c = this.oauthService.getIdentityClaims();
+    this.usuario_id = c['sub'];
+    this.uid.setValue(this.usuario_id);
   }
 
   obtener_sesiones() {

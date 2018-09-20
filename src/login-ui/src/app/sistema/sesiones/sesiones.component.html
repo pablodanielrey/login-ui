@@ -1,5 +1,8 @@
 
 <div>
+  <div *ngIf='usuario_id'>
+    Usuario Actual : {{usuario_id}}
+  </div>
   <form class="formulario" [formGroup]='formulario' (ngSubmit)='obtener_sesiones()'>
       <input class="itemInput" matInput placeholder="Usuario" formControlName='uid'>
       <button class="btnAcceder" type='submit' mat-raised-button>ACCEDER</button>

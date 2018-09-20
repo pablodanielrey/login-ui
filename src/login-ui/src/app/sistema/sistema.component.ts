@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { OAuthService } from 'angular-oauth2-oidc';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sistema',
@@ -9,10 +8,10 @@ import { OAuthService } from 'angular-oauth2-oidc';
 })
 export class SistemaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
-    
+    this.router.navigate(['/sistema/inicial']);
   }
 
 

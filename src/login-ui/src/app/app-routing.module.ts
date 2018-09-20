@@ -40,11 +40,12 @@ const routes: Routes = [
     component: SistemaComponent,
     canActivate: [OidpGuard],
     children: [
+      { path: 'inicial', redirectTo: '/sistema/sesiones' },
       { path: 'sesiones', component: SesionesComponent }
     ]
   },
+  { path: '**', redirectTo: '/recuperar_clave', pathMatch: 'full' }
 
-  { path: '**', component: AppComponent }
 ];
 
 
