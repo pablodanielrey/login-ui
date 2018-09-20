@@ -12,12 +12,24 @@ import { RecuperarClaveComponent } from './recuperar-clave/recuperar-clave.compo
 import { Oauth2Component } from './oauth2/oauth2.component';
 
 import { SesionesComponent } from './sistema/sesiones/sesiones.component';
+import { IngresardniComponent } from './recuperar-clave/ingresardni/ingresardni.component';
+import { ConfirmarcodigoComponent } from './recuperar-clave/confirmarcodigo/confirmarcodigo.component';
+import { FinalizarComponent } from './recuperar-clave/finalizar/finalizar.component';
 
 const routes: Routes = [
   { path: 'logout/:id_token/:client_id', component: LogoutComponent },
   { path: 'login/:login_challenge', component: LoginComponent },
   { path: 'consent/:consent_challenge', component: ConsentComponent },
-  { path: 'recuperar_clave', component: RecuperarClaveComponent },
+
+  { 
+    path: 'recuperar_clave', 
+    component: RecuperarClaveComponent,
+    children: [
+      { path: 'ingresar_dni', component: IngresardniComponent },
+      { path: 'confirmar_codigo', component: ConfirmarcodigoComponent },
+      { path: 'finalizar', component: FinalizarComponent }
+    ]},
+
   { path: 'error', component: ErrorComponent },
 
   { path: 'oauth2', component: Oauth2Component },
