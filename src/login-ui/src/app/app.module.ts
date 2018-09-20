@@ -12,14 +12,18 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 
-import { LoginComponent } from './login/login.component';
-import { RecuperarClaveComponent } from './recuperar-clave/recuperar-clave.component';
 import { ErrorComponent } from './error/error.component';
-import { ConsentComponent } from './consent/consent.component';
+
+import { LoginComponent } from './login/login/login.component';
+import { LogoutComponent } from './login/logout/logout.component';
+import { ConsentComponent } from './login/consent/consent.component';
+
 import { SistemaComponent } from './sistema/sistema.component';
 import { SesionesComponent } from './sistema/sesiones/sesiones.component';
-import { LogoutComponent } from './logout/logout.component';
+
 import { Oauth2Component } from './oauth2/oauth2.component';
+
+import { RecuperarClaveComponent } from './recuperar-clave/recuperar-clave.component';
 import { IngresardniComponent } from './recuperar-clave/ingresardni/ingresardni.component';
 import { ConfirmarcodigoComponent } from './recuperar-clave/confirmarcodigo/confirmarcodigo.component';
 import { FinalizarComponent } from './recuperar-clave/finalizar/finalizar.component';

@@ -6,7 +6,7 @@ import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'
 
 import { map } from 'rxjs/operators';
 
-import { LoginService } from '../login.service';
+import { LoginService } from '../../login.service';
 
 @Component({
   selector: 'app-login',

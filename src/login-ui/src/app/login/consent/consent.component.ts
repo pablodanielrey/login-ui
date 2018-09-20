@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 
-import { LoginService } from '../login.service';
+import { LoginService } from '../../login.service';
 
 @Component({
   selector: 'app-consent',
