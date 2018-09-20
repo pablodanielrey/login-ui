@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'logout/:id_token/:client_id', component: LogoutComponent },
   { path: 'login', component: LoginComponent },
   { path: 'login/:login_challenge', component: LoginComponent },
+  { path: 'consent', component: ConsentComponent },
   { path: 'consent/:consent_challenge', component: ConsentComponent },
 
   { 
