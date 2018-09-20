@@ -16,6 +16,7 @@ import { SesionesComponent } from './sistema/sesiones/sesiones.component';
 import { IngresardniComponent } from './recuperar-clave/ingresardni/ingresardni.component';
 import { ConfirmarcodigoComponent } from './recuperar-clave/confirmarcodigo/confirmarcodigo.component';
 import { FinalizarComponent } from './recuperar-clave/finalizar/finalizar.component';
+import { SistemaComponent } from './sistema/sistema.component';
 
 const routes: Routes = [
   { path: 'logout/:id_token/:client_id', component: LogoutComponent },
@@ -36,9 +37,10 @@ const routes: Routes = [
 
   { 
     path: 'sistema',
+    component: SistemaComponent,
     canActivate: [OidpGuard],
     children: [
-      { path: 'sesiones', component: SesionesComponent, canActivate: [OidpGuard] }
+      { path: 'sesiones', component: SesionesComponent }
     ]
   },
 
