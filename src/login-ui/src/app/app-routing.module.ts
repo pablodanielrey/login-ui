@@ -43,8 +43,8 @@ const routes: Routes = [
       { path: 'inicial', redirectTo: '/sistema/sesiones' },
       { path: 'sesiones', component: SesionesComponent }
     ]
-  },
-  { path: '**', redirectTo: '/recuperar_clave', pathMatch: 'full' }
+  }
+  //{ path: '**', redirectTo: '/recuperar_clave', pathMatch: 'full' }
 
 ];
 
