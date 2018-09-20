@@ -14,9 +14,9 @@ import { MaterialModule } from './material.module';
 
 import { ErrorComponent } from './error/error.component';
 
-import { LoginComponent } from './login/login/login.component';
-import { LogoutComponent } from './login/logout/logout.component';
-import { ConsentComponent } from './login/consent/consent.component';
+import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
+import { ConsentComponent } from './consent/consent.component';
 
 import { SistemaComponent } from './sistema/sistema.component';
 import { SesionesComponent } from './sistema/sesiones/sesiones.component';
