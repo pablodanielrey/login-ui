@@ -8,6 +8,8 @@ import { map } from 'rxjs/operators';
 
 import { LoginService } from '../../login.service';
 
+import { environment } from '../../../environments/environment';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,6 +22,10 @@ export class LoginComponent implements OnInit {
   formulario: FormGroup;
   usuario = new FormControl('', Validators.required);
   clave = new FormControl('', Validators.required);
+  loginHeader : string = environment.loginHeader;
+  loginLogo : string = environment.loginLogo;
+  loginFooterMini : string = environment.loginFooterMini;
+  loginFooterFull : string = environment.loginFooterFull;
 
   subscriptions = [];
 
