@@ -41,6 +41,16 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  procesar_error(e:any) {
+    this.router.navigate(['error'],
+    {
+      queryParams:{
+        'error':e.name,
+        'error_description':e.message
+      }
+    });
+  }
+
   ngOnInit() {
     this.route.params.subscribe(params => {
       let login_challenge = params['login_challenge'];
@@ -56,7 +66,8 @@ export class LoginComponent implements OnInit {
             }
           },
           e => {
-            this.router.navigate(['error'],{queryParams:{'error':'error login','error_description':e}});
+            console.log(e);
+            this.procesar_error(e);
           });
      });
   }
@@ -76,7 +87,7 @@ export class LoginComponent implements OnInit {
         this.redireccionar(r.redirect_to);
       },
       e => {
-        this.router.navigate(['error'],{queryParams:{'error':'error login','error_description':e}});
+        this.procesar_error(e);
       }
     ));
 
