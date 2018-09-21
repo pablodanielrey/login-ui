@@ -5,7 +5,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { OAuthModule } from 'angular-oauth2-oidc';
-//import { TokenInterceptor } from './auth.service';
 import { OidpGuard } from './oauth2/oidp.guard';
 
 import { AppComponent } from './app.component';
