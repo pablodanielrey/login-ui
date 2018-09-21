@@ -12,11 +12,12 @@ import { RecuperarClaveComponent } from './recuperar-clave/recuperar-clave.compo
 import { OidpGuard } from './oauth2/oidp.guard';
 import { Oauth2Component } from './oauth2/oauth2.component';
 
+import { SistemaComponent } from './sistema/sistema.component';
 import { SesionesComponent } from './sistema/sesiones/sesiones.component';
 import { IngresardniComponent } from './recuperar-clave/ingresardni/ingresardni.component';
 import { ConfirmarcodigoComponent } from './recuperar-clave/confirmarcodigo/confirmarcodigo.component';
 import { FinalizarComponent } from './recuperar-clave/finalizar/finalizar.component';
-import { SistemaComponent } from './sistema/sistema.component';
+import { SinCorreoComponent } from './recuperar-clave/sin-correo/sin-correo.component';
 
 const routes: Routes = [
   { path: 'logout/:id_token/:client_id', component: LogoutComponent },
@@ -31,7 +32,8 @@ const routes: Routes = [
     children: [
       { path: 'ingresar_dni', component: IngresardniComponent },
       { path: 'confirmar_codigo', component: ConfirmarcodigoComponent },
-      { path: 'finalizar', component: FinalizarComponent }
+      { path: 'finalizar', component: FinalizarComponent },
+      { path: 'sin_correo', component: SinCorreoComponent }
     ]},
 
   { path: 'error', component: ErrorComponent },

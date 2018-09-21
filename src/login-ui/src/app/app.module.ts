@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { OAuthModule } from 'angular-oauth2-oidc';
@@ -26,15 +26,18 @@ import { RecuperarClaveComponent } from './recuperar-clave/recuperar-clave.compo
 import { IngresardniComponent } from './recuperar-clave/ingresardni/ingresardni.component';
 import { ConfirmarcodigoComponent } from './recuperar-clave/confirmarcodigo/confirmarcodigo.component';
 import { FinalizarComponent } from './recuperar-clave/finalizar/finalizar.component';
+import { SinCorreoComponent } from './recuperar-clave/sin-correo/sin-correo.component';
+import { ConfirmarCorreoComponent } from './recuperar-clave/confirmar-correo/confirmar-correo.component';
 
 @NgModule({
   declarations: [
     AppComponent,    
-    LoginComponent, RecuperarClaveComponent, ErrorComponent, ConsentComponent, SistemaComponent, SesionesComponent, LogoutComponent, Oauth2Component, IngresardniComponent, ConfirmarcodigoComponent, FinalizarComponent
+    LoginComponent, RecuperarClaveComponent, ErrorComponent, ConsentComponent, SistemaComponent, SesionesComponent, LogoutComponent, Oauth2Component, IngresardniComponent, ConfirmarcodigoComponent, FinalizarComponent, SinCorreoComponent, ConfirmarCorreoComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+//    FormsModule,
     ReactiveFormsModule,
     MaterialModule,
     AppRoutingModule,

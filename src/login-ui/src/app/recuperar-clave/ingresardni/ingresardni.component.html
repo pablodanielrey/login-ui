@@ -1,2 +1,15 @@
-dni:<input/>
-<button (click)='chequear_dni()'>Chequear</button>
+<form [formGroup]='form' (ngSubmit)='chequear_dni()'>
+    dni:<input type='text' formControlName='dni'/>
+    <div>
+        <mat-error *ngIf='!form.valid && form.dirty'>Debe ingresar su dni sin espacios ni signos de puntuación</mat-error>
+    </div>
+    <button type='submit' [disabled]='!form.valid'>Chequear</button>
+</form>
+<div *ngIf='!chequeos'>
+    <p>
+        Error chequeando el dni ingresado, para registrar una nueva cuenta debe ingresar <a href='https://pedidos.econo.unlp.edu.ar/nueva_cuenta'>aquí</a>
+    </p>
+    <p>
+        Si ya tiene cuenta creada por favor ingrese <a href='https://pedidos.econo.unlp.edu.ar/recupero_clave'>aquí</a> para que podamos ayudar.
+    </p>
+</div>

@@ -1,2 +1,7 @@
-codigo<input />
-<button (click)='confirmar()'>confirmar</button>
+<form [formGroup]='form' (ngSubmit)='confirmar()'>
+codigo<input type='text' formControlName='codigo'/>
+<div>
+    <mat-error *ngIf='!form.valid && form.dirty'>error de código</mat-error>
+</div>
+<button type='submit'>confirmar</button>
+</form>
