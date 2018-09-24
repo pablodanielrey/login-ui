@@ -18,6 +18,7 @@ import { IngresardniComponent } from './recuperar-clave/ingresardni/ingresardni.
 import { ConfirmarcodigoComponent } from './recuperar-clave/confirmarcodigo/confirmarcodigo.component';
 import { FinalizarComponent } from './recuperar-clave/finalizar/finalizar.component';
 import { SinCorreoComponent } from './recuperar-clave/sin-correo/sin-correo.component';
+import { ConfirmarCorreoComponent } from './recuperar-clave/confirmar-correo/confirmar-correo.component';
 
 const routes: Routes = [
   { path: 'logout/:id_token/:client_id', component: LogoutComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
     component: RecuperarClaveComponent,
     children: [
       { path: 'ingresar_dni', component: IngresardniComponent },
+      { path: 'confirmar_correo', component: ConfirmarCorreoComponent },
       { path: 'confirmar_codigo', component: ConfirmarcodigoComponent },
       { path: 'finalizar', component: FinalizarComponent },
       { path: 'sin_correo', component: SinCorreoComponent }

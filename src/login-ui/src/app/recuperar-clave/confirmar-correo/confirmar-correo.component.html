@@ -2,6 +2,12 @@
   <div>
     Por favor complete la información faltante
   </div>
-  <div>ayuda de cuenta alternativa registrada <span>{{correo}}</span></div>
-  Correo <input type='text' formControlName='email'/> <span>{{dominio}}</span>
+  <div>
+      Cuenta alternativa registrada : {{tip()}}@{{dominio()}}
+  </div>
+  <div>
+    Correo <input type='text' formControlName='email'/> <span>{{dominio()}}</span>
+    <mat-error *ngIf='!form.valid && form.dirty'>El correo no concuerda</mat-error>
+  </div>
+  <button type='submit'>Enviar Código</button>
 </form>>
