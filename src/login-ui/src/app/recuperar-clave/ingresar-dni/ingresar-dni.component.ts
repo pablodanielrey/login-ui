@@ -6,11 +6,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RecuperarClaveService } from '../../recuperar-clave.service';
 
 @Component({
-  selector: 'app-ingresardni',
-  templateUrl: './ingresardni.component.html',
-  styleUrls: ['./ingresardni.component.css']
+  selector: 'app-ingresar-dni',
+  templateUrl: './ingresar-dni.component.html',
+  styleUrls: ['./ingresar-dni.component.css']
 })
-export class IngresardniComponent implements OnInit {
+export class IngresarDniComponent implements OnInit {
 
   form: FormGroup;
   chequeos: boolean = false;
@@ -36,7 +36,12 @@ export class IngresardniComponent implements OnInit {
     this.service.verificar_dni(dni).subscribe(
       r => {
         if (r.ok) {
-          this.router.navigate(['/recuperar_clave/confirmar_correo',r.usuario.id]);
+          if (r.tiene_correo) {
+            this.router.navigate(['/recuperar_clave/confirmar_correo',r.usuario.id]);
+          } else {
+            this.router.navigate(['/recuperar_clave/sin_correo']);
+          }
+          
         } else {
           this.form.setErrors({dni:r.error.descripcion});
         }

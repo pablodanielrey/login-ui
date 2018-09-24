@@ -18,6 +18,7 @@ export class RecuperarClaveService {
         error: 500,
         descripcion: 'error interno de servidor'
       },
+      tiene_correo: false,
       usuario: {
         id: 'asdsad',
         nombre: 'prueba',

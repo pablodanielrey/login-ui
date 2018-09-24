@@ -28,6 +28,7 @@ export interface RecuperarCorreoData {
 export interface VerificarDniData {
     ok: boolean;
     usuario: UsuarioData;
+    tiene_correo: boolean;
     error: ErrorData;
 }
 

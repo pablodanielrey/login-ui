@@ -23,7 +23,7 @@ import { SesionesComponent } from './sistema/sesiones/sesiones.component';
 import { Oauth2Component } from './oauth2/oauth2.component';
 
 import { RecuperarClaveComponent } from './recuperar-clave/recuperar-clave.component';
-import { IngresardniComponent } from './recuperar-clave/ingresardni/ingresardni.component';
+import { IngresarDniComponent } from './recuperar-clave/ingresar-dni/ingresar-dni.component';
 import { ConfirmarCodigoComponent } from './recuperar-clave/confirmar-codigo/confirmar-codigo.component';
 import { FinalizarComponent } from './recuperar-clave/finalizar/finalizar.component';
 import { SinCorreoComponent } from './recuperar-clave/sin-correo/sin-correo.component';
@@ -32,7 +32,9 @@ import { ConfirmarCorreoComponent } from './recuperar-clave/confirmar-correo/con
 @NgModule({
   declarations: [
     AppComponent,    
-    LoginComponent, RecuperarClaveComponent, ErrorComponent, ConsentComponent, SistemaComponent, SesionesComponent, LogoutComponent, Oauth2Component, IngresardniComponent, ConfirmarCodigoComponent, FinalizarComponent, SinCorreoComponent, ConfirmarCorreoComponent
+    LoginComponent, 
+    ErrorComponent, ConsentComponent, SistemaComponent, SesionesComponent, LogoutComponent, Oauth2Component, 
+    RecuperarClaveComponent, IngresarDniComponent, ConfirmarCorreoComponent, ConfirmarCodigoComponent, FinalizarComponent, SinCorreoComponent
   ],
   imports: [
     BrowserModule,

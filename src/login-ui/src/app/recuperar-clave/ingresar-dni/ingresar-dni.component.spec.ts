@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IngresardniComponent } from './ingresardni.component';
+import { IngresarDniComponent } from './ingresar-dni.component';
 
-describe('IngresardniComponent', () => {
-  let component: IngresardniComponent;
-  let fixture: ComponentFixture<IngresardniComponent>;
+describe('IngresarDniComponent', () => {
+  let component: IngresarDniComponent;
+  let fixture: ComponentFixture<IngresarDniComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IngresardniComponent ]
+      declarations: [ IngresarDniComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IngresardniComponent);
+    fixture = TestBed.createComponent(IngresarDniComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
