@@ -32,7 +32,7 @@ import { ConfirmarCorreoComponent } from './recuperar-clave/confirmar-correo/con
 @NgModule({
   declarations: [
     AppComponent,    
-    LoginComponent, RecuperarClaveComponent, ErrorComponent, ConsentComponent, SistemaComponent, SesionesComponent, LogoutComponent, Oauth2Component, IngresardniComponent, ConfirmarcodigoComponent, FinalizarComponent, SinCorreoComponent, ConfirmarCorreoComponent
+    LoginComponent, RecuperarClaveComponent, ErrorComponent, ConsentComponent, SistemaComponent, SesionesComponent, LogoutComponent, Oauth2Component, IngresardniComponent, ConfirmarCodigoComponent, FinalizarComponent, SinCorreoComponent, ConfirmarCorreoComponent
   ],
   imports: [
     BrowserModule,
