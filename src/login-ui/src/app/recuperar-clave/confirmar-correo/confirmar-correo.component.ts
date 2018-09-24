@@ -36,7 +36,7 @@ export class ConfirmarCorreoComponent implements OnInit {
   }
 
   esVaron() {
-    return this.data.usuario.sexo.toLowerCase().startsWith('m');
+    return (this.data.usuario.sexo && this.data.usuario.sexo.toLowerCase().startsWith('m'));
   }
 
   enviar_correo() {
