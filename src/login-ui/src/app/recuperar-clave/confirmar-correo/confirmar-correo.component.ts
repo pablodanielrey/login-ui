@@ -36,6 +36,9 @@ export class ConfirmarCorreoComponent implements OnInit {
   }
 
   enviar_correo() {
+    if (!this.form.valid) {
+      return;
+    }
     let eid = this.data.correo.id;
     let correo = this.form.value['email'];
     this.service.enviar_codigo(eid, correo).subscribe(
