@@ -90,10 +90,6 @@ export class LoginService {
     return this.http.delete<string[]>(url, h);
   }
 
-  obtener_usuario_por_dni(dni: string):Observable<any> {
-    return null;
-  }
-
 
   /*
   login_challenge(challenge:string):Observable<string> {

@@ -15,7 +15,7 @@ import { Oauth2Component } from './oauth2/oauth2.component';
 import { SistemaComponent } from './sistema/sistema.component';
 import { SesionesComponent } from './sistema/sesiones/sesiones.component';
 import { IngresardniComponent } from './recuperar-clave/ingresardni/ingresardni.component';
-import { ConfirmarcodigoComponent } from './recuperar-clave/confirmarcodigo/confirmarcodigo.component';
+import { ConfirmarCodigoComponent } from './recuperar-clave/confirmar-codigo/confirmar-codigo.component';
 import { FinalizarComponent } from './recuperar-clave/finalizar/finalizar.component';
 import { SinCorreoComponent } from './recuperar-clave/sin-correo/sin-correo.component';
 import { ConfirmarCorreoComponent } from './recuperar-clave/confirmar-correo/confirmar-correo.component';
@@ -33,7 +33,7 @@ const routes: Routes = [
     children: [
       { path: 'ingresar_dni', component: IngresardniComponent },
       { path: 'confirmar_correo', component: ConfirmarCorreoComponent },
-      { path: 'confirmar_codigo', component: ConfirmarcodigoComponent },
+      { path: 'confirmar_codigo', component: ConfirmarCodigoComponent },
       { path: 'finalizar', component: FinalizarComponent },
       { path: 'sin_correo', component: SinCorreoComponent }
     ]},

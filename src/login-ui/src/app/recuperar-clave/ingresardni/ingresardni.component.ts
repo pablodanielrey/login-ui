@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { LoginService } from '../../login.service';
+import { RecuperarClaveService } from '../../recuperar-clave.service';
 
 @Component({
   selector: 'app-ingresardni',
@@ -15,7 +15,7 @@ export class IngresardniComponent implements OnInit {
   form: FormGroup;
   chequeos: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private service: LoginService) {
+  constructor(private fb: FormBuilder, private router: Router, private service: RecuperarClaveService) {
     this.form = fb.group({
       dni: ['', [Validators.pattern('[a-zA-Z0-9]+'), Validators.required]] 
     });
@@ -32,9 +32,10 @@ export class IngresardniComponent implements OnInit {
     if (!this.form.valid) {
       return;
     }
-    this.service.obtener_usuario_por_dni(this.form.value['dni']).subscribe(
+    let dni = this.form.value['dni'];
+    this.service.verificar_dni(dni).subscribe(
       u => {
-        this.router.navigate(['/recuperar_clave/confirmar_codigo']);
+        this.router.navigate(['/recuperar_clave/confirmar_correo']);
       },
       e => {
         this.form.reset();

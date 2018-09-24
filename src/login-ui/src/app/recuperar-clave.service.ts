@@ -11,6 +11,10 @@ export class RecuperarClaveService {
 
   constructor() { }
 
+  verificar_dni(dni: string):Observable<any> {
+    return null;
+  }
+
   obtener_correo(dni:string): Observable<RecuperarCorreoData> {
     let rr : RecuperarCorreoData = {
       nombre: '',

@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-confirmarcodigo',
-  templateUrl: './confirmarcodigo.component.html',
-  styleUrls: ['./confirmarcodigo.component.css']
+  selector: 'app-confirmar-codigo',
+  templateUrl: './confirmar-codigo.component.html',
+  styleUrls: ['./confirmar-codigo.component.css']
 })
-export class ConfirmarcodigoComponent implements OnInit {
+export class ConfirmarCodigoComponent implements OnInit {
 
   form: FormGroup;
 

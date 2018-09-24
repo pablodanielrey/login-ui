@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConfirmarcodigoComponent } from './confirmarcodigo.component';
+import { ConfirmarCodigoComponent } from './confirmar-codigo.component';
 
-describe('ConfirmarcodigoComponent', () => {
-  let component: ConfirmarcodigoComponent;
-  let fixture: ComponentFixture<ConfirmarcodigoComponent>;
+describe('ConfirmarCodigoComponent', () => {
+  let component: ConfirmarCodigoComponent;
+  let fixture: ComponentFixture<ConfirmarCodigoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConfirmarcodigoComponent ]
+      declarations: [ ConfirmarCodigoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ConfirmarcodigoComponent);
+    fixture = TestBed.createComponent(ConfirmarCodigoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
