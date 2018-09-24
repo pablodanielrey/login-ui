@@ -6,10 +6,8 @@ import { map, flatMap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 
 import { LoginFlow, ConsentFlow } from './entities/login';
-import { Sesion } from './entities/sesion';
 
 const LOGIN_API_URL = environment.loginApiUrl;
-const SID = environment.session;
 
 @Injectable({
   providedIn: 'root'

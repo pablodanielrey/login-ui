@@ -2,16 +2,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 
+import { environment } from '../environments/environment';
+
 import { RecuperarCorreoData, VerificarDniData, EnviarCodigoData, VerificarCodigoData } from './entities/recuperar';
+
+const RECUPERAR_API_URL = environment.loginApiUrl + '/recuperar_clave';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecuperarClaveService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   verificar_dni(dni: string):Observable<VerificarDniData> {
+    //let url = `${RECUPERAR_API_URL}/verificar_dni/` + dni;
+    //return this.http.get<VerificarDniData>(url);
+    
     let r : VerificarDniData = {
       ok: true,
       error: {
@@ -29,6 +36,7 @@ export class RecuperarClaveService {
       }
     }
     return of(r);
+    
   }
 
   obtener_correo(uid:string): Observable<RecuperarCorreoData> {
