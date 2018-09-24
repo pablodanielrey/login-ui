@@ -10,6 +10,7 @@ export interface UsuarioData {
     apellido: string;
     dni: string;
     tipo: string;
+    sexo: string;
 }
 
 export interface CorreoData {

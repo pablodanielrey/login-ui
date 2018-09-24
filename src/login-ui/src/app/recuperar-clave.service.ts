@@ -20,7 +20,8 @@ export class RecuperarClaveService {
         nombre: 'prueba',
         apellido: 'prueba',
         dni: '123213',
-        tipo: 'estudiante'
+        tipo: 'estudiante',
+        sexo: 'masculino'
       }
     }
     return of(r);
@@ -39,7 +40,8 @@ export class RecuperarClaveService {
         nombre: 'prueba',
         apellido: 'prueba',
         dni: '123213',
-        tipo: 'estudiante'
+        tipo: 'estudiante',
+        sexo: 'masculino'
       }
     };
     return of(rr);

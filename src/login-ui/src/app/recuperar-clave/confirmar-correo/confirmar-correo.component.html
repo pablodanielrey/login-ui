@@ -1,13 +1,18 @@
 
 <form *ngIf='data' [formGroup]='form' (ngSubmit)='enviar_correo()'>
   <div>
-    Por favor complete la información faltante
+    <div>
+      <span *ngIf='esVaron()'>Bienvenido</span><span *ngIf='!esVaron()'>Bienvenida</span> {{data.usuario.nombre}} {{data.usuario.apellido}}
+    </div>
+    <div>
+      Por favor complete la información faltante para poder enviarle el código de verificación.
+    </div>
   </div>
   <div>
       Cuenta alternativa registrada : {{data.correo.ayuda}}
   </div>
   <div>
-    Correo <input type='text' formControlName='email'/> <span>{{dominio()}}</span>
+    Reingresar Correo <input type='email' formControlName='email'/>
     <mat-error *ngIf='!form.valid && form.dirty'>El correo no concuerda</mat-error>
   </div>
   <button type='submit'>Enviar Código</button>

@@ -35,6 +35,10 @@ export class ConfirmarCorreoComponent implements OnInit {
     
   }
 
+  esVaron() {
+    return this.data.usuario.sexo.toLowerCase().startsWith('m');
+  }
+  
   enviar_correo() {
     if (!this.form.valid) {
       return;
@@ -48,7 +52,6 @@ export class ConfirmarCorreoComponent implements OnInit {
         } else {
           this.form.setErrors({email:'correo no válido'});  
         }
-        
       },
       e => {
         this.form.setErrors({email:'correo no válido'});
