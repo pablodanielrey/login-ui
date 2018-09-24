@@ -38,7 +38,7 @@ export class ConfirmarCorreoComponent implements OnInit {
   esVaron() {
     return this.data.usuario.sexo.toLowerCase().startsWith('m');
   }
-  
+
   enviar_correo() {
     if (!this.form.valid) {
       return;
@@ -47,8 +47,8 @@ export class ConfirmarCorreoComponent implements OnInit {
     let correo = this.form.value['email'];
     this.service.enviar_codigo(eid, correo).subscribe(
       d => {
-        if (d) {
-          this.router.navigate(['/recuperar_clave/confirmar_codigo']);
+        if (d.ok) {
+          this.router.navigate(['/recuperar_clave/confirmar_codigo',d.iid]);
         } else {
           this.form.setErrors({email:'correo no válido'});  
         }

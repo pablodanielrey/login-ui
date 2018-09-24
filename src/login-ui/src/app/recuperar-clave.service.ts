@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 
-import { RecuperarCorreoData, VerificarDniData } from './entities/recuperar';
+import { RecuperarCorreoData, VerificarDniData, EnviarCodigoData, VerificarCodigoData } from './entities/recuperar';
 
 @Injectable({
   providedIn: 'root'
@@ -47,8 +47,22 @@ export class RecuperarClaveService {
     return of(rr);
   }
 
-  enviar_codigo(uid:string, correo:string): Observable<boolean> {
-    return of(false);
+  enviar_codigo(uid:string, correo:string): Observable<EnviarCodigoData> {
+    let r : EnviarCodigoData = {
+      ok: true,
+      error: null,
+      iid: 'id-del-recupero'
+    };
+    return of(r);
+  }
+
+  verificar_codigo(iid:string, codigo:string): Observable<VerificarCodigoData> {
+    let r : VerificarCodigoData = {
+      ok: true,
+      error: null,
+      clave: 'sdfdsfds'
+    };
+    return of(r);
   }
 
 }

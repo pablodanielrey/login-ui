@@ -33,8 +33,8 @@ const routes: Routes = [
     children: [
       { path: 'ingresar_dni', component: IngresardniComponent },
       { path: 'confirmar_correo', component: ConfirmarCorreoComponent },
-      { path: 'confirmar_codigo', component: ConfirmarCodigoComponent },
-      { path: 'finalizar', component: FinalizarComponent },
+      { path: 'confirmar_codigo/:iid', component: ConfirmarCodigoComponent },
+      { path: 'finalizar/:temporal', component: FinalizarComponent },
       { path: 'sin_correo', component: SinCorreoComponent }
     ]},
 

@@ -1,4 +1,6 @@
-<p>
-  finalizar works!
-</p>
+<div *ngIf='temporal'>
+  <p>Se ha generado la clave temporal: {{temporal}}</p>
+  <p>Puede usar esa clave para acceder a los servicios de la facultad.</p>
+  <p>Gracias.</p>
+</div>
 <button (click)='finalizar()'>finalizar</button>

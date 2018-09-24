@@ -30,3 +30,15 @@ export interface VerificarDniData {
     usuario: UsuarioData;
     error: ErrorData;
 }
+
+export interface EnviarCodigoData {
+    ok: boolean;
+    error: ErrorData;
+    iid: string;
+}
+
+export interface VerificarCodigoData {
+    ok: boolean,
+    error: ErrorData,
+    clave: string
+}
