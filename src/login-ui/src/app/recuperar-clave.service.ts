@@ -14,7 +14,10 @@ export class RecuperarClaveService {
   verificar_dni(dni: string):Observable<VerificarDniData> {
     let r : VerificarDniData = {
       ok: true,
-      error: null,
+      error: {
+        error: 500,
+        descripcion: 'error interno de servidor'
+      },
       usuario: {
         id: 'asdsad',
         nombre: 'prueba',

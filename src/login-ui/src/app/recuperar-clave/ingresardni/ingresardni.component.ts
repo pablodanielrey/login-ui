@@ -34,12 +34,15 @@ export class IngresardniComponent implements OnInit {
     }
     let dni = this.form.value['dni'];
     this.service.verificar_dni(dni).subscribe(
-      u => {
-        this.router.navigate(['/recuperar_clave/confirmar_correo']);
+      r => {
+        if (r.ok) {
+          this.router.navigate(['/recuperar_clave/confirmar_correo',r.usuario.id]);
+        } else {
+          this.form.setErrors({dni:r.error.descripcion});
+        }
       },
       e => {
-        this.form.reset();
-        this.chequeos = true;
+        this.form.setErrors({dni:'error'});
       }
     );
   }

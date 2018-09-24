@@ -1,6 +1,6 @@
 
 export interface ErrorData {
-    error: string;
+    error: number;
     descripcion: string;
 }
 

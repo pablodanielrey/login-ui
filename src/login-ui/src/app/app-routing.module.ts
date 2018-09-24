@@ -32,7 +32,7 @@ const routes: Routes = [
     component: RecuperarClaveComponent,
     children: [
       { path: 'ingresar_dni', component: IngresardniComponent },
-      { path: 'confirmar_correo', component: ConfirmarCorreoComponent },
+      { path: 'confirmar_correo/:uid', component: ConfirmarCorreoComponent },
       { path: 'confirmar_codigo/:iid', component: ConfirmarCodigoComponent },
       { path: 'finalizar/:temporal', component: FinalizarComponent },
       { path: 'sin_correo', component: SinCorreoComponent }

@@ -23,12 +23,12 @@ export class ConfirmarCorreoComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(p => {
-      let uid = p['uid'];
+      let uid = p.get('uid');
       this.service.obtener_correo(uid).subscribe(d => {
         if (d.ok) {
           this.data = d;
         } else {
-          this.form.setErrors({email:'correo no válido'});
+          this.router.navigate(['/recuperar_clave']);
         }
       });
     });
