@@ -19,8 +19,5 @@ export class FinalizarComponent implements OnInit {
     console.log(this.temporal); 
   }
 
-  finalizar() {
-    this.router.navigate(['/']);
-  }
 
 }

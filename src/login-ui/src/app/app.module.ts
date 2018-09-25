@@ -13,9 +13,9 @@ import { MaterialModule } from './material.module';
 
 import { ErrorComponent } from './error/error.component';
 
-import { LoginComponent } from './login/login.component';
-import { LogoutComponent } from './logout/logout.component';
-import { ConsentComponent } from './consent/consent.component';
+import { LoginComponent } from './login/login/login.component';
+import { LogoutComponent } from './login/logout/logout.component';
+import { ConsentComponent } from './login/consent/consent.component';
 
 import { SistemaComponent } from './sistema/sistema.component';
 import { SesionesComponent } from './sistema/sesiones/sesiones.component';
@@ -28,13 +28,15 @@ import { ConfirmarCodigoComponent } from './recuperar-clave/confirmar-codigo/con
 import { FinalizarComponent } from './recuperar-clave/finalizar/finalizar.component';
 import { SinCorreoComponent } from './recuperar-clave/sin-correo/sin-correo.component';
 import { ConfirmarCorreoComponent } from './recuperar-clave/confirmar-correo/confirmar-correo.component';
+import { ErrorDniComponent } from './recuperar-clave/error-dni/error-dni.component';
+import { ErrorServidorComponent } from './recuperar-clave/error-servidor/error-servidor.component';
 
 @NgModule({
   declarations: [
     AppComponent,    
     LoginComponent, 
     ErrorComponent, ConsentComponent, SistemaComponent, SesionesComponent, LogoutComponent, Oauth2Component, 
-    RecuperarClaveComponent, IngresarDniComponent, ConfirmarCorreoComponent, ConfirmarCodigoComponent, FinalizarComponent, SinCorreoComponent
+    RecuperarClaveComponent, IngresarDniComponent, ConfirmarCorreoComponent, ConfirmarCodigoComponent, FinalizarComponent, SinCorreoComponent, ErrorDniComponent, ErrorServidorComponent
   ],
   imports: [
     BrowserModule,

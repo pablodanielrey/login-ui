@@ -13,7 +13,6 @@ import { RecuperarClaveService } from '../../recuperar-clave.service';
 export class IngresarDniComponent implements OnInit {
 
   form: FormGroup;
-  chequeos: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private service: RecuperarClaveService) {
     this.form = fb.group({
@@ -41,13 +40,12 @@ export class IngresarDniComponent implements OnInit {
           } else {
             this.router.navigate(['/recuperar_clave/sin_correo']);
           }
-          
         } else {
-          this.form.setErrors({dni:r.error.descripcion});
+          this.router.navigate(['/recuperar_clave/error_dni']);
         }
       },
       e => {
-        this.form.setErrors({dni:'error'});
+        this.router.navigate(['/recuperar_clave/error_servidor']);
       }
     );
   }
