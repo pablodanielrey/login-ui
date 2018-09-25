@@ -17,7 +17,7 @@ export class ConfirmarCorreoComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private service: RecuperarClaveService) { 
     this.form = fb.group({
-      email: ['',[Validators.pattern('[a-zA-Z0-9._-]+'), Validators.required]]
+      email: ['',[Validators.required, Validators.email]]
     });
   }
 

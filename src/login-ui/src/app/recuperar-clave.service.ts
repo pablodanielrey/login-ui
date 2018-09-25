@@ -16,9 +16,9 @@ export class RecuperarClaveService {
   constructor(private http: HttpClient) { }
 
   verificar_dni(dni: string):Observable<VerificarDniData> {
-    //let url = `${RECUPERAR_API_URL}/verificar_dni/` + dni;
-    //return this.http.get<VerificarDniData>(url);
-    
+    let url = `${RECUPERAR_API_URL}/verificar_dni/` + dni;
+    return this.http.get<VerificarDniData>(url);
+    /*
     let r : VerificarDniData = {
       ok: true,
       error: {
@@ -36,10 +36,13 @@ export class RecuperarClaveService {
       }
     }
     return of(r);
-    
+    */
   }
 
   obtener_correo(uid:string): Observable<RecuperarCorreoData> {
+    let url = `${RECUPERAR_API_URL}/obtener_correo/` + uid;
+    return this.http.get<RecuperarCorreoData>(url);
+    /*
     let rr : RecuperarCorreoData = {
       ok: true,
       error: null,
@@ -57,24 +60,39 @@ export class RecuperarClaveService {
       }
     };
     return of(rr);
+    */
   }
 
-  enviar_codigo(uid:string, correo:string): Observable<EnviarCodigoData> {
+  enviar_codigo(eid:string, correo:string): Observable<EnviarCodigoData> {
+    let url = `${RECUPERAR_API_URL}/enviar_codigo/` + eid;
+    let data = {
+      correo: correo
+    }
+    return this.http.post<EnviarCodigoData>(url,data);
+    /*    
     let r : EnviarCodigoData = {
       ok: true,
       error: null,
       iid: 'id-del-recupero'
     };
     return of(r);
+    */
   }
 
   verificar_codigo(iid:string, codigo:string): Observable<VerificarCodigoData> {
+    let url = `${RECUPERAR_API_URL}/verificar_codigo/` + iid;
+    let data = {
+      codigo: codigo
+    }
+    return this.http.post<VerificarCodigoData>(url,data);
+    /*
     let r : VerificarCodigoData = {
       ok: true,
       error: null,
       clave: 'sdfdsfds'
     };
     return of(r);
+    */
   }
 
 }
