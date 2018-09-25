@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RecuperarClaveService } from '../../recuperar-clave.service';
 
@@ -11,7 +11,7 @@ import { RecuperarClaveService } from '../../recuperar-clave.service';
 export class ConfirmarCodigoComponent implements OnInit {
 
   form: FormGroup;
-  iid: string;
+  rid: string = 'nulo';
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private service: RecuperarClaveService) { 
     this.form = fb.group({
@@ -20,15 +20,22 @@ export class ConfirmarCodigoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(p => { this.iid = p['iid']; });
+    this.route.paramMap.subscribe(
+        p => {
+          this.rid = p.get('rid');
+          console.log(this);
+        }
+      );
   }
 
   confirmar() {
+    console.log(this);
     if (!this.form.valid) {
       return;
     }
     let codigo = this.form.value['codigo'];
-    this.service.verificar_codigo(this.iid, codigo).subscribe(
+    let rid = this.rid;
+    this.service.verificar_codigo(rid, codigo).subscribe(
       r => {
         if (r.ok) {
           this.router.navigate(['/recuperar_clave/finalizar',r.clave]);
