@@ -1,19 +1,27 @@
+<div>
 
-<form *ngIf='data' [formGroup]='form' (ngSubmit)='enviar_correo()'>
-  <div>
-    <div>
-      <span *ngIf='esVaron()'>Bienvenido</span><span *ngIf='!esVaron()'>Bienvenida</span> {{data.usuario.nombre}} {{data.usuario.apellido}}
+    <div class="cabecera">
+        <button mat-button class="btnVolver"><mat-icon>keyboard_arrow_left</mat-icon> volver</button>
     </div>
-    <div>
-      Por favor complete la información faltante para poder enviarle el código de verificación.
+
+    <mat-divider></mat-divider>
+
+    <div class="contenido">
+
+      <h3>CONFIRMAR CORREO </h3>
+
+        <form class="formulario" *ngIf='data' [formGroup]='form' (ngSubmit)='enviar_correo()'>
+            <div><span *ngIf='esVaron()'>Hola!</span><span *ngIf='!esVaron()'>Hola!</span> <b> {{data.usuario.nombre}} {{data.usuario.apellido}}</b></div>
+            <p class="mensaje"> Necesitamos que confirmes tu cuenta de correo alternativa para poder enviarte un código con el cual podrás restablecer tu contraseña.</p>
+            <p class="mensaje"> Correo registrado: <span class="cuentaDeCorreo">{{data.correo.ayuda}}</span> </p>
+            <mat-form-field class="contenedorImput">
+                <input matInput placeholder="Ingresa tu cuenta de correo alternativa" type='email' formControlName='email'/>
+                <mat-error *ngIf='!form.valid && form.dirty'>El correo no concuerda</mat-error>
+            </mat-form-field>
+            <button mat-button class="btnSiguiente" type='submit'>ENVIAR CÓDIGO</button>
+        </form>
+
+
     </div>
-  </div>
-  <div>
-      Cuenta alternativa registrada : {{data.correo.ayuda}}
-  </div>
-  <div>
-    Reingresar Correo <input type='email' formControlName='email'/>
-    <mat-error *ngIf='!form.valid && form.dirty'>El correo no concuerda</mat-error>
-  </div>
-  <button type='submit'>Enviar Código</button>
-</form>
+
+</div>

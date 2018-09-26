@@ -1,7 +1,28 @@
-<form [formGroup]='form' (ngSubmit)='chequear_dni()'>
-    dni:<input type='text' formControlName='dni'/>
-    <div>
-        <mat-error *ngIf='!form.valid && form.dirty'>Debe ingresar su dni sin espacios ni signos de puntuación</mat-error>
-    </div>
-    <button type='submit' [disabled]='!form.valid'>Chequear</button>
-</form>
+<div>
+
+  <div class="cabecera">
+      <button mat-button class="btnVolver"><mat-icon>keyboard_arrow_left</mat-icon> volver</button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="contenido">
+
+    <h3>RECUPERAR CONTRASEÑA </h3>
+
+
+      <form class="formulario" [formGroup]='form' (ngSubmit)='chequear_dni()'>
+
+          <mat-form-field>
+              <input matInput placeholder="Ingresa tu DNI" formControlName='dni'>
+              <mat-error *ngIf='!form.valid && form.dirty'>Ingresa tu DNI sin espacios o puntos</mat-error>
+          </mat-form-field>
+
+          <button mat-button type='submit' [disabled]='!form.valid' class="btnSiguiente">SIGUIENTE</button>
+
+      </form>
+
+
+  </div>
+
+</div>

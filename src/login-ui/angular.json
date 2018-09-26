@@ -62,6 +62,14 @@
               "vendorChunk": false,
               "buildOptimizer": true
             },
+            "api-econo": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.econo.ts"
+                }
+              ]
+            },
             "api-vs": {
               "fileReplacements": [
                 {
@@ -69,7 +77,7 @@
                   "with": "src/environments/environment.vs.ts"
                 }
               ]
-            }                                      
+            }
           }
         },
         "serve": {
@@ -82,7 +90,7 @@
               "browserTarget": "login-ui:build:api-vs"
             },
             "econo": {
-              "browserTarget": "login-ui:build:econo"
+              "browserTarget": "login-ui:build:api-econo"
             },
             "presi": {
               "browserTarget": "login-ui:build:presi"

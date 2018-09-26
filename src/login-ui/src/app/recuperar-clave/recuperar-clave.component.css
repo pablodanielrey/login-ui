@@ -1,0 +1,57 @@
+.recuperarClave {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.cabecera {
+  color: white;
+  background-color: #222222;
+}
+
+.nombreUsuario {
+  margin-left: 5px;
+}
+
+
+.imgLogoHeader {
+  width: 25px;
+  margin-right: 10px;
+}
+
+.contenido {
+  height: 100%;
+}
+
+
+.footer {
+  width: 100%;
+  height: 20px;
+  background: #222222;
+  color: #9d9d9d;
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  padding-left: 10px;
+  font-size: 11px;
+}
+
+.footerAlternativo {
+  display: none;
+}
+
+@media screen and (max-width: 719px) {
+  .footerAlternativo {
+    display: block;
+  }
+  .footerPrincipal {
+    display: none;
+  }
+  .footer {
+    display: none;
+  }
+
+}
