@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 
-import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'; 
+import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 
 import { map } from 'rxjs/operators';
 
@@ -16,7 +16,7 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
+
   login_challenge: string = '';
   estado : number = 200;
   formulario: FormGroup;
@@ -30,10 +30,10 @@ export class LoginComponent implements OnInit {
   subscriptions = [];
 
   constructor(@Inject(DOCUMENT) private document: any,
-              private fb: FormBuilder, 
+              private fb: FormBuilder,
               private router: Router,
-              private route: ActivatedRoute, 
-              private service: LoginService) { 
+              private route: ActivatedRoute,
+              private service: LoginService) {
 
     this.formulario = fb.group({
       'usuario': this.usuario,

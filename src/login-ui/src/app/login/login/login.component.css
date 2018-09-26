@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+.cargando {
+  opacity: .7;
+  height: 100%;
+}
+
 .login {
   display: flex;
   display: -moz-flex;
