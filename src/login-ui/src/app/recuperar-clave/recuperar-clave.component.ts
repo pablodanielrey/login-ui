@@ -11,7 +11,7 @@ export class RecuperarClaveComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    //this.router.navigate(['/recuperar_clave/ingresar_dni']);
+    this.router.navigate(['/recuperar_clave/ingresar_dni']);
   }
 
 }
