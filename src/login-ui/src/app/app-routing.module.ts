@@ -16,7 +16,7 @@ import { SistemaComponent } from './sistema/sistema.component';
 import { SesionesComponent } from './sistema/sesiones/sesiones.component';
 import { IngresarDniComponent } from './recuperar-clave/ingresar-dni/ingresar-dni.component';
 import { ConfirmarCodigoComponent } from './recuperar-clave/confirmar-codigo/confirmar-codigo.component';
-//import { FinalizarComponent } from './recuperar-clave/finalizar/finalizar.component';
+import { FinalizarComponent } from './recuperar-clave/finalizar/finalizar.component';
 import { SinCorreoComponent } from './recuperar-clave/sin-correo/sin-correo.component';
 import { ConfirmarCorreoComponent } from './recuperar-clave/confirmar-correo/confirmar-correo.component';
 import { ErrorServidorComponent } from './recuperar-clave/error-servidor/error-servidor.component';
@@ -41,7 +41,7 @@ const routes: Routes = [
       { path: 'confirmar_codigo/:rid', component: ConfirmarCodigoComponent },
       { path: 'ingresar_clave/:cid', component: IngresarClaveComponent },
       { path: 'clave_modificada', component: ClaveModificadaComponent },
-      //{ path: 'finalizar/:temporal', component: FinalizarComponent },
+      { path: 'finalizar/:temporal', component: FinalizarComponent },
       { path: 'error_dni', component: ErrorDniComponent },
       { path: 'error_servidor', component: ErrorServidorComponent },
       { path: 'sin_correo', component: SinCorreoComponent }
