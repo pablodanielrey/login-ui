@@ -19,5 +19,8 @@ export class FinalizarComponent implements OnInit {
     console.log(this.temporal); 
   }
 
+  cambiar_clave() {
+    this.router.navigate(['/recuperar_clave/ingresar_clave',this.temporal]);
+  }
 
 }

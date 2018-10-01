@@ -38,7 +38,7 @@ export class ConfirmarCodigoComponent implements OnInit {
     this.service.verificar_codigo(rid, codigo).subscribe(
       r => {
         if (r.ok) {
-          this.router.navigate(['/recuperar_clave/ingresar_clave',r.clave]);
+          this.router.navigate(['/recuperar_clave/finalizar',r.clave]);
         } else {
           this.form.setErrors({codigo:'codigo inválido'});
         }

@@ -43,13 +43,13 @@ export class IngresarClaveComponent implements OnInit {
         this.router.navigate(['/recuperar_clave/clave_modificada']);
       },
       e => {
-        this.form.setErrors({clave:true});
+        this.form.setErrors({servidor:true});
       }
     )
   }  
 
   volver() {
-    this.router.navigate(['/recuperar_clave/ingresar_dni']);
+    this.router.navigate(['/recuperar_clave/finalizar',this.cid]);
   }
 
 }
