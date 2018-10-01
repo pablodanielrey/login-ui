@@ -30,13 +30,15 @@ import { SinCorreoComponent } from './recuperar-clave/sin-correo/sin-correo.comp
 import { ConfirmarCorreoComponent } from './recuperar-clave/confirmar-correo/confirmar-correo.component';
 import { ErrorDniComponent } from './recuperar-clave/error-dni/error-dni.component';
 import { ErrorServidorComponent } from './recuperar-clave/error-servidor/error-servidor.component';
+import { IngresarClaveComponent } from './recuperar-clave/ingresar-clave/ingresar-clave.component';
+import { ClaveModificadaComponent } from './recuperar-clave/clave-modificada/clave-modificada.component';
 
 @NgModule({
   declarations: [
     AppComponent,    
     LoginComponent, 
     ErrorComponent, ConsentComponent, SistemaComponent, SesionesComponent, LogoutComponent, Oauth2Component, 
-    RecuperarClaveComponent, IngresarDniComponent, ConfirmarCorreoComponent, ConfirmarCodigoComponent, FinalizarComponent, SinCorreoComponent, ErrorDniComponent, ErrorServidorComponent
+    RecuperarClaveComponent, IngresarDniComponent, ConfirmarCorreoComponent, ConfirmarCodigoComponent, FinalizarComponent, IngresarClaveComponent, ClaveModificadaComponent, SinCorreoComponent, ErrorDniComponent, ErrorServidorComponent
   ],
   imports: [
     BrowserModule,

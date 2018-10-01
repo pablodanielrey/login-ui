@@ -6,3 +6,4 @@ export interface LoginFlow {
 export interface ConsentFlow {
     redirect_to: string
 }
+

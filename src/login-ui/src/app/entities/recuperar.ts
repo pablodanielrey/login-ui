@@ -43,3 +43,7 @@ export interface VerificarCodigoData {
     error: ErrorData,
     clave: string
 }
+
+export interface CambiarClaveData {
+    clave: string;
+}

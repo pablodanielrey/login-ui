@@ -54,6 +54,7 @@ export class LoginService {
     return this.http.get<ConsentFlow>(url, h);
   }
 
+
   /*
     funciones de adminsitracion
   */

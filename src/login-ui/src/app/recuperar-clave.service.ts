@@ -4,7 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 
 import { environment } from '../environments/environment';
 
-import { RecuperarCorreoData, VerificarDniData, EnviarCodigoData, VerificarCodigoData } from './entities/recuperar';
+import { RecuperarCorreoData, VerificarDniData, EnviarCodigoData, VerificarCodigoData, CambiarClaveData } from './entities/recuperar';
 
 const RECUPERAR_API_URL = environment.loginApiUrl + '/recuperar_clave';
 
@@ -93,6 +93,14 @@ export class RecuperarClaveService {
     };
     return of(r);
     */
+  }
+
+  cambiar_clave(cid:string, clave:string):Observable<CambiarClaveData> {
+    let apiUrl = `${RECUPERAR_API_URL}/clave/${cid}`;
+    let data = {
+      'clave':clave
+    }
+    return this.http.post<CambiarClaveData>(apiUrl, data);
   }
 
 }
