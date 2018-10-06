@@ -15,7 +15,7 @@ export class ErrorComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.queryParamMap.subscribe(p => {
+    this.route.paramMap.subscribe(p => {
       if (p.has('error')) {
         this.error = p.get('error');
       }

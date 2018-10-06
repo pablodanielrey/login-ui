@@ -47,7 +47,7 @@ const routes: Routes = [
       { path: 'sin_correo', component: SinCorreoComponent }
     ]},
 
-  { path: 'error', component: ErrorComponent },
+  { path: 'error/:error', component: ErrorComponent },
   { path: 'oauth2', component: Oauth2Component },
 
   { 
