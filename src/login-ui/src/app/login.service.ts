@@ -54,6 +54,10 @@ export class LoginService {
     return this.http.get<ConsentFlow>(url, h);
   }
 
+  logout(id_token:string, app_id:string):Observable<string> {
+    let url = `${LOGIN_API_URL}/logout/${id_token},${app_id}`;
+    return this.http.get<string>(url);
+  }
 
   /*
     funciones de adminsitracion

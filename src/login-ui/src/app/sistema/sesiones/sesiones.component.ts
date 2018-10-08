@@ -51,4 +51,10 @@ export class SesionesComponent implements OnInit {
     });
   }
 
+  logout() {
+    this.service.logout('','login-ui').subscribe(r => {
+      console.log();
+    });
+  }
+
 }

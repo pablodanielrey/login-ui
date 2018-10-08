@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -12,7 +12,7 @@ export class ErrorComponent implements OnInit {
   error = '';
   descripcion = '';
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(p => {
@@ -23,6 +23,15 @@ export class ErrorComponent implements OnInit {
         this.descripcion = p.get('error_description');
       }
     });
+ 
   }
+
+    esErrorDeUsuario():boolean {
+      return this.error == 'unknown_user';
+    }
+
+    login() {
+      this.router.navigate(['/oauth2']);
+    }
 
 }
