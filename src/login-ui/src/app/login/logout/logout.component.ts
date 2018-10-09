@@ -20,25 +20,19 @@ export class LogoutComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(p => {
-      let ref = p.get('ref');
       let id_token = p.get('id_token');
       let client_id = p.get('client_id');
+
       this.service.logout(id_token, client_id).subscribe(
         r => {
-          if (ref) {
-            console.log('redireccionando a ' + ref);
-            this.document.location.href = ref;
-          }
+          console.log('redireccionando a ' + r.redirect_to);
+          this.document.location.href = r.redirect_to;
         },
         e => {
-          if (ref) {
-            console.log('redireccionando a ' + ref);
-            this.document.location.href = ref;
-          }
+          console.log(e);
         }
       );
     });
-
   }
 
 }
