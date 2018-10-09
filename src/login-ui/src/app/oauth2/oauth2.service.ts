@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { from, Subscription, Observable } from 'rxjs';
+import { from, Subscription, Observable, of } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import { AuthConfig, OAuthService, NullValidationHandler, JwksValidationHandler, OAuthEvent, OAuthErrorEvent, OAuthInfoEvent } from 'angular-oauth2-oidc';
@@ -12,7 +12,7 @@ export const authConfig: AuthConfig = {
   logoutUrl: environment.logoutUrl,
   oidc: true,
   requireHttps: false,
-  clientId: 'login-ui',
+  clientId: environment.client_id,
   dummyClientSecret: 'login-ui',
   scope: 'openid profile email',
   sessionChecksEnabled: true,
@@ -85,7 +85,37 @@ export class Oauth2Service {
     return this.oauthService.hasValidAccessToken();
   }
 
-  logout() {
-    this.oauthService.logOut(true);
+  logout(redirect=true) {
+    this.oauthService.logOut(!redirect);
   }
+
+  getId() {
+    let c = this.oauthService.getIdentityClaims();
+    return c['sub'];
+  }
+
+  getPrimaryEmail() {
+    let c = this.oauthService.getIdentityClaims();
+    if (c['email_verified']) {
+      return c['email'];
+    } else {
+      return null;
+    }
+    
+  }
+
+  getNames() {
+    return {
+      
+    };
+  }
+
+  getIdToken(): string {
+    return this.oauthService.getIdToken();
+  }
+
+  getAppId(): string {
+    return environment.client_id;
+  }
+
 }

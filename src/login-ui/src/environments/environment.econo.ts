@@ -4,6 +4,7 @@ export const environment = {
   loginApiUrl: 'https://api.econo.unlp.edu.ar/login/api/v1.0',
   logoutUrl:'https://login.econo.unlp.edu.ar/logout/{{id_token}}/{{client_id}}',
   session: 'SID',
+  client_id: 'login-ui',
 
   loginHeader: 'FCE | Login',
   loginLogo: '/assets/img/logo_fce.png',

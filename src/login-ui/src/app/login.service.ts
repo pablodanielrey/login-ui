@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { map, flatMap } from 'rxjs/operators';
 
@@ -8,6 +8,7 @@ import { environment } from '../environments/environment';
 import { LoginFlow, ConsentFlow } from './entities/login';
 
 const LOGIN_API_URL = environment.loginApiUrl;
+const OIDC = environment.oidp_issuer;
 
 @Injectable({
   providedIn: 'root'
@@ -55,8 +56,13 @@ export class LoginService {
   }
 
   logout(id_token:string, app_id:string):Observable<string> {
-    let url = `${LOGIN_API_URL}/logout/${id_token},${app_id}`;
-    return this.http.get<string>(url);
+    let url = `${LOGIN_API_URL}/logout`;
+    //let url = `${OIDC}oauth2/auth/sessions/login/revoke`;
+    let data = {
+      'id_token': id_token,
+      'app_id': app_id
+    }
+    return this.http.post<string>(url, data);
   }
 
   /*

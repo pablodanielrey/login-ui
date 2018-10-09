@@ -26,12 +26,12 @@ export class ErrorComponent implements OnInit {
  
   }
 
-    esErrorDeUsuario():boolean {
-      return this.error == 'unknown_user';
-    }
+  esErrorDeUsuario():boolean {
+    return this.error == 'unknown_user';
+  }
 
-    login() {
-      this.router.navigate(['/oauth2']);
-    }
+  login() {
+    this.router.navigate(['/oauth2']);
+  }
 
 }

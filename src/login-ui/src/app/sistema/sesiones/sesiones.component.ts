@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'; 
-import { OAuthService } from 'angular-oauth2-oidc';
+import { Oauth2Service } from '../../oauth2/oauth2.service';
 
 import { LoginService } from '../../login.service';
 
@@ -17,8 +18,9 @@ export class SesionesComponent implements OnInit {
   sesiones: string[] = [];
 
   constructor(private fb: FormBuilder,
+              private router: Router,
               private service: LoginService,
-              private oauthService: OAuthService) { 
+              private oauthService: Oauth2Service) { 
 
       this.formulario = fb.group({
         'uid': this.uid
@@ -26,9 +28,7 @@ export class SesionesComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.oauthService.getAccessToken());
-    let c = this.oauthService.getIdentityClaims();
-    this.usuario_id = c['sub'];
+    this.usuario_id = this.oauthService.getId();
     this.uid.setValue(this.usuario_id);
   }
 
@@ -52,9 +52,16 @@ export class SesionesComponent implements OnInit {
   }
 
   logout() {
-    this.service.logout('','login-ui').subscribe(r => {
-      console.log();
-    });
+    this.service.logout(this.oauthService.getIdToken(), this.oauthService.getAppId()).subscribe(
+      r => {
+        this.oauthService.logout(false);
+        console.log(r);
+        this.router.navigate(['/']);
+      },
+      e => {
+        console.log(e);
+      }
+    )
   }
 
 }

@@ -4,6 +4,7 @@ export const environment = {
   loginApiUrl: 'https://api.asistencia.presi.unlp.edu.ar/login/api/v1.0',
   logoutUrl:'https://login.asistencia.presi.unlp.edu.ar/logout/{{id_token}}/{{client_id}}',
   session: 'SID',
+  client_id: 'login-ui',
 
   loginHeader: 'Asistencia | Login',
   loginLogo: '/assets/img/logo_presi.png',
