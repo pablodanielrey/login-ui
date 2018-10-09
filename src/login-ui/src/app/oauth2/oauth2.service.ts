@@ -31,13 +31,10 @@ export class Oauth2Service {
     this.oauthService.configure(authConfig);
     this.oauthService.tokenValidationHandler = new NullValidationHandler();
     
-    // this.oauthService.events.pipe(filter((e1:OAuthEvent) => e1 instanceof OAuthErrorEvent)).subscribe((err:OAuthErrorEvent) => {
-    //   if (err.params['error'] == 'unknown_user') {
-    //     console.log('erro usuario clave');
-    //   }
-    //   this.error = true;
-    //   this.error_description = err.params['error'];
-    // });
+    //this.oauthService.events.pipe(filter((e1:OAuthEvent) => e1 instanceof OAuthErrorEvent)).subscribe((err:OAuthErrorEvent) => {
+    this.oauthService.events.subscribe((e:OAuthEvent) => {
+       console.log(e);
+    });
     
     this.oauthService.loadDiscoveryDocument().then(() => {
       console.log('documento cargado');
