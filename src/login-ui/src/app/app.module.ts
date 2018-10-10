@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { OAuthModule } from 'angular-oauth2-oidc';
+import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
 import { OidpGuard } from './oauth2/oidp.guard';
 
 import { AppComponent } from './app.component';
@@ -62,6 +62,7 @@ import { CookieService } from 'ngx-cookie-service';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
+    { provide: OAuthStorage, useValue: localStorage },
     OidpGuard,
     CookieService
   ],
