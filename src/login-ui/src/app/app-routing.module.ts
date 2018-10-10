@@ -27,7 +27,8 @@ import { ClaveModificadaComponent } from './recuperar-clave/clave-modificada/cla
 
 const routes: Routes = [
 
-  { path: 'logout/:id_token/:client_id', component: LogoutComponent, canActivate: [OidpGuard] },
+  { path: 'logout/:id_token/:client_id', component: LogoutComponent },
+  
   { path: 'login', component: LoginComponent },
   { path: 'login/:login_challenge', component: LoginComponent },
   { path: 'consent', component: ConsentComponent },
