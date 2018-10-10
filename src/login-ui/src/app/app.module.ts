@@ -32,6 +32,8 @@ import { ErrorDniComponent } from './recuperar-clave/error-dni/error-dni.compone
 import { ErrorServidorComponent } from './recuperar-clave/error-servidor/error-servidor.component';
 import { IngresarClaveComponent } from './recuperar-clave/ingresar-clave/ingresar-clave.component';
 import { ClaveModificadaComponent } from './recuperar-clave/clave-modificada/clave-modificada.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import { ClaveModificadaComponent } from './recuperar-clave/clave-modificada/cla
         allowedUrls: ['http'],
         sendAccessToken: true
     }
-    })
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     OidpGuard
