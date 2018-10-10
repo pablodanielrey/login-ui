@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Location, DOCUMENT } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { LoginService } from '../../login.service';
 
@@ -12,7 +12,8 @@ import { LoginService } from '../../login.service';
 export class LogoutComponent implements OnInit {
 
   constructor(@Inject(DOCUMENT) private document: any,
-              private route: ActivatedRoute, 
+              private router: Router,
+              private route: ActivatedRoute,
               private location: Location, 
               private service: LoginService) {
 
@@ -30,6 +31,7 @@ export class LogoutComponent implements OnInit {
         },
         e => {
           console.log(e);
+          this.router.navigate(['/error'], e);
         }
       );
     });
