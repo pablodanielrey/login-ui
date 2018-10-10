@@ -30,29 +30,7 @@ export class LogoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cookies.deleteAll();
 
-    this.route.paramMap.subscribe(p => {
-      let id_token = p.get('id_token');
-      let client_id = p.get('client_id');
-
-      if (!this.oauthService.hasValidToken()) {
-        console.log('no tiene token válido');
-        this.document.location.href = LOGOUT_REDIRECT;
-
-      } else {
-        this.service.logout(id_token, client_id).subscribe(
-          r => {
-            console.log('redireccionando a ' + r.redirect_to);
-            this.document.location.href = r.redirect_to;
-          },
-          e => {
-            console.log(e);
-            this.router.navigate(['/error'], e);
-          }
-        );
-      }
-    });
   }
 
 }

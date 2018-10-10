@@ -52,9 +52,8 @@ export class SesionesComponent implements OnInit {
   }
 
   logout() {
-    this.service.logout(this.oauthService.getIdToken(), this.oauthService.getAppId()).subscribe(
+    this.oauthService.logout().subscribe(
       r => {
-        this.oauthService.logout(false);
         console.log(r);
         this.router.navigate(['/']);
       },

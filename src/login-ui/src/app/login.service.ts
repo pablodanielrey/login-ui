@@ -5,7 +5,7 @@ import { map, flatMap } from 'rxjs/operators';
 
 import { environment } from '../environments/environment';
 
-import { LoginFlow, ConsentFlow, LogoutData } from './entities/login';
+import { LoginFlow, ConsentFlow } from './entities/login';
 
 const LOGIN_API_URL = environment.loginApiUrl;
 const OIDC = environment.oidp_issuer;
@@ -53,16 +53,6 @@ export class LoginService {
       })
     }
     return this.http.get<ConsentFlow>(url, h);
-  }
-
-  logout(id_token:string, app_id:string):Observable<LogoutData> {
-    let url = `${LOGIN_API_URL}/logout`;
-    //let url = `${OIDC}oauth2/auth/sessions/login/revoke`;
-    let data = {
-      'id_token': id_token,
-      'app_id': app_id
-    }
-    return this.http.post<LogoutData>(url, data);
   }
 
   /*

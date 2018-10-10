@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { from, Subscription, Observable, of } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { AuthConfig, OAuthService, NullValidationHandler, JwksValidationHandler, OAuthEvent, OAuthErrorEvent, OAuthInfoEvent } from 'angular-oauth2-oidc';
 
@@ -19,6 +20,10 @@ export const authConfig: AuthConfig = {
   showDebugInformation: true
 }
 
+export interface LogoutData {
+  redirect_to: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -27,7 +32,7 @@ export class Oauth2Service {
   error: boolean = false;
   error_description: string = null;
 
-  constructor(private oauthService: OAuthService) { 
+  constructor(private oauthService: OAuthService, private http: HttpClient) { 
     this.oauthService.configure(authConfig);
     this.oauthService.tokenValidationHandler = new NullValidationHandler();
     
@@ -82,9 +87,6 @@ export class Oauth2Service {
     return this.oauthService.hasValidAccessToken();
   }
 
-  logout(redirect=true) {
-    this.oauthService.logOut(!redirect);
-  }
 
   getId() {
     let c = this.oauthService.getIdentityClaims();
@@ -113,6 +115,17 @@ export class Oauth2Service {
 
   getAppId(): string {
     return environment.client_id;
+  }
+
+  logout():Observable<LogoutData> {
+    this.oauthService.logOut(true);
+    let url = `${environment.loginApiUrl}/logout`;
+    //let url = `${OIDC}oauth2/auth/sessions/login/revoke`;
+    let data = {
+      'id_token': this.getIdToken(),
+      'app_id': this.getAppId()
+    }
+    return this.http.post<LogoutData>(url, data);
   }
 
 }
