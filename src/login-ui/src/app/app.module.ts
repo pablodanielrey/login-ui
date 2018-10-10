@@ -33,7 +33,11 @@ import { ErrorServidorComponent } from './recuperar-clave/error-servidor/error-s
 import { IngresarClaveComponent } from './recuperar-clave/ingresar-clave/ingresar-clave.component';
 import { ClaveModificadaComponent } from './recuperar-clave/clave-modificada/clave-modificada.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+
 import { environment } from '../environments/environment';
+
+import { CookieService } from 'ngx-cookie-service';
+
 
 @NgModule({
   declarations: [
@@ -58,7 +62,8 @@ import { environment } from '../environments/environment';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
-    OidpGuard
+    OidpGuard,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

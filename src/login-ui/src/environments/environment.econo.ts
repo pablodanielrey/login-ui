@@ -5,6 +5,7 @@ export const environment = {
   logoutUrl:'https://login.econo.unlp.edu.ar/logout/{{id_token}}/{{client_id}}',
   session: 'SID',
   client_id: 'login-ui',
+  default_logout_redirect: 'https://aplicaciones.econo.unlp.edu.ar',
 
   loginHeader: 'FCE | Login',
   loginLogo: '/assets/img/logo_fce.png',

@@ -1,9 +1,16 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Location, DOCUMENT } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Oauth2Service } from '../../oauth2/oauth2.service';
 
+import { environment } from '../../../environments/environment';
+
+import { CookieService } from 'ngx-cookie-service';
+
+
+import { Oauth2Service } from '../../oauth2/oauth2.service';
 import { LoginService } from '../../login.service';
+
+const LOGOUT_REDIRECT = environment.default_logout_redirect;
 
 @Component({
   selector: 'app-logout',
@@ -17,18 +24,22 @@ export class LogoutComponent implements OnInit {
               private route: ActivatedRoute,
               private location: Location, 
               private service: LoginService,
-              private oauthService: Oauth2Service) {
+              private oauthService: Oauth2Service,
+              private cookies: CookieService) {
 
   }
 
   ngOnInit() {
+    this.cookies.deleteAll();
+
     this.route.paramMap.subscribe(p => {
       let id_token = p.get('id_token');
       let client_id = p.get('client_id');
 
       if (!this.oauthService.hasValidToken()) {
         console.log('no tiene token válido');
-        this.location.back();
+        this.document.location.href = LOGOUT_REDIRECT;
+
       } else {
         this.service.logout(id_token, client_id).subscribe(
           r => {
