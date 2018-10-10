@@ -6,8 +6,6 @@ export const environment = {
   production: false,
   oidp_issuer: 'https://oidc.econo.unlp.edu.ar/',
   loginApiUrl: 'http://localhost:10002/login/api/v1.0',
-  //logoutUrl:'https://login.econo.unlp.edu.ar/logout/{{id_token}}/{{client_id}}',
-  logoutUrl:'http://localhost:10005/logout/{{id_token}}/{{client_id}}',
   session: 'SID',
   client_id: 'login-ui',
   default_logout_redirect: 'https://aplicaciones.econo.unlp.edu.ar',

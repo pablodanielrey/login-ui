@@ -10,7 +10,6 @@ import { environment } from '../../environments/environment';
 export const authConfig: AuthConfig = {
   issuer: environment.oidp_issuer,
   redirectUri: window.location.origin + '/oauth2',
-  logoutUrl: environment.logoutUrl,
   oidc: true,
   requireHttps: false,
   clientId: environment.client_id,
