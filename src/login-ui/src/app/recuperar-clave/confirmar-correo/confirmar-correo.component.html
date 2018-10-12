@@ -12,10 +12,10 @@
 
         <form class="formulario" *ngIf='data' [formGroup]='form' (ngSubmit)='enviar_correo()'>
             <div><span *ngIf='esVaron()'>Hola!</span><span *ngIf='!esVaron()'>Hola!</span> <b> {{data.usuario.nombre}} {{data.usuario.apellido}}</b></div>
-            <p class="mensaje"> Necesitamos que confirmes tu cuenta de correo alternativa para poder enviarte un código con el cual podrás restablecer tu contraseña.</p>
+            <p class="mensaje"> Necesitamos que confirmes tu cuenta de correo registrado para poder enviarte un código con el cual podrás restablecer tu contraseña.</p>
             <p class="mensaje"> Correo registrado: <span class="cuentaDeCorreo">{{data.correo.ayuda}}</span> </p>
             <mat-form-field class="contenedorImput">
-                <input matInput placeholder="Ingresa tu cuenta de correo alternativa" type='email' formControlName='email'/>
+                <input matInput placeholder="Ingresa tu cuenta de correo registrado " type='email' formControlName='email'/>
                 <mat-error *ngIf='!form.valid && form.dirty'>El correo no concuerda</mat-error>
             </mat-form-field>
             <button mat-button class="btnSiguiente" type='submit'>ENVIAR CÓDIGO</button>
