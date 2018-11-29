@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 
 @Component({
@@ -8,6 +9,9 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./error.component.css']
 })
 export class ErrorComponent implements OnInit {
+  loginHeader: string = environment.loginHeader;
+  loginFooterMini: string = environment.loginFooterMini;
+  loginFooterFull: string = environment.loginFooterFull;
 
   error = '';
   descripcion = '';
