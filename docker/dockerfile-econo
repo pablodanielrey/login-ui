@@ -20,12 +20,11 @@ COPY docker/entrypoint.sh /
 
 RUN curl -o- -L https://yarnpkg.com/install.sh | bash
 RUN yarn global add @angular/cli
-RUN ng set --global packageManager=yarn
 
 COPY src /src
 WORKDIR /src
 
-RUN cd /src/login-ui && yarn install
+RUN cd /src/login-ui && ng set --global packageManager=yarn && yarn install
 RUN cd /src/login-ui && ng build --configuration=econo --build-optimizer --aot --i18n-file src/messages.xlf --i18n-format xlf --i18n-locale es
 #RUN cd /src/login-ui && ng build --prod --build-optimizer --aot
 EXPOSE 80
