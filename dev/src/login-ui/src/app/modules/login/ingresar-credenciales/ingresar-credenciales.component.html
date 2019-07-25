@@ -1,0 +1,7 @@
+<form *ngIf='mostrar' [formGroup]='credenciales' (ngSubmit)='acceder()'>
+    Usuario<input type='text' mat-input formControlName='usuario'/>
+    Clave<input type='password' mat-input formControlName='clave'/>
+    <button type='submit'>Ingresar</button>
+
+    <a href='https://www.usuarios.econo.unlp.edu.ar/recuperar-clave'>no me acuerdo mi clave</a>
+</form>
