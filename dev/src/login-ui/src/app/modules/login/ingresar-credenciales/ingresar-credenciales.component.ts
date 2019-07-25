@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { LoginService } from '../../../shared/services/login.service';
 
 @Component({
   selector: 'app-ingresar-credenciales',
@@ -20,7 +21,8 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder, 
               private router:Router, 
-              private route:ActivatedRoute) {
+              private route:ActivatedRoute,
+              private service:LoginService) {
     this.credenciales = fb.group({
       usuario: [''],
       clave: ['']
@@ -41,8 +43,13 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
   }
 
   acceder() {
+    let u = this.credenciales.value['usuario'];
+    let c = this.credenciales.value['clave'];
+    let h = localStorage.getItem('login_challenge');
     console.log(this.credenciales.value);
-    this.router.navigate(['/login/registrar']);
+    this.subs.push(this.service.login(u,c,h).subscribe(r => {
+      this.router.navigate(['/login/registrar']);
+    }))
   }
 
 }
