@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../../../shared/services/login.service';
+import { of } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ingresar-credenciales',
@@ -16,7 +18,7 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
     this.subs.forEach(s => s.unsubscribe());
   }
 
-  mostrar: boolean = false;
+  mostrar: boolean = true;
   credenciales: FormGroup;
 
   constructor(private fb: FormBuilder, 
@@ -30,26 +32,21 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subs.push(this.route.paramMap.subscribe(params => {
-      let c = params.get('challenge');
-      if (c != null) {
-        localStorage.setItem('login_challenge', c);
-        this.mostrar = true;
-      } else {
-        localStorage.removeItem('login_challenge');
-        this.router.navigate(['/oauth2']);
-      }
-    }));
   }
 
   acceder() {
-    let u = this.credenciales.value['usuario'];
-    let c = this.credenciales.value['clave'];
-    let h = localStorage.getItem('login_challenge');
-    console.log(this.credenciales.value);
-    this.subs.push(this.service.login(u,c,h).subscribe(r => {
+    of(
+      {
+        u: this.credenciales.value['usuario'],
+        c: this.credenciales.value['clave']
+      }
+    ).pipe(
+      switchMap(d => this.service.get_login_challenge(null).pipe(
+        switchMap(c => this.service.login(d.u, d.c, c))
+      )
+    )).subscribe(r => {
       this.router.navigate(['/login/registrar']);
-    }))
+    });
   }
 
 }

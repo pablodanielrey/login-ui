@@ -11,13 +11,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IngresarCredencialesComponent } from './modules/login/ingresar-credenciales/ingresar-credenciales.component';
 import { RegistrarDispositivoComponent } from './modules/login/registrar-dispositivo/registrar-dispositivo.component';
 import { BienvenidoComponent } from './modules/login/bienvenido/bienvenido.component';
+import { VerificarDispositivoComponent } from './modules/login/verificar-dispositivo/verificar-dispositivo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IngresarCredencialesComponent,
     RegistrarDispositivoComponent,
-    BienvenidoComponent
+    BienvenidoComponent,
+    VerificarDispositivoComponent
   ],
   imports: [
     BrowserModule,
