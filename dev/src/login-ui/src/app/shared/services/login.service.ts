@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
@@ -20,6 +20,10 @@ export class LoginService {
 
   constructor(private http: HttpClient) { 
     this.url = environment.loginApiUrl;
+  }
+
+  device_id(): Observable<string> {
+    return of('assxa');
   }
 
   login(usuario:string, clave:string, challenge:string): Observable<Response> {
