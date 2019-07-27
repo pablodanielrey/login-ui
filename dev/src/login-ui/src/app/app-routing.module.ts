@@ -4,6 +4,7 @@ import { IngresarCredencialesComponent } from './modules/login/ingresar-credenci
 import { RegistrarDispositivoComponent } from './modules/login/registrar-dispositivo/registrar-dispositivo.component';
 import { BienvenidoComponent } from './modules/login/bienvenido/bienvenido.component';
 import { VerificarDispositivoComponent } from './modules/login/verificar-dispositivo/verificar-dispositivo.component';
+import { AuthRoutingModule } from './modules/auth/auth-routing.module';
 
 
 const routes: Routes = [
@@ -18,11 +19,15 @@ const routes: Routes = [
       { path: '', redirectTo: 'verificar/d', pathMatch: 'full'}
     ]
   },
-  { path: '**', redirectTo: '/login/verificar/d' }
+  //{ path: '**', redirectTo: '/login/verificar/d' }
+  { path: '**', redirectTo: '/auth/oauth2' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes),
+    AuthRoutingModule
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

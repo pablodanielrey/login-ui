@@ -18,7 +18,15 @@ export const environment = {
     subtituloSistema: '',
     desarrolloSistema: 'DiTeSI | Dirección de Tecnologías y Sistemas Informáticos',
     logoSistema: '/assets/img/fce/logofce2018.png',
-  }      
+  },
+
+  auth: {
+    issuer: 'https://oidc.econo.unlp.edu.ar/',
+    redirectUri: window.location.origin + '/auth/oauth2',
+    clientId: 'login-ui',
+    scope: 'openid profile email algo',
+    waitForTokenInMsec: 2000
+  }
 };
 
 /*

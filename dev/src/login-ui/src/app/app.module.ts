@@ -12,6 +12,11 @@ import { IngresarCredencialesComponent } from './modules/login/ingresar-credenci
 import { RegistrarDispositivoComponent } from './modules/login/registrar-dispositivo/registrar-dispositivo.component';
 import { BienvenidoComponent } from './modules/login/bienvenido/bienvenido.component';
 import { VerificarDispositivoComponent } from './modules/login/verificar-dispositivo/verificar-dispositivo.component';
+import { AuthModule, OAuth2Config } from './modules/auth/auth.module';
+
+
+const conf: OAuth2Config = environment.auth;
+
 
 @NgModule({
   declarations: [
@@ -23,6 +28,7 @@ import { VerificarDispositivoComponent } from './modules/login/verificar-disposi
   ],
   imports: [
     BrowserModule,
+    AuthModule.forRoot(conf),
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
