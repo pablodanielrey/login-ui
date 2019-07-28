@@ -20,6 +20,7 @@ export const environment = {
     logoSistema: '/assets/img/fce/logofce2018.png',
   },
 
+  /*
   auth: {
     issuer: 'https://oidc.econo.unlp.edu.ar/',
     redirectUri: window.location.origin + '/auth/oauth2',
@@ -27,6 +28,16 @@ export const environment = {
     scope: 'openid profile email algo',
     waitForTokenInMsec: 2000
   }
+  */
+  auth: {
+    issuer: 'http://oidc:6444/',
+    redirectUri: window.location.origin + '/auth/oauth2',
+    clientId: 'login-ui',
+    scope: 'openid profile email algo',
+    waitForTokenInMsec: 2000,
+    requireHttps: false
+  }
+
 };
 
 /*

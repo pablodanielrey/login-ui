@@ -1,0 +1,6 @@
+<div *ngIf='(error$ | async) as e'>
+    <div>{{e?.error}}</div>
+    <div>{{e?.description}}</div>
+    <div>{{e?.hint}}</div>
+</div>
+

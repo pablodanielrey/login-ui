@@ -6,13 +6,15 @@ import { OAuthModule, AuthConfig, OAuthModuleConfig, OAuthService, UrlHelperServ
 import { AuthComponent } from './auth/auth.component';
 import { AuthService } from './auth.service';
 import { AuthRoutingModule } from './auth-routing.module';
+import { AuthErrorComponent } from './auth-error/auth-error.component';
 
 export type OAuth2Config = AuthConfig;
 
 
 @NgModule({
   declarations: [
-    AuthComponent
+    AuthComponent,
+    AuthErrorComponent
   ],
   imports: [
     CommonModule,
