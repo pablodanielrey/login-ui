@@ -2,18 +2,19 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login-pro, private router: Routerxy',
-  templateUrl: './login-proxy.component.html',
-  styleUrls: ['./login-proxy.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class LoginProxyComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit, OnDestroy {
+
   private subs = [];
 
   ngOnDestroy(): void {
     this.subs.forEach(s => s.unsubscribe());
   }
 
-  constructor(private route:ActivatedRoute, 
+  constructor(private route: ActivatedRoute, 
               private router: Router) { 
 
   }
@@ -26,5 +27,4 @@ export class LoginProxyComponent implements OnInit, OnDestroy {
       }
     })
   }
-
 }
