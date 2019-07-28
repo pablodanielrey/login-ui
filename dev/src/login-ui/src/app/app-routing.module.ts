@@ -22,7 +22,7 @@ const routes: Routes = [
       { path: 'login', component: IngresarCredencialesComponent },
       { path: 'login/:challenge', component: IngresarCredencialesComponent },
       { path: 'registrar', component: RegistrarDispositivoComponent },
-      { path: 'bienvenido', component: BienvenidoComponent }
+      { path: 'bienvenido/:url', component: BienvenidoComponent }
     ]
   },
   {

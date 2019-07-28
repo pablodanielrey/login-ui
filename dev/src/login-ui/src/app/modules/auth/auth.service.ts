@@ -44,10 +44,10 @@ export class AuthService {
     this.oauth.logOut(true);
   }
 
-  claims() {
+  claims(): Observable<any> {
     let o = this.oauth.getIdentityClaims(); 
     console.log(o);
-    return o;
+    return of(o);
   }
 
 }
