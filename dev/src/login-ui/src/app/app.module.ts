@@ -19,7 +19,7 @@ import { AuthModule, OAuth2Config } from './modules/auth/auth.module';
 import { ConsentComponent } from './modules/consent/consent.component';
 import { VerificarChallengeComponent } from './modules/consent/verificar-challenge/verificar-challenge.component';
 
-const conf: OAuth2Config = environment.auth;
+const oauthconf: OAuth2Config = environment.auth;
 
 @NgModule({
   declarations: [
@@ -29,12 +29,12 @@ const conf: OAuth2Config = environment.auth;
     RegistrarDispositivoComponent,
     BienvenidoComponent,
     VerificarDispositivoComponent,
-    ConsentComponent,
+    ConsentComponent, 
     VerificarChallengeComponent
   ],
   imports: [
     BrowserModule,
-    AuthModule.forRoot(conf),
+    AuthModule.forRoot(oauthconf),
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
