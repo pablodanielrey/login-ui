@@ -6,6 +6,8 @@ import { BienvenidoComponent } from './modules/login/bienvenido/bienvenido.compo
 import { VerificarDispositivoComponent } from './modules/login/verificar-dispositivo/verificar-dispositivo.component';
 import { AuthRoutingModule } from './modules/auth/auth-routing.module';
 import { LoginProxyComponent } from './modules/login/login-proxy/login-proxy.component';
+import { ConsentComponent } from './modules/consent/consent.component';
+import { VerificarChallengeComponent } from './modules/consent/verificar-challenge/verificar-challenge.component';
 
 
 const routes: Routes = [
@@ -18,6 +20,13 @@ const routes: Routes = [
       { path: 'login/:challenge', component: IngresarCredencialesComponent },
       { path: 'registrar', component: RegistrarDispositivoComponent },
       { path: 'bienvenido', component: BienvenidoComponent }
+    ]
+  },
+  {
+    path: 'consent',
+    component: ConsentComponent,
+    children: [
+      { path: 'verificar/:challenge', component: VerificarChallengeComponent }
     ]
   },
   //{ path: '**', redirectTo: '/login/verificar/d' }

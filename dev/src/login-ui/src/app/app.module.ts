@@ -14,6 +14,8 @@ import { BienvenidoComponent } from './modules/login/bienvenido/bienvenido.compo
 import { VerificarDispositivoComponent } from './modules/login/verificar-dispositivo/verificar-dispositivo.component';
 import { AuthModule, OAuth2Config } from './modules/auth/auth.module';
 import { LoginProxyComponent } from './modules/login/login-proxy/login-proxy.component';
+import { ConsentComponent } from './modules/consent/consent.component';
+import { VerificarChallengeComponent } from './modules/consent/verificar-challenge/verificar-challenge.component';
 
 
 const conf: OAuth2Config = environment.auth;
@@ -26,7 +28,9 @@ const conf: OAuth2Config = environment.auth;
     RegistrarDispositivoComponent,
     BienvenidoComponent,
     VerificarDispositivoComponent,
-    LoginProxyComponent
+    LoginProxyComponent,
+    ConsentComponent,
+    VerificarChallengeComponent
   ],
   imports: [
     BrowserModule,
