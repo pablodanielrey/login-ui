@@ -5,18 +5,19 @@ import { RegistrarDispositivoComponent } from './modules/login/registrar-disposi
 import { BienvenidoComponent } from './modules/login/bienvenido/bienvenido.component';
 import { VerificarDispositivoComponent } from './modules/login/verificar-dispositivo/verificar-dispositivo.component';
 import { AuthRoutingModule } from './modules/auth/auth-routing.module';
+import { LoginProxyComponent } from './modules/login/login-proxy/login-proxy.component';
 
 
 const routes: Routes = [
   { 
-    path: 'login', 
+    path: 'login',
+    component: LoginProxyComponent,
     children: [
       { path: 'verificar/:challenge', component: VerificarDispositivoComponent },
       { path: 'login', component: IngresarCredencialesComponent },
       { path: 'login/:challenge', component: IngresarCredencialesComponent },
       { path: 'registrar', component: RegistrarDispositivoComponent },
-      { path: 'bienvenido', component: BienvenidoComponent },
-      { path: '', redirectTo: 'verificar/d', pathMatch: 'full'}
+      { path: 'bienvenido', component: BienvenidoComponent }
     ]
   },
   //{ path: '**', redirectTo: '/login/verificar/d' }

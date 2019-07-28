@@ -13,6 +13,7 @@ import { RegistrarDispositivoComponent } from './modules/login/registrar-disposi
 import { BienvenidoComponent } from './modules/login/bienvenido/bienvenido.component';
 import { VerificarDispositivoComponent } from './modules/login/verificar-dispositivo/verificar-dispositivo.component';
 import { AuthModule, OAuth2Config } from './modules/auth/auth.module';
+import { LoginProxyComponent } from './modules/login/login-proxy/login-proxy.component';
 
 
 const conf: OAuth2Config = environment.auth;
@@ -24,7 +25,8 @@ const conf: OAuth2Config = environment.auth;
     IngresarCredencialesComponent,
     RegistrarDispositivoComponent,
     BienvenidoComponent,
-    VerificarDispositivoComponent
+    VerificarDispositivoComponent,
+    LoginProxyComponent
   ],
   imports: [
     BrowserModule,

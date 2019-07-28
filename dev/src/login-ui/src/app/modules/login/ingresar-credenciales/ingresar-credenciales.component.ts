@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../../../shared/services/login.service';
 import { of } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-ingresar-credenciales',
@@ -24,7 +25,9 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder, 
               private router:Router, 
               private route:ActivatedRoute,
-              private service:LoginService) {
+              private service:LoginService,
+              @Inject(DOCUMENT) private document: any) {
+
     this.credenciales = fb.group({
       usuario: [''],
       clave: ['']
@@ -41,11 +44,16 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
         c: this.credenciales.value['clave']
       }
     ).pipe(
-      switchMap(d => this.service.get_login_challenge(null).pipe(
-        switchMap(c => this.service.login(d.u, d.c, c))
+      switchMap(d => this.route.paramMap.pipe(
+        switchMap(params => {
+          let challenge = params.get('challenge');
+          return this.service.login(d.u, d.c, challenge);
+        })
       )
     )).subscribe(r => {
-      this.router.navigate(['/login/registrar']);
+      console.log(r);
+      let redirect_url = r['redirect_to'];
+      this.document.location.href = redirect_url;
     });
   }
 

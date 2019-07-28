@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-verificar-dispositivo',
@@ -26,14 +27,14 @@ export class VerificarDispositivoComponent implements OnInit {
   ngOnInit() {
     this.mensaje = 'verificando dispositivo';
     this.subs.push(
-      this.service.get_login_challenge(this.route).pipe(
-        switchMap(c => {
-          this.mensaje = `challenge : ${c}`;
-          return this.service.get_device_id(c)
-        })
-      ).subscribe(d => {
-        this.mensaje = `device id: ${d}`;
-        this.router.navigate(['/login/login']);
+      this.service.get_login_challenge(this.route).subscribe(c => {
+        if (c['skip']) {
+          // se acepta implícitamente el challenge así que ya redirecciono
+          this.router.navigate(['/login/bienvenido']);
+        } else {
+          let challenge = c['challenge'];
+          this.router.navigate([`/login/login/${challenge}`]);
+        }
       })
     )
   }
