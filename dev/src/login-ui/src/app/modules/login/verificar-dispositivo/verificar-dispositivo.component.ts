@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-verificar-dispositivo',
@@ -19,9 +19,13 @@ export class VerificarDispositivoComponent implements OnInit {
 
   mensaje : string = '';
 
+  device_id$ : Observable<string>;
+
   constructor(private service:LoginService, 
               private router:Router, 
               private route:ActivatedRoute) { 
+
+    this.device_id$ = this.service.get_device_id();
   }
   
   ngOnInit() {
