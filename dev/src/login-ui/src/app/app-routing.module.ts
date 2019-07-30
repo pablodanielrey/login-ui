@@ -40,10 +40,10 @@ const routes: Routes = [
       { path: 'start', component: StartComponent, canActivate: [AuthGuardService] },
       { path: '**', redirectTo: 'start' }
     ]
-  }
+  },
   //{ path: '**', redirectTo: '/login/verificar/d' }
   //{ path: '**', redirectTo: '/auth/oauth2' }
-  //{ path: '**', redirectTo: '/system/start' }
+  { path: '**', redirectTo: '/system/start' }
 ];
 
 @NgModule({
