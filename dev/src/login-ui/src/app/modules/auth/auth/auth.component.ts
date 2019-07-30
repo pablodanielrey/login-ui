@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -20,7 +20,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   message: any = null;
 
   constructor(private auth: AuthService, 
-              private route:ActivatedRoute) { 
+              private route: ActivatedRoute,
+              private router: Router) { 
   }
 
   ngOnInit() {
@@ -32,11 +33,13 @@ export class AuthComponent implements OnInit, OnDestroy {
       is_auth$.pipe(
         switchMap(b => b ? of(b) : read_tokens$)
       ).subscribe(b => {
-        if (!b) {
-          console.log('iniciando el flujo de login');
-          this.auth.login();
+        let url = localStorage.getItem('oauth_redirect_url');
+        if (url != null) {
+          // voy a la url pedida originalmente antes de la autentificacion
+          console.log(`redireccionando a la url requerida anteriormente ${url}`);
+          this.router.navigateByUrl(url);
         } else {
-          this.message = this.auth.claims();
+          this.router.navigate(['/']);
         }
       })
     )

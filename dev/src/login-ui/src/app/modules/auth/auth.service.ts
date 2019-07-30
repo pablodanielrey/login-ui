@@ -27,9 +27,9 @@ export class AuthService {
     );
   }
 
-  login() {
+  login(): Observable<void> {
     console.log('iniciando flujo de auth');
-    this.oauth.initLoginFlow();
+    return of(this.oauth.initLoginFlow());
     //this.oauth.tryLogin();
     //this.oauth.loadDiscoveryDocumentAndLogin();
   }
@@ -49,5 +49,8 @@ export class AuthService {
     console.log(o);
     return of(o);
   }
+
+
+
 
 }

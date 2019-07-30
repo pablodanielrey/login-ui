@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
 import { Observable, of, combineLatest } from 'rxjs';
-import { map, tap, switchMap } from 'rxjs/operators';
+import { map, tap, switchMap, catchError } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -75,15 +75,27 @@ export class LoginService {
   }
 
   login(usuario:string, clave:string, challenge:string): Observable<Response> {
-    let url = `${this.url}/login`;
-    let data = {
-      user: usuario,
-      password: clave,
-      challenge: challenge
-    }
-    return this.http.post<Response>(url, data).pipe(
-      map(r => r.response)
-    );
+    let device_id$ = this.get_device_id();
+    return device_id$.pipe(
+      switchMap(did => {
+        let url = `${this.url}/login`;
+        let data = {
+          user: usuario,
+          password: clave,
+          challenge: challenge,
+          device_id: did
+        }
+        return this.http.post<Response>(url, data).pipe(
+          /*
+          catchError((err:HttpErrorResponse) => {
+            let r:Response = err.error;
+            return of(r);
+          }),*/
+          map(r => r.response)
+        );
+      })
+    )
+
   }
 
   get_consent_challenge(route:ActivatedRoute): Observable<any> {

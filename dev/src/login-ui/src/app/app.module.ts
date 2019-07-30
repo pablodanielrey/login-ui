@@ -18,6 +18,7 @@ import { AuthModule, OAuth2Config } from './modules/auth/auth.module';
 
 import { ConsentComponent } from './modules/consent/consent.component';
 import { VerificarChallengeComponent } from './modules/consent/verificar-challenge/verificar-challenge.component';
+import { StartComponent } from './modules/system/start/start.component';
 
 const oauthconf: OAuth2Config = environment.auth;
 
@@ -30,7 +31,7 @@ const oauthconf: OAuth2Config = environment.auth;
     BienvenidoComponent,
     VerificarDispositivoComponent,
     ConsentComponent, 
-    VerificarChallengeComponent
+    VerificarChallengeComponent, StartComponent
   ],
   imports: [
     BrowserModule,

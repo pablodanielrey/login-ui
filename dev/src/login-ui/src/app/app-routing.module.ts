@@ -10,6 +10,8 @@ import { AuthRoutingModule } from './modules/auth/auth-routing.module';
 
 import { ConsentComponent } from './modules/consent/consent.component';
 import { VerificarChallengeComponent } from './modules/consent/verificar-challenge/verificar-challenge.component';
+import { StartComponent } from './modules/system/start/start.component';
+import { AuthGuardService } from './modules/auth/auth-guard.service';
 
 
 
@@ -32,8 +34,16 @@ const routes: Routes = [
       { path: 'verificar/:challenge', component: VerificarChallengeComponent }
     ]
   },
+  {
+    path: 'system',
+    children: [
+      { path: 'start', component: StartComponent, canActivate: [AuthGuardService] },
+      { path: '**', redirectTo: 'start' }
+    ]
+  }
   //{ path: '**', redirectTo: '/login/verificar/d' }
-  { path: '**', redirectTo: '/auth/oauth2' }
+  //{ path: '**', redirectTo: '/auth/oauth2' }
+  //{ path: '**', redirectTo: '/system/start' }
 ];
 
 @NgModule({

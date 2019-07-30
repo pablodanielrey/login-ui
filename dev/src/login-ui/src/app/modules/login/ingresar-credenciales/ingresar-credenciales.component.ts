@@ -19,6 +19,7 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
     this.subs.forEach(s => s.unsubscribe());
   }
 
+  error: string = '';
   mostrar: boolean = true;
   credenciales: FormGroup;
 
@@ -54,6 +55,13 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
       console.log(r);
       let redirect_url = r['redirect_to'];
       this.document.location.href = redirect_url;
+    }, e => {
+      let err = e.error;
+      if (err.response['redirect_to'] != undefined) {
+        let redirect_url = err.response['redirect_to'];
+        this.document.location.href = redirect_url;
+      }
+      
     });
   }
 
