@@ -28,10 +28,7 @@ export class AuthService {
   }
 
   login(): Observable<void> {
-    console.log('iniciando flujo de auth');
     return of(this.oauth.initLoginFlow());
-    //this.oauth.tryLogin();
-    //this.oauth.loadDiscoveryDocumentAndLogin();
   }
 
   is_authenticated():Observable<boolean> {

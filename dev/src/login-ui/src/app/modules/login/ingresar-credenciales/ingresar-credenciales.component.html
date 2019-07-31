@@ -6,4 +6,8 @@
     <a href='https://www.usuarios.econo.unlp.edu.ar/recuperar-clave'>no me acuerdo mi clave</a>
 </form>
 
+<div *ngIf='(hash$ | async) != null'>
+    <button (click)='login_hash()'>loguearse usando hash</button>
+</div>
+
 <div *ngIf='error'>{{error}}</div>

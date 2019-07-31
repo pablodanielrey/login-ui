@@ -1,0 +1,9 @@
+
+<p>Por favor escanee este código qe usando su celular</p>
+<div *ngIf='qr_code'><a href='http://login:10005/login/qrcode/activar/{{qr_code}}'>activar</a></div>
+<div *ngIf='qr_datauri'>
+    <img src='{{qr_datauri}}'/>
+</div>
+
+<mat-spinner></mat-spinner>
+

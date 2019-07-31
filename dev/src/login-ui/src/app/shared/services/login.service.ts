@@ -24,6 +24,17 @@ export class LoginService {
     this.url = environment.loginApiUrl;
   }
 
+  get_qr_code(device_hash:string, challenge:string): Observable<any> {
+    let url = `${this.url}/qrcode/${device_hash}`;
+    let data = {
+      challenge: challenge
+    }
+    return this.http.post<Response>(url, data).pipe(
+      map(r => r.response)
+    );
+  }
+
+
   get_login_challenge(device_id:string, challenge:string): Observable<any> {
     let did = {'device_id':device_id};
     let url = `${this.url}/challenge/${challenge}`;
@@ -67,6 +78,29 @@ export class LoginService {
     );
   }
 
+  get_user_hash(): Observable<string> {
+    let h = localStorage.getItem('user_hash');
+    return of(h);
+  }
+
+  get_qr_redirection(qr:string): Observable<Response> {
+    let url = `${this.url}/login/${qr}`;
+    return this.http.get<Response>(url).pipe(
+      map(r => r.response)
+    );
+  }
+
+  login_hash(qr:string, hash:string, device_id:string): Observable<Response> {
+    let url = `${this.url}/login/${qr}`;
+    let data = {
+      hash: hash,
+      device_id: device_id
+    }
+    return this.http.post<Response>(url, data).pipe(
+      map(r => r.response)
+    );
+  }
+
   login(usuario:string, clave:string, device_id:string, challenge:string): Observable<Response> {
     let url = `${this.url}/login`;
     let data = {
@@ -81,7 +115,14 @@ export class LoginService {
         let r:Response = err.error;
         return of(r);
       }),*/
-      map(r => r.response)
+      map(r => {
+        let resp = r.response;
+        let h = resp['hash'];
+        if (h != null) {
+          localStorage.setItem('user_hash',h);
+        }
+        return resp;
+      })
     );
   }
 

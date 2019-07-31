@@ -13,6 +13,8 @@ import { VerificarChallengeComponent } from './modules/consent/verificar-challen
 import { StartComponent } from './modules/system/start/start.component';
 import { AuthGuardService } from './modules/auth/auth-guard.service';
 import { ErrorComponent } from './modules/login/error/error.component';
+import { GenerarQrComponent } from './modules/login/generar-qr/generar-qr.component';
+import { ActivarQrComponent } from './modules/login/activar-qr/activar-qr.component';
 
 
 
@@ -26,6 +28,8 @@ const routes: Routes = [
       { path: 'login/:challenge', component: IngresarCredencialesComponent },
       { path: 'registrar', component: RegistrarDispositivoComponent },
       { path: 'bienvenido/:url', component: BienvenidoComponent },
+      { path: 'qrcode/:challenge', component: GenerarQrComponent },
+      { path: 'qrcode/activar/:code', component: ActivarQrComponent },
       { path: 'error', component: ErrorComponent }
     ]
   },
