@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../../../shared/services/login.service';
-import { of } from 'rxjs';
+import { of, Observable, combineLatest } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
 
@@ -23,6 +23,11 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
   mostrar: boolean = true;
   credenciales: FormGroup;
 
+  challenge$: Observable<string>;
+  device_id$: Observable<string>;
+  credenciales$: Observable<any>;
+  login$: Observable<any>;
+
   constructor(private fb: FormBuilder, 
               private router:Router, 
               private route:ActivatedRoute,
@@ -33,25 +38,25 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
       usuario: [''],
       clave: ['']
     })
+
+    this.challenge$ = this.route.paramMap.pipe(map(params => params.get('challenge')));
+    this.credenciales$ = of({u: this.credenciales.value['usuario'], c: this.credenciales.value['clave']});
+    this.device_id$ = this.service.get_device_id();
+    this.login$ = combineLatest(this.device_id$, this.challenge$, this.credenciales$).pipe(
+      switchMap(rs => {
+        let did = rs[0];
+        let challenge = rs[1];
+        let creds = rs[2];
+        return this.service.login(creds.u, creds.c, did, challenge);
+      })
+    )
   }
 
   ngOnInit() {
   }
 
   acceder() {
-    of(
-      {
-        u: this.credenciales.value['usuario'],
-        c: this.credenciales.value['clave']
-      }
-    ).pipe(
-      switchMap(d => this.route.paramMap.pipe(
-        switchMap(params => {
-          let challenge = params.get('challenge');
-          return this.service.login(d.u, d.c, challenge);
-        })
-      )
-    )).subscribe(r => {
+    this.login$.subscribe(r => {
       console.log(r);
       let redirect_url = r['redirect_to'];
       this.document.location.href = redirect_url;
@@ -61,7 +66,6 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
         let redirect_url = err.response['redirect_to'];
         this.document.location.href = redirect_url;
       }
-      
     });
   }
 

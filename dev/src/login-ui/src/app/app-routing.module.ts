@@ -12,6 +12,7 @@ import { ConsentComponent } from './modules/consent/consent.component';
 import { VerificarChallengeComponent } from './modules/consent/verificar-challenge/verificar-challenge.component';
 import { StartComponent } from './modules/system/start/start.component';
 import { AuthGuardService } from './modules/auth/auth-guard.service';
+import { ErrorComponent } from './modules/login/error/error.component';
 
 
 
@@ -24,7 +25,8 @@ const routes: Routes = [
       { path: 'login', component: IngresarCredencialesComponent },
       { path: 'login/:challenge', component: IngresarCredencialesComponent },
       { path: 'registrar', component: RegistrarDispositivoComponent },
-      { path: 'bienvenido/:url', component: BienvenidoComponent }
+      { path: 'bienvenido/:url', component: BienvenidoComponent },
+      { path: 'error', component: ErrorComponent }
     ]
   },
   {

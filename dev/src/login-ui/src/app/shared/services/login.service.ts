@@ -24,19 +24,12 @@ export class LoginService {
     this.url = environment.loginApiUrl;
   }
 
-  get_login_challenge(route:ActivatedRoute): Observable<any> {
-    let device_id$ = this.get_device_id();
-    let challenge$ = route.paramMap.pipe(map(p => p.get('challenge')));
-    return combineLatest(device_id$, challenge$).pipe(
-      switchMap(rs => {
-        let did = {'device_id':rs[0]};
-        let challenge = rs[1];
-        let url = `${this.url}/challenge/${challenge}`;
-        return this.http.post<Response>(url, did).pipe(
-          map(r => r.response)
-        );
-      })
-    )
+  get_login_challenge(device_id:string, challenge:string): Observable<any> {
+    let did = {'device_id':device_id};
+    let url = `${this.url}/challenge/${challenge}`;
+    return this.http.post<Response>(url, did).pipe(
+      map(r => r.response)
+    );
   }
 
   _get_hardware_data() {
@@ -74,28 +67,22 @@ export class LoginService {
     );
   }
 
-  login(usuario:string, clave:string, challenge:string): Observable<Response> {
-    let device_id$ = this.get_device_id();
-    return device_id$.pipe(
-      switchMap(did => {
-        let url = `${this.url}/login`;
-        let data = {
-          user: usuario,
-          password: clave,
-          challenge: challenge,
-          device_id: did
-        }
-        return this.http.post<Response>(url, data).pipe(
-          /*
-          catchError((err:HttpErrorResponse) => {
-            let r:Response = err.error;
-            return of(r);
-          }),*/
-          map(r => r.response)
-        );
-      })
-    )
-
+  login(usuario:string, clave:string, device_id:string, challenge:string): Observable<Response> {
+    let url = `${this.url}/login`;
+    let data = {
+      user: usuario,
+      password: clave,
+      challenge: challenge,
+      device_id: device_id
+    }
+    return this.http.post<Response>(url, data).pipe(
+      /*
+      catchError((err:HttpErrorResponse) => {
+        let r:Response = err.error;
+        return of(r);
+      }),*/
+      map(r => r.response)
+    );
   }
 
   get_consent_challenge(route:ActivatedRoute): Observable<any> {
