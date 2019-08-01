@@ -16,6 +16,8 @@ export const environment = {
     logoSistema: '/assets/img/fce/logofce2018.png',
   },
   
+  url_to_activate_qr: 'http://login:10005/login/qrcode/activar',
+  
   /*
   auth: {
     issuer: 'https://oidc.econo.unlp.edu.ar/',

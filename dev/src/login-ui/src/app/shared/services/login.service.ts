@@ -24,9 +24,10 @@ export class LoginService {
     this.url = environment.loginApiUrl;
   }
 
-  get_qr_code(device_hash:string, challenge:string): Observable<any> {
+  get_qr_code(url_to_redirect:string, device_hash:string, challenge:string): Observable<any> {
     let url = `${this.url}/qrcode/${device_hash}`;
     let data = {
+      redirect: url_to_redirect,
       challenge: challenge
     }
     return this.http.post<Response>(url, data).pipe(

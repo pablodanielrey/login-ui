@@ -1,9 +1,15 @@
 
-<p>Por favor escanee este código qe usando su celular</p>
-<div *ngIf='qr_code'><a href='http://login:10005/login/qrcode/activar/{{qr_code}}'>activar</a></div>
-<div *ngIf='qr_datauri'>
-    <img src='{{qr_datauri}}'/>
+<div>
+    <p *ngIf='challenge$ | async'>challenge: {{challenge$}}</p>
+    <p *ngIf='device_hash$ | async'>device hash: {{device_hash$}}</p>
 </div>
 
-<mat-spinner></mat-spinner>
+<div *ngIf='(qr$ | async) as qr'>
+    <mat-spinner></mat-spinner>
+    <div><a href='{{url_to_redirect}}/{{qr.code}}'>activar manual</a></div>
+    <p>Por favor escanee este código qe usando su celular</p>
+    <div><p>{{qr.qr_datauri}}</p></div>
+</div>
+
+
 
