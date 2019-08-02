@@ -36,8 +36,8 @@ export class LoginService {
   }
 
 
-  get_login_challenge(device_id:string, challenge:string): Observable<any> {
-    let did = {'device_id':device_id};
+  get_login_challenge(device_hash:string, challenge:string): Observable<any> {
+    let did = {'device_hash':device_hash};
     let url = `${this.url}/challenge/${challenge}`;
     return this.http.post<Response>(url, did).pipe(
       map(r => r.response)
@@ -63,7 +63,7 @@ export class LoginService {
     Obtiene un device_id de localStorage o accede al servidor para generar uno
   */
   get_device_id(): Observable<string> {
-    let d = localStorage.getItem('device_id');
+    let d = localStorage.getItem('device_hash');
     if (d != null) {
       return of(d);
     }
@@ -72,8 +72,8 @@ export class LoginService {
     return this.http.post<Response>(url, data).pipe(
       map(r => r.response),
       map(d => {
-        let id = d['device_id'];
-        localStorage.setItem('device_id',id);
+        let id = d['device_hash'];
+        localStorage.setItem('device_hash',id);
         return id;
       })
     );
@@ -85,14 +85,14 @@ export class LoginService {
   }
 
   get_qr_redirection(qr:string): Observable<Response> {
-    let url = `${this.url}/login/${qr}`;
+    let url = `${this.url}/login_qrcode/${qr}`;
     return this.http.get<Response>(url).pipe(
       map(r => r.response)
     );
   }
 
   login_hash(qr:string, hash:string, device_id:string): Observable<Response> {
-    let url = `${this.url}/login/${qr}`;
+    let url = `${this.url}/login_qrcode/${qr}`;
     let data = {
       hash: hash,
       device_id: device_id

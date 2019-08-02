@@ -19,7 +19,7 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
 
   mensaje : string = '';
 
-  device_id$: Observable<string>;
+  device_hash$: Observable<string>;
   challenge$: Observable<string>;
   login_challenge$: Observable<any>;
 
@@ -27,11 +27,11 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
               private router:Router, 
               private route:ActivatedRoute) { 
 
-    this.device_id$ = this.service.get_device_id();
+    this.device_hash$ = this.service.get_device_id();
     this.challenge$ = this.route.paramMap.pipe(map(params => params.get('challenge')));
     this.login_challenge$ = combineLatest(
       this.challenge$,
-      this.device_id$
+      this.device_hash$
     ).pipe(
       switchMap(rs => {
         let challenge = rs[0];
@@ -56,6 +56,7 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
         }
       },
       err => {
+        console.log('verificando dispositivo');
         this.router.navigate(['/login/error']);
       })
     )

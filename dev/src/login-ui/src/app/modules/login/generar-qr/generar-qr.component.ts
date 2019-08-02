@@ -51,7 +51,7 @@ export class GenerarQrComponent implements OnInit, OnDestroy {
     return qr$.pipe(
       switchMap(qr => {
         return timer(1000,10000).pipe(
-          switchMap(_ => this.service.get_qr_redirection(qr).pipe(
+          switchMap(_ => this.service.get_qr_redirection(qr.code).pipe(
             catchError(err => {
               /*
                 Errores posibles:
