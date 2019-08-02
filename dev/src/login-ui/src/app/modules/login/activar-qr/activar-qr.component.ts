@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { ActivatedRoute } from '@angular/router';
-import { map, switchMap } from 'rxjs/operators';
-import { Observable, combineLatest } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { Observable, combineLatest, throwError, of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -18,25 +18,41 @@ export class ActivarQrComponent implements OnInit, OnDestroy {
     this.subs.forEach(s => s.unsubscribe());
   }
 
-  code$: Observable<string>;
-  device_id$: Observable<string>;
-  hash$: Observable<string>;
 
+  device: string;
+  code$: Observable<string>;
+  hash: string;
+  
   constructor(private service:LoginService, 
               private route: ActivatedRoute) { 
-    
-    this.code$ = route.paramMap.pipe(map(params => params.get('code')));
-    this.device_id$ = this.service.get_device_id();
-    this.hash$ = this.service.get_user_hash();
+    this.code$ = this.obtener_codigo();
   }
 
-  ngOnInit() {
+  obtener_codigo() {
+    return this.route.paramMap.pipe(map(params => params.get('code')));
+  }
+
+  obtener_device() {
+    return this.service.get_device_id().pipe(tap(h => this.device = h));
+  }
+
+  obtener_hash() {
+    return this.service.get_user_hash().pipe(tap(h => this.hash = h));
+  }
+
+  activar() {
     this.subs.push(
-      combineLatest(this.code$, this.device_id$, this.hash$).pipe(
+      combineLatest(this.code$, 
+                    this.obtener_device(),
+                    this.obtener_hash()).pipe(
         switchMap(rs => {
           let code = rs[0];
           let did = rs[1];
           let hash_ = rs[2];
+          if (code == null || did == null || hash_ == null) {
+            throwError('Parámetros faltantes');
+            return of(null);
+          }
           return this.service.login_hash(code, hash_, did);
         })
       ).subscribe(r => {
@@ -49,6 +65,9 @@ export class ActivarQrComponent implements OnInit, OnDestroy {
         }
       })
     );
+  }
+
+  ngOnInit() {
   }
 
 }
