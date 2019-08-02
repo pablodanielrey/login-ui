@@ -4,12 +4,16 @@
     <p *ngIf='(device_hash$ | async) as d'>device hash: {{d}}</p>
 </div>
 
-<div *ngIf='(qr$ | async) as qr'>
+<div *ngIf='qr'>
     <mat-spinner></mat-spinner>
     <div><a href='{{url_to_redirect}}/{{qr.code}}'>activar manual</a></div>
     <p>Por favor escanee este código qe usando su celular</p>
     <div><img src='{{qr.qr_datauri}}'/></div>
 </div>
 
+<div *ngIf='error'>
+    <p>{{error}}</p>
+    <button (click)='generar_codigo_qr()'>Generar Código QR</button>
+</div>
 
 

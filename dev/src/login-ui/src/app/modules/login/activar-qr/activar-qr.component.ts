@@ -3,6 +3,7 @@ import { LoginService } from 'src/app/shared/services/login.service';
 import { ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
 import { Observable, combineLatest } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-activar-qr',
@@ -40,6 +41,12 @@ export class ActivarQrComponent implements OnInit, OnDestroy {
         })
       ).subscribe(r => {
         console.log(r);
+      },
+      err => {
+        if (err instanceof HttpErrorResponse) {
+          let e = <HttpErrorResponse>err;
+          // ver que hago.
+        }
       })
     );
   }
