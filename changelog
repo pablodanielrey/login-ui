@@ -1,0 +1,7 @@
+
+- cuando se accede a la app protegida, e hydra no esta levantado no muestra nada.
+
+
+
+02/8/2019 -
+- la pantalla de ingreso de credenciales no muestra loguearse con código qr si no se ha ingresado nunca.
