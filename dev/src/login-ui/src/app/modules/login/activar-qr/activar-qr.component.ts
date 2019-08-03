@@ -18,7 +18,7 @@ export class ActivarQrComponent implements OnInit, OnDestroy {
     this.subs.forEach(s => s.unsubscribe());
   }
 
-
+  error: string;
   device: string;
   code$: Observable<string>;
   hash: string;
@@ -62,6 +62,7 @@ export class ActivarQrComponent implements OnInit, OnDestroy {
         if (err instanceof HttpErrorResponse) {
           let e = <HttpErrorResponse>err;
           // ver que hago.
+          this.error = e.message.response.error;
         }
       })
     );

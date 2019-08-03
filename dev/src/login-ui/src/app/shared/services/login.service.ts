@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 
 
 
-interface Response {
+export interface Response {
   status:number,
   response:any
 }
