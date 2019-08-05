@@ -79,9 +79,12 @@ export class LoginService {
     );
   }
 
-  get_user_hash(): Observable<string> {
-    let h = localStorage.getItem('user_hash');
-    return of(h);
+  get_user_hash(user:string): Observable<string> {
+    let hs = this._get_users_hashes();
+    if (hs[user] == undefined) {
+      return of(null);
+    }
+    return of(hs[user]);
   }
 
   get_qr_redirection(qr:string): Observable<Response> {
@@ -120,11 +123,26 @@ export class LoginService {
         let resp = r.response;
         let h = resp['hash'];
         if (h != null) {
-          localStorage.setItem('user_hash',h);
+          let hs = this._get_users_hashes();
+          hs[usuario] = h;
+          this._set_users_hashes(h);
         }
         return resp;
       })
     );
+  }
+
+  _set_users_hashes(hs:{}) {
+    let h = JSON.stringify(hs);
+    localStorage.setItem('users_hashes',h);
+  }
+
+  _get_users_hashes() {
+    let hs = localStorage.getItem('users_hashes')
+    if (hs == null) {
+      return {};
+    }
+    return JSON.parse(hs);
   }
 
   get_consent_challenge(route:ActivatedRoute): Observable<any> {

@@ -1,0 +1,5 @@
+<div *ngIf='(hashes$ | async) as hashes'>
+    <li>
+        <ul *ngFor='let e of hashes'>{{e.user}}</ul>
+    </li>
+</div>

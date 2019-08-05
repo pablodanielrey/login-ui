@@ -24,6 +24,8 @@ import { VerificarChallengeComponent } from './modules/consent/verificar-challen
 import { StartComponent } from './modules/system/start/start.component';
 import { ErrorComponent } from './modules/login/error/error.component';
 import { GenerarQrComponent } from './modules/login/generar-qr/generar-qr.component';
+import { ActivarQrUserComponent } from './modules/login/activar-qr-user/activar-qr-user.component';
+import { SeleccionarUsuarioQrComponent } from './modules/login/seleccionar-usuario-qr/seleccionar-usuario-qr.component';
 import { ActivarQrComponent } from './modules/login/activar-qr/activar-qr.component';
 
 const oauthconf: OAuth2Config = environment.auth;
@@ -37,7 +39,7 @@ const oauthconf: OAuth2Config = environment.auth;
     BienvenidoComponent,
     VerificarDispositivoComponent,
     ConsentComponent, 
-    VerificarChallengeComponent, StartComponent, ErrorComponent, GenerarQrComponent, ActivarQrComponent
+    VerificarChallengeComponent, StartComponent, ErrorComponent, GenerarQrComponent, ActivarQrUserComponent, SeleccionarUsuarioQrComponent, ActivarQrComponent
   ],
   imports: [
     BrowserModule,

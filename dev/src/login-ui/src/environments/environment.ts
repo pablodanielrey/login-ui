@@ -20,7 +20,7 @@ export const environment = {
     logoSistema: '/assets/img/fce/logofce2018.png',
   },
 
-  url_to_activate_qr: 'http://localhost:10005/login/qrcode/activar',
+  url_to_activate_qr: 'http://localhost:10005/login/qrcode/activar/',
 
   /*
   auth: {

@@ -23,7 +23,6 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
   mostrar: boolean = true;
   credenciales: FormGroup;
 
-  hash$: Observable<string>;
   challenge$: Observable<string>;
   device_id$: Observable<string>;
 
@@ -40,7 +39,6 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
       clave: ['']
     })
 
-    this.hash$ = this.service.get_user_hash();
     this.challenge$ = this.route.paramMap.pipe(map(params => params.get('challenge')));
     this.device_id$ = this.service.get_device_id();
   }
