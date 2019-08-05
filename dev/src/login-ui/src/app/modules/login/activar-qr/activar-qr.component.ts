@@ -62,7 +62,7 @@ export class ActivarQrComponent implements OnInit, OnDestroy {
         if (err instanceof HttpErrorResponse) {
           let e = <HttpErrorResponse>err;
           // ver que hago.
-          this.error = e.message.response.error;
+          this.error = e.message;
         }
       })
     );

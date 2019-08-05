@@ -77,10 +77,8 @@ export class GenerarQrComponent implements OnInit, OnDestroy {
     return qr$.pipe(
       switchMap(qr => {
         return this.service.get_qr_redirection(qr.code).pipe(
-          retry$,          
-          tap(v => console.log(v)),
-          map((r:Response) => r.response),
-          tap(v => console.log(v))
+          retry$,
+          map(r => r['redirect_to'])
         )
       })
     )
@@ -97,6 +95,18 @@ export class GenerarQrComponent implements OnInit, OnDestroy {
         }
       },
       err => {
+        if (err instanceof HttpErrorResponse) {
+          let e = <HttpErrorResponse>err;
+          if (e.status == 410) {
+            /*
+              El qr pertenece a un challenge que ya fue aceptado en hydra. hay que regenerar todo le challenge.
+              el redirect retornado es la petición que dió origen a todo el procesamiento.
+            */
+            let server_response = e.error.response;
+            this.document.location.href = server_response['redirect_to'];
+          }
+        }
+        console.log(err);
         // en cualquier caso los errores que llegan hasta aca son fatales.
         this.router.navigate(['/login/error']);
       })
