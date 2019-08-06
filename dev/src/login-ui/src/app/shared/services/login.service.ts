@@ -81,10 +81,13 @@ export class LoginService {
 
   get_user_hash(user:string): Observable<string> {
     let hs = this._get_users_hashes();
-    if (hs[user] == undefined) {
-      return of(null);
+    for (let i = 0; i < hs.length; i++) {
+      let o = hs[i];
+      if (o.user == user) {
+        return of(o.hash);
+      }
     }
-    return of(hs[user]);
+    return of(null);
   }
 
   get_qr_redirection(qr:string): Observable<Response> {
@@ -105,7 +108,8 @@ export class LoginService {
     );
   }
 
-  login(usuario:string, clave:string, device_id:string, challenge:string): Observable<Response> {
+
+   login(usuario:string, clave:string, device_id:string, challenge:string): Observable<Response> {
     let url = `${this.url}/login`;
     let data = {
       user: usuario,
@@ -121,18 +125,27 @@ export class LoginService {
       }),*/
       map(r => {
         let resp = r.response;
+        // almacena en locastore el hash en caso de que no exista
         let h = resp['hash'];
         if (h != null) {
-          let hs = this._get_users_hashes();
-          hs[usuario] = h;
-          this._set_users_hashes(h);
+          let _hs = this._get_users_hashes();
+          let found = false;
+          _hs.forEach(_h => {
+            if (h.user == usuario) {
+              found = true;
+            }
+          });
+          if (!found) {
+            _hs.push({user:usuario, hash:h});
+            this._set_users_hashes(_hs);
+          }
         }
         return resp;
       })
     );
   }
 
-  _set_users_hashes(hs:{}) {
+  _set_users_hashes(hs:[]) {
     let h = JSON.stringify(hs);
     localStorage.setItem('users_hashes',h);
   }
@@ -140,7 +153,7 @@ export class LoginService {
   _get_users_hashes() {
     let hs = localStorage.getItem('users_hashes')
     if (hs == null) {
-      return {};
+      return [];
     }
     return JSON.parse(hs);
   }

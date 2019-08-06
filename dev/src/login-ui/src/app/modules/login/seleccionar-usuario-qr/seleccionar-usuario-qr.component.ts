@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/shared/services/login.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Router, ActivatedRoute } from '@angular/router';
 
 interface hash {
   user: string,
@@ -15,18 +16,32 @@ interface hash {
 })
 export class SeleccionarUsuarioQrComponent implements OnInit {
 
-  hashes$ : Observable<hash[]>;
+  private subs = [];
 
-  constructor(private service:LoginService) { 
-    this.hashes$ = service._get_users_hashes().pipe(
-      map(hs => {
-        let hss = [];
-        Object.keys(hs).forEach(k => {
-          hss.push({user:k, hash:hs[k]});
-        });
-        return hss;
+  ngOnDestroy(): void {
+    this.subs.forEach(s => s.unsubscribe());
+  }
+
+
+  hashes$ : Observable<hash[]>;
+  code$: Observable<string>;
+
+  constructor(private service:LoginService, 
+              private router: Router, 
+              private route: ActivatedRoute) { 
+
+  
+    this.hashes$ = of(service._get_users_hashes());
+    this.code$ = this.route.paramMap.pipe(map(params => params.get('code')));
+  }
+
+  seleccionar(e) {
+    this.subs.push(
+      this.code$.subscribe(code => {
+        this.router.navigate([`/login/qrcode/activar/${e.user}/${code}`]);
       })
     );
+    
   }
 
   ngOnInit() {

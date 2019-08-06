@@ -32,16 +32,18 @@ export class ActivarQrUserComponent implements OnInit, OnDestroy {
     return this.route.paramMap.pipe(map(params => params.get('code')));
   }
 
-  obtener_device() {
-    return this.service.get_device_id().pipe(tap(h => this.device = h));
-  }
-
   obtener_hash() {
     return this.route.paramMap.pipe(
       map(params => params.get('user')),
+      tap(h => console.log(h)),
       switchMap(user => this.service.get_user_hash(user)),
-      tap(h => { this.hash = h; return h;})
+      tap(h => this.hash = h),
+      tap(h => console.log(h))
     );
+  }
+
+  obtener_device() {
+    return this.service.get_device_id().pipe(tap(h => this.device = h));
   }
 
   activar() {

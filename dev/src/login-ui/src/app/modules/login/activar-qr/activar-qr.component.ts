@@ -20,7 +20,7 @@ export class ActivarQrComponent implements OnInit, OnDestroy {
     this.subs.push(
       this.route.paramMap.subscribe(params => {
         let code = params.get('code');
-        this.router.navigate([`/login/seleccionar-usuario-qr/${code}`]);
+        this.router.navigate([`/login/qrcode/seleccionar-usuario/${code}`]);
       })
     );
   }
