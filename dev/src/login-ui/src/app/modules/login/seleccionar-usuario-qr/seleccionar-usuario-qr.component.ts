@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/shared/services/login.service';
-import { Observable, of } from 'rxjs';
+import { Observable, of, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -35,17 +35,19 @@ export class SeleccionarUsuarioQrComponent implements OnInit {
     this.code$ = this.route.paramMap.pipe(map(params => params.get('code')));
   }
 
-  seleccionar(e) {
+  seleccionar() {
     this.subs.push(
-      this.code$.subscribe(code => {
-        this.router.navigate([`/login/qrcode/activar/${e.user}/${code}`]);
+      combineLatest(this.code$, this.hashes$).subscribe(rs => {
+        let code = rs[0];
+        let hash = rs[1][0];
+        this.router.navigate([`/login/qrcode/activar/${hash.user}/${code}`]);
       })
     );
     
   }
 
   ngOnInit() {
-
+    this.seleccionar();
   }
 
 }

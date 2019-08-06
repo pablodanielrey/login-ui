@@ -125,27 +125,19 @@ export class LoginService {
       }),*/
       map(r => {
         let resp = r.response;
-        // almacena en locastore el hash en caso de que no exista
+        // almacena el hash en localstore.
         let h = resp['hash'];
         if (h != null) {
-          let _hs = this._get_users_hashes();
-          let found = false;
-          _hs.forEach(_h => {
-            if (h.user == usuario) {
-              found = true;
-            }
-          });
-          if (!found) {
-            _hs.push({user:usuario, hash:h});
-            this._set_users_hashes(_hs);
-          }
+          let _hs = [];
+          _hs.push({user:usuario, hash:h});
+          this._set_users_hashes(_hs);
         }
         return resp;
       })
     );
   }
 
-  _set_users_hashes(hs:[]) {
+  _set_users_hashes(hs:any[]) {
     let h = JSON.stringify(hs);
     localStorage.setItem('users_hashes',h);
   }
