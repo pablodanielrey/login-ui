@@ -2,9 +2,10 @@ import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../../../shared/services/login.service';
-import { of, Observable, combineLatest, BehaviorSubject } from 'rxjs';
+import { of, Observable, combineLatest, BehaviorSubject, from } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
+import { GeolocationService } from 'src/app/shared/services/geolocation.service';
 
 @Component({
   selector: 'app-ingresar-credenciales',
@@ -28,6 +29,7 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
 
   challenge$: Observable<string>;
   device_id$: Observable<string>;
+  position$: Observable<Position>;
 
   login$: Observable<any>;
 
@@ -48,6 +50,9 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
   }
+
+
+
 
   acceder() {
     this.subs.push(

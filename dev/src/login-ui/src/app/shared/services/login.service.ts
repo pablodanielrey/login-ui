@@ -5,8 +5,7 @@ import { environment } from '../../../environments/environment';
 import { Observable, of, combineLatest } from 'rxjs';
 import { map, tap, switchMap, catchError } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-
-
+import { GeolocationService } from './geolocation.service';
 
 export interface Response {
   status:number,
@@ -20,7 +19,9 @@ export class LoginService {
 
   private url : string;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, 
+              private geolocation:GeolocationService) { 
+
     this.url = environment.loginApiUrl;
   }
 
@@ -99,40 +100,72 @@ export class LoginService {
 
   login_hash(qr:string, hash:string, device_id:string): Observable<Response> {
     let url = `${this.url}/login_qrcode/${qr}`;
-    let data = {
-      hash: hash,
-      device_id: device_id
-    }
-    return this.http.post<Response>(url, data).pipe(
-      map(r => r.response)
+
+    return this.geolocation.get_geolocation().pipe(
+      switchMap(pos => {
+        let data = {
+          hash: hash,
+          device_id: device_id,
+          position: null
+        }
+
+        if (pos != null) {
+          data['position'] = {
+            accuracy: pos.coords.accuracy, 
+            latitude: pos.coords.latitude, 
+            longitude: pos.coords.longitude 
+          };
+        }
+
+        return this.http.post<Response>(url, data).pipe(
+          map(r => r.response)
+        );
+      })
     );
+    
   }
 
 
-   login(usuario:string, clave:string, device_id:string, challenge:string): Observable<Response> {
+  login(usuario:string, clave:string, device_id:string, challenge:string): Observable<Response> {
     let url = `${this.url}/login`;
-    let data = {
-      user: usuario,
-      password: clave,
-      challenge: challenge,
-      device_id: device_id
-    }
-    return this.http.post<Response>(url, data).pipe(
-      /*
-      catchError((err:HttpErrorResponse) => {
-        let r:Response = err.error;
-        return of(r);
-      }),*/
-      map(r => {
-        let resp = r.response;
-        // almacena el hash en localstore.
-        let h = resp['hash'];
-        if (h != null) {
-          let _hs = [];
-          _hs.push({user:usuario, hash:h});
-          this._set_users_hashes(_hs);
+
+    return this.geolocation.get_geolocation().pipe(
+      switchMap(pos => {
+
+        let data = {
+          user: usuario,
+          password: clave,
+          challenge: challenge,
+          device_id: device_id,
+          position: null
         }
-        return resp;
+    
+        if (pos != null) {
+          data['position'] = {
+            accuracy: pos.coords.accuracy, 
+            latitude: pos.coords.latitude, 
+            longitude: pos.coords.longitude 
+          };
+        }
+
+        return this.http.post<Response>(url, data).pipe(
+          /*
+          catchError((err:HttpErrorResponse) => {
+            let r:Response = err.error;
+            return of(r);
+          }),*/
+          map(r => {
+            let resp = r.response;
+            // almacena el hash en localstore.
+            let h = resp['hash'];
+            if (h != null) {
+              let _hs = [];
+              _hs.push({user:usuario, hash:h});
+              this._set_users_hashes(_hs);
+            }
+            return resp;
+          })
+        )
       })
     );
   }
