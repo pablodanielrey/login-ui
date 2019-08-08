@@ -68,6 +68,8 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
         if (err.response['redirect_to'] != undefined) {
           let redirect_url = err.response['redirect_to'];
           this.document.location.href = redirect_url;
+        } else {
+          this.router.navigate(['/login/error']);
         }
       })
     );
@@ -79,29 +81,6 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
         this.router.navigate([`/login/qrcode/${c}`]);
       })
     )
-    
-    /*
-    this.subs.push(
-      combineLatest(
-        this.device_id$,
-        this.challenge$,
-        this.hash$
-      ).pipe(
-        switchMap(rs => {
-          let did = rs[0];
-          let challenge = rs[1];
-          let hash_ = rs[2];
-          return this.service.login_hash('', hash_, did, challenge);
-        })
-      ).subscribe(r => {
-        console.log(r);
-        let redirect_url = r['redirect_to'];
-        this.document.location.href = redirect_url;
-      }, e => {
-        this.router.navigate(['/login/error']);
-      })
-    );
-    */
   }
 
 }

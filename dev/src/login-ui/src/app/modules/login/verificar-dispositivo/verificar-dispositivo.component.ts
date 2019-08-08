@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
 import { of, Observable, combineLatest } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-verificar-dispositivo',
@@ -25,7 +26,8 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
 
   constructor(private service:LoginService, 
               private router:Router, 
-              private route:ActivatedRoute) { 
+              private route:ActivatedRoute,
+              @Inject(DOCUMENT) private document: any) { 
 
     this.device_hash$ = this.service.get_device_id();
     this.challenge$ = this.route.paramMap.pipe(map(params => params.get('challenge')));
@@ -48,17 +50,25 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
       this.login_challenge$.subscribe(c => {
         this.mensaje = 'Analizando Requerimiento';
         if (c['skip']) {
-          // se acepta implícitamente el challenge así que ya redirecciono
-          this.router.navigate(['/login/bienvenido']);
+          // se aceptó el challenge implicitamente, hay que saltar todo el paso de login.
+          let redirect_url = c['redirect_to'];
+          this.document.location.href = redirect_url;
         } else {
+          // el usuario tiene que loguearse.
           let challenge = c['challenge'];
           this.router.navigate([`/login/login/${challenge}`]);
         }
       },
-      err => {
-        console.log('verificando dispositivo');
-        this.router.navigate(['/login/error']);
-      })
+      e => {
+        let err = e.error;
+        if (err.response['redirect_to'] != undefined) {
+          let redirect_url = err.response['redirect_to'];
+          this.document.location.href = redirect_url;
+        } else {
+          this.router.navigate(['/login/error']);
+        }
+      }
+     )
     )
   }
 
