@@ -16,7 +16,7 @@ export class GeolocationService {
           return true;
         }
         if (result.state == 'prompt') {
-          return false;
+          return true;
         }
         return false;
       })
