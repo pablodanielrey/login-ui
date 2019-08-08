@@ -1,11 +1,21 @@
+<div class="pantalla">
+
+<mat-card>
 <form *ngIf='mostrar' [formGroup]='credenciales' (ngSubmit)='acceder()'>
+    <mat-form-field appearance="outline">
+        <mat-label>Usuario</mat-label>
+        <input matInput placeholder="Placeholder">
+        <mat-hint>DNI o Legajo sin puntos</mat-hint>
+    </mat-form-field>
     Usuario<input type='text' mat-input formControlName='usuario'/>
     Clave<input type='password' mat-input formControlName='clave'/>
     <button type='submit'>Ingresar</button>
 
     <a href='https://www.usuarios.econo.unlp.edu.ar/recuperar-clave'>no me acuerdo mi clave</a>
 </form>
+</mat-card>
 
+</div>
 <button (click)='login_hash()'>Ingresar usando código qr</button>
 
 <div *ngIf='error'>{{error}}</div>
