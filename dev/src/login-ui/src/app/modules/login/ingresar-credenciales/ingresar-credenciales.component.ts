@@ -13,6 +13,9 @@ import { DOCUMENT } from '@angular/common';
 })
 export class IngresarCredencialesComponent implements OnInit, OnDestroy {
 
+  ver_clave = false;
+  accediendo = false;
+
   private subs = [];
 
   ngOnDestroy(): void {
@@ -57,13 +60,16 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
           let did = rs[0];
           let challenge = rs[1];
           let creds = rs[2];
+          this.accediendo = true;
           return this.service.login(creds.u, creds.c, did, challenge);
         })
       ).subscribe(r => {
+        this.accediendo = false;
         console.log(r);
         let redirect_url = r['redirect_to'];
         this.document.location.href = redirect_url;
       }, e => {
+        this.accediendo = false;
         let err = e.error;
         if (err.response['redirect_to'] != undefined) {
           let redirect_url = err.response['redirect_to'];

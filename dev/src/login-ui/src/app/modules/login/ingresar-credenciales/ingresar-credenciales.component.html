@@ -1,21 +1,54 @@
 <div class="pantalla">
 
 <mat-card>
-<form *ngIf='mostrar' [formGroup]='credenciales' (ngSubmit)='acceder()'>
+
+<form *ngIf='mostrar' [formGroup]='credenciales' (ngSubmit)='acceder()' class="formulario">
+
+    <img class="imgLogo" src="/assets/img/logo_fce.png">
+    
     <mat-form-field appearance="outline">
         <mat-label>Usuario</mat-label>
-        <input matInput placeholder="Placeholder">
-        <mat-hint>DNI o Legajo sin puntos</mat-hint>
+        <input matInput placeholder="DNI o Legajo sin puntos" formControlName='usuario'>
+        <mat-error>Nombre de usuario Incorrecto</mat-error>
+
     </mat-form-field>
-    Usuario<input type='text' mat-input formControlName='usuario'/>
-    Clave<input type='password' mat-input formControlName='clave'/>
-    <button type='submit'>Ingresar</button>
+
+    <mat-form-field appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input *ngIf='!ver_clave' matInput pvblaceholder="Contraseña" formControlName='clave' type="password">
+            <input *ngIf='ver_clave' matInput pvblaceholder="Contraseña" formControlName='clave' type="text">
+            <mat-error>Contaseña incorrecta</mat-error>
+            <button type='button' mat-icon-button matSuffix (click)="ver_clave = !ver_clave" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{ver_clave ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+    </mat-form-field>
+
+    <button *ngIf='!accediendo' class="btnAcceder" mat-flat-button color="primary" type='submit'>ACCEDER</button>
+    <mat-progress-bar *ngIf='accediendo' mode="indeterminate" class="spiner" ></mat-progress-bar>
+    <!-- <button type='submit'>Ingresar</button> -->
+
+
+    <mat-checkbox class="check">Recordar mis datos</mat-checkbox>
+
+
 
     <a href='https://www.usuarios.econo.unlp.edu.ar/recuperar-clave'>no me acuerdo mi clave</a>
+
+
+
 </form>
+
+<button (click)='login_hash()'>Ingresar usando código qr</button>
+
 </mat-card>
 
+<div>
+        <div>Una cuenta.</div> 
+        <div>Todos los servicios de la FCE a tu disposición.</div>
 </div>
-<button (click)='login_hash()'>Ingresar usando código qr</button>
+
+
+
+</div>
 
 <div *ngIf='error'>{{error}}</div>

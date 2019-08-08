@@ -4,4 +4,28 @@
     align-items: center;
     height: 100%;
  }
+
+ .formulario {
+     min-width: 300px;
+     display: flex;
+     flex-direction: column;
+     padding: 20px;
+ }
+
+ .imgLogo {
+     margin-bottom: 20px;
+    //  width: 60%;
+     margin: 0 auto;
+     margin-bottom: 20px;
+     opacity: .9;
+ }
+
+ .btnAcceder {
+     padding: 8px;
+ }
+
+ .check {
+     margin: 10px 0 0 0;
+     font-weight: 100;
+ }
  
