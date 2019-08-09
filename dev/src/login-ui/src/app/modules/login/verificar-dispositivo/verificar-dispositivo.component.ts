@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
 import { of, Observable, combineLatest } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
+import { HardwareService } from 'src/app/shared/services/hardware.service';
 
 @Component({
   selector: 'app-verificar-dispositivo',
@@ -24,12 +25,13 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
   challenge$: Observable<string>;
   login_challenge$: Observable<any>;
 
-  constructor(private service:LoginService, 
+  constructor(private service:LoginService,
+              private hardware:HardwareService,
               private router:Router, 
               private route:ActivatedRoute,
               @Inject(DOCUMENT) private document: any) { 
 
-    this.device_hash$ = this.service.get_device_id();
+    this.device_hash$ = this.hardware.get_device_id();
     this.challenge$ = this.route.paramMap.pipe(map(params => params.get('challenge')));
     this.login_challenge$ = combineLatest(
       this.challenge$,

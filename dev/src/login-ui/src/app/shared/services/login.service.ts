@@ -45,41 +45,6 @@ export class LoginService {
     );
   }
 
-  _get_hardware_data() {
-    let n = window.navigator;
-    let data = {
-      'platform': n.platform,
-      'user_agent': n.userAgent,
-      'app_name': n.appName,
-      'code_name': n.appCodeName,
-      'product': n.product,
-      'app_version': n.appVersion,
-      'language': n.language,
-      'on_line': n.onLine
-    }
-    return data;
-  }
-
-  /*
-    Obtiene un device_id de localStorage o accede al servidor para generar uno
-  */
-  get_device_id(): Observable<string> {
-    let d = localStorage.getItem('device_hash');
-    if (d != null) {
-      return of(d);
-    }
-    let url = `${this.url}/device`;
-    let data = this._get_hardware_data();
-    return this.http.post<Response>(url, data).pipe(
-      map(r => r.response),
-      map(d => {
-        let id = d['device_hash'];
-        localStorage.setItem('device_hash',id);
-        return id;
-      })
-    );
-  }
-
   get_user_hash(user:string): Observable<string> {
     let hs = this._get_users_hashes();
     for (let i = 0; i < hs.length; i++) {

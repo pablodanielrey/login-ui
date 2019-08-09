@@ -1,0 +1,21 @@
+<div class="pantalla">
+
+    <mat-card>
+    
+        <form [formGroup]='form' (ngSubmit)='verificar()' class="formulario">
+            
+            <mat-form-field appearance="outline">
+                <mat-label>Usuario</mat-label>
+                <input matInput placeholder="Ingrese su DNI..." formControlName='usuario' type="text">
+                <mat-error *ngIf="form.get('usuario').hasError('minlength')">8 caracteres como mínimo</mat-error>
+                <mat-error *ngIf="form.get('usuario').hasError('required')">Debe ingresar algún valor</mat-error>
+                <mat-error *ngIf="form.get('usuario').hasError('pattern')">Caractéres no permitidos</mat-error>
+            </mat-form-field>
+        
+            <button *ngIf='!accediendo' class="btnAcceder" mat-flat-button color="primary" type='submit'>VERIFICAR</button>
+            <mat-progress-bar *ngIf='accediendo' mode="indeterminate" class="spiner" ></mat-progress-bar>
+        
+        </form>
+
+    </mat-card>
+</div>

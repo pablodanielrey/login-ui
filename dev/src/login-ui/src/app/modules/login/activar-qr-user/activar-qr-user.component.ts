@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { Observable, combineLatest, throwError, of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { HardwareService } from 'src/app/shared/services/hardware.service';
 
 @Component({
   selector: 'app-activar-qr-user',
@@ -24,6 +25,7 @@ export class ActivarQrUserComponent implements OnInit, OnDestroy {
   hash: string;
   
   constructor(private service:LoginService, 
+              private hardware:HardwareService,
               private route: ActivatedRoute) { 
     this.code$ = this.obtener_codigo();
   }
@@ -43,7 +45,7 @@ export class ActivarQrUserComponent implements OnInit, OnDestroy {
   }
 
   obtener_device() {
-    return this.service.get_device_id().pipe(tap(h => this.device = h));
+    return this.hardware.get_device_id().pipe(tap(h => this.device = h));
   }
 
   activar() {
