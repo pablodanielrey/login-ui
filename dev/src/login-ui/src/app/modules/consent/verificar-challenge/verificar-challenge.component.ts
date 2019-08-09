@@ -27,7 +27,6 @@ export class VerificarChallengeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.mensaje = 'verificando permisos';
     this.subs.push(
       this.service.get_consent_challenge(this.route).subscribe(r => {
         console.log(r);
