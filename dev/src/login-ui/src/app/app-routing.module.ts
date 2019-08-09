@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './modules/login/login.component';
 import { IngresarCredencialesComponent } from './modules/login/ingresar-credenciales/ingresar-credenciales.component';
 import { RegistrarDispositivoComponent } from './modules/login/registrar-dispositivo/registrar-dispositivo.component';
-import { BienvenidoComponent } from './modules/login/bienvenido/bienvenido.component';
 import { VerificarDispositivoComponent } from './modules/login/verificar-dispositivo/verificar-dispositivo.component';
 import { AuthRoutingModule } from './modules/auth/auth-routing.module';
 
@@ -29,7 +28,6 @@ const routes: Routes = [
       { path: 'login', component: IngresarCredencialesComponent },
       { path: 'login/:challenge', component: IngresarCredencialesComponent },
       { path: 'registrar', component: RegistrarDispositivoComponent },
-      { path: 'bienvenido/:url', component: BienvenidoComponent },
       { path: 'qrcode/:challenge', component: GenerarQrComponent },
       { path: 'qrcode/activar/:code', component: ActivarQrComponent },
       { path: 'qrcode/activar/:user/:code', component: ActivarQrUserComponent },
