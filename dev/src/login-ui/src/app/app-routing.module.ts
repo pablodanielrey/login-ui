@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { AuthRoutingModule } from './modules/auth/auth-routing.module';
+import { RecoverPasswordRoutingModule } from './modules/recover-password/recover-password-routing.module';
+
 import { LoginComponent } from './modules/login/login.component';
 import { IngresarCredencialesComponent } from './modules/login/ingresar-credenciales/ingresar-credenciales.component';
 import { RegistrarDispositivoComponent } from './modules/login/registrar-dispositivo/registrar-dispositivo.component';
 import { VerificarDispositivoComponent } from './modules/login/verificar-dispositivo/verificar-dispositivo.component';
-import { AuthRoutingModule } from './modules/auth/auth-routing.module';
 
 import { ConsentComponent } from './modules/consent/consent.component';
 import { VerificarChallengeComponent } from './modules/consent/verificar-challenge/verificar-challenge.component';
@@ -16,6 +18,7 @@ import { GenerarQrComponent } from './modules/login/generar-qr/generar-qr.compon
 import { ActivarQrUserComponent } from './modules/login/activar-qr-user/activar-qr-user.component';
 import { SeleccionarUsuarioQrComponent } from './modules/login/seleccionar-usuario-qr/seleccionar-usuario-qr.component';
 import { ActivarQrComponent } from './modules/login/activar-qr/activar-qr.component';
+
 
 
 
@@ -57,7 +60,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    AuthRoutingModule
+    AuthRoutingModule,
+    RecoverPasswordRoutingModule
   ],
   exports: [RouterModule]
 })

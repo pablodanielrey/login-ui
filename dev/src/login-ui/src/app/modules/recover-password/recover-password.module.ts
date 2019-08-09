@@ -1,5 +1,6 @@
 import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { RecoverPasswordRoutingModule } from './recover-password-routing.module';
 import { RegisterDeviceComponent } from './register-device/register-device.component';
 import { InputUsernameComponent } from './input-username/input-username.component';
