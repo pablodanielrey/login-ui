@@ -17,8 +17,6 @@ import { FinalizeComponent } from './components/finalize/finalize.component';
 import { RecoverPasswordService } from './services/recover-password.service';
 
 
-
-
 @NgModule({
   declarations: [
     RegisterDeviceComponent, 

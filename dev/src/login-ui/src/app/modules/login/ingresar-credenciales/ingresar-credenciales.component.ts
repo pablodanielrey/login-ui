@@ -6,6 +6,7 @@ import { of, Observable, combineLatest, BehaviorSubject, from } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
 import { GeolocationService } from 'src/app/shared/services/geolocation.service';
+import { HardwareService } from 'src/app/shared/services/hardware.service';
 
 @Component({
   selector: 'app-ingresar-credenciales',
@@ -37,6 +38,7 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
               private router:Router, 
               private route:ActivatedRoute,
               private service:LoginService,
+              private hardware: HardwareService,
               @Inject(DOCUMENT) private document: any) {
 
     this.credenciales = fb.group({
@@ -45,7 +47,7 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
     })
 
     this.challenge$ = this.route.paramMap.pipe(map(params => params.get('challenge')));
-    this.device_id$ = this.service.get_device_id();
+    this.device_id$ = this.hardware.get_device_id();
   }
 
   ngOnInit() {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { Observable, of, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -14,7 +14,7 @@ interface hash {
   templateUrl: './seleccionar-usuario-qr.component.html',
   styleUrls: ['./seleccionar-usuario-qr.component.scss']
 })
-export class SeleccionarUsuarioQrComponent implements OnInit {
+export class SeleccionarUsuarioQrComponent implements OnInit, OnDestroy {
 
   private subs = [];
 

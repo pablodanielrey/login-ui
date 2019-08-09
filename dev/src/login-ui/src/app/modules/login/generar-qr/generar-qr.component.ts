@@ -9,6 +9,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Response } from '../../../shared/services/login.service';
 
 import { environment } from '../../../../environments/environment';
+import { HardwareService } from 'src/app/shared/services/hardware.service';
 
 @Component({
   selector: 'app-generar-qr',
@@ -30,13 +31,14 @@ export class GenerarQrComponent implements OnInit, OnDestroy {
   qr: any;
 
   constructor(private service:LoginService,
+              private hardware:HardwareService,
               private router: Router,
               private route:ActivatedRoute,
               private location: Location,
               @Inject(DOCUMENT) private document: any) { 
 
     this.challenge$ = route.paramMap.pipe(map(params => params.get('challenge')));
-    this.device_hash$ = service.get_device_id();
+    this.device_hash$ = hardware.get_device_id();
   }
 
   obtener_qr_code(device_hash$:Observable<string>, challenge$:Observable<string>):Observable<any> {
