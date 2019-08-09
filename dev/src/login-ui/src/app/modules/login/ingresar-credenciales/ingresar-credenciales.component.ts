@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../../../shared/services/login.service';
 import { of, Observable, combineLatest, BehaviorSubject, from } from 'rxjs';
@@ -40,8 +40,8 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
               @Inject(DOCUMENT) private document: any) {
 
     this.credenciales = fb.group({
-      usuario: [''],
-      clave: ['']
+      usuario: ['', [Validators.required]],
+      clave: ['', [Validators.required]]
     })
 
     this.challenge$ = this.route.paramMap.pipe(map(params => params.get('challenge')));
@@ -51,10 +51,12 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
-
-
-
   acceder() {
+
+    if (!this.credenciales.valid) {
+      return;
+    }
+
     this.subs.push(
       combineLatest(
         this.device_id$,

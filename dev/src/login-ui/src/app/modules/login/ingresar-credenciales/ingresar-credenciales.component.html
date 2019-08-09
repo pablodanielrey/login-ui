@@ -9,7 +9,7 @@
     <mat-form-field appearance="outline">
         <mat-label>Usuario</mat-label>
         <input matInput placeholder="DNI o Legajo sin puntos" formControlName='usuario'>
-        <mat-error>Nombre de usuario Incorrecto</mat-error>
+        <mat-error>Debe ingresar algún valor</mat-error>
 
     </mat-form-field>
 
@@ -17,7 +17,7 @@
             <mat-label>Contraseña</mat-label>
             <input *ngIf='!ver_clave' matInput pvblaceholder="Contraseña" formControlName='clave' type="password">
             <input *ngIf='ver_clave' matInput pvblaceholder="Contraseña" formControlName='clave' type="text">
-            <mat-error>Contaseña incorrecta</mat-error>
+            <mat-error>Debe ingresar algún valor</mat-error>
             <button type='button' mat-icon-button matSuffix (click)="ver_clave = !ver_clave" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{ver_clave ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
