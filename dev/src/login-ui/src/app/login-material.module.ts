@@ -11,7 +11,8 @@ import {
   MatInputModule,
   MatIconModule,
   MatButtonModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatDividerModule
 
 
 } from '@angular/material';
@@ -27,7 +28,8 @@ import {
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDividerModule
   ],
   exports: [
     MatProgressSpinnerModule,
@@ -37,7 +39,8 @@ import {
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDividerModule
   ]
 })
 export class LoginMaterialModule { }

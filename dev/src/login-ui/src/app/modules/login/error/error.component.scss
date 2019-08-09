@@ -1,0 +1,25 @@
+.pantalla {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+ }
+
+ .contenedorError{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .icono {
+     font-size: 150px;
+     opacity: 0.5;
+ }
+
+ .spiner {
+     margin-top: 40px;
+     opacity: .5;
+     width: 100px;
+
+ }

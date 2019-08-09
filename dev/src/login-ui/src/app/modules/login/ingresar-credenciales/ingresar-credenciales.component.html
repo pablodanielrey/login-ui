@@ -1,6 +1,6 @@
 <div class="pantalla">
 
-<mat-card>
+<mat-card class="card animacionLateral">
 
 <form *ngIf='mostrar' [formGroup]='credenciales' (ngSubmit)='acceder()' class="formulario">
 
@@ -26,24 +26,23 @@
     </mat-form-field>
 
     <button *ngIf='!accediendo' class="btnAcceder" mat-flat-button color="primary" type='submit'>ACCEDER</button>
-    <mat-progress-bar *ngIf='accediendo' mode="indeterminate" class="spiner" ></mat-progress-bar>
-    <!-- <button type='submit'>Ingresar</button> -->
+    <button *ngIf='accediendo' class="btnAcceder" mat-flat-button color="primary" type='submit'><mat-progress-bar *ngIf='accediendo' mode="indeterminate" class="spiner" ></mat-progress-bar></button>
+
+    
 
     <mat-checkbox class="check">Recordar mis datos</mat-checkbox>
 
-    <a href='https://www.usuarios.econo.unlp.edu.ar/recuperar-clave'>no me acuerdo mi clave</a>
+
+    <button class="btnqr" mat-stroked-button (click)='login_hash()'>ACCEDER CON QR <i class="material-icons">center_focus_weak </i></button>
+
+
+    <a mat-button class="btnPassword" routerLink="https://www.usuarios.econo.unlp.edu.ar/recuperar-clave">Olvidé mi contraseña</a>
+
 
 </form>
 
-<button (click)='login_hash()'>Ingresar usando código qr</button>
 
 </mat-card>
-
-<div>
-        <div>Una cuenta.</div> 
-        <div>Todos los servicios de la FCE a tu disposición.</div>
-</div>
-
 
 
 </div>
