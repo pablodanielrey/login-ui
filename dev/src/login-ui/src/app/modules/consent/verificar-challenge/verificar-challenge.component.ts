@@ -32,11 +32,7 @@ export class VerificarChallengeComponent implements OnInit, OnDestroy {
       this.service.get_consent_challenge(this.route).subscribe(r => {
         console.log(r);
         let redirect_url = r['redirect_to'];
-        sessionStorage.setItem('redirect_url', redirect_url);
-        let redirect = btoa(redirect_url);
-        //this.document.location.href = redirect_url;
-        this.router.navigate([`/login/bienvenido/${redirect}`]);
-        //this.router.navigate([`/login/bienvenido/`]);
+        this.document.location.href = redirect_url;
       })
     )    
   }
