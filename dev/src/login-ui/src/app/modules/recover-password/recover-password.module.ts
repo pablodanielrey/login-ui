@@ -7,13 +7,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RecoverPasswordMaterialModule } from './recover-password-material-module';
 import { RecoverPasswordRoutingModule } from './recover-password-routing.module';
 
-import { RegisterDeviceComponent } from './register-device/register-device.component';
-import { InputUsernameComponent } from './input-username/input-username.component';
-import { VerifyCodeComponent } from './verify-code/verify-code.component';
-import { InputCredentialsComponent } from './input-credentials/input-credentials.component';
-import { ErrorComponent } from './error/error.component';
-import { VerifyEmailComponent } from './verify-email/verify-email.component';
-import { FinalizeComponent } from './finalize/finalize.component';
+import { RegisterDeviceComponent } from './components/register-device/register-device.component';
+import { InputUsernameComponent } from './components/input-username/input-username.component';
+import { VerifyCodeComponent } from './components/verify-code/verify-code.component';
+import { InputCredentialsComponent } from './components/input-credentials/input-credentials.component';
+import { ErrorComponent } from './components/error/error.component';
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { FinalizeComponent } from './components/finalize/finalize.component';
 
 
 
