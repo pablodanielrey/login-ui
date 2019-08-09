@@ -26,6 +26,7 @@ import { GenerarQrComponent } from './modules/login/generar-qr/generar-qr.compon
 import { ActivarQrUserComponent } from './modules/login/activar-qr-user/activar-qr-user.component';
 import { SeleccionarUsuarioQrComponent } from './modules/login/seleccionar-usuario-qr/seleccionar-usuario-qr.component';
 import { ActivarQrComponent } from './modules/login/activar-qr/activar-qr.component';
+import { RecoverPasswordModule } from './modules/recover-password/recover-password.module';
 
 const oauthconf: OAuth2Config = environment.auth;
 
@@ -37,12 +38,19 @@ const oauthconf: OAuth2Config = environment.auth;
     RegistrarDispositivoComponent,
     VerificarDispositivoComponent,
     ConsentComponent, 
-    VerificarChallengeComponent, StartComponent, ErrorComponent, GenerarQrComponent, ActivarQrUserComponent, SeleccionarUsuarioQrComponent, ActivarQrComponent
+    VerificarChallengeComponent, 
+    StartComponent, 
+    ErrorComponent, 
+    GenerarQrComponent, 
+    ActivarQrUserComponent, 
+    SeleccionarUsuarioQrComponent, 
+    ActivarQrComponent
   ],
   imports: [
     BrowserModule,
     AuthModule.forRoot(oauthconf),
     AppRoutingModule,
+    RecoverPasswordModule.forRoot(),
     LoginMaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
