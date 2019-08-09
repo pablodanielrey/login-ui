@@ -14,6 +14,7 @@ import { InputCredentialsComponent } from './components/input-credentials/input-
 import { ErrorComponent } from './components/error/error.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { FinalizeComponent } from './components/finalize/finalize.component';
+import { RecoverPasswordService } from './services/recover-password.service';
 
 
 
@@ -51,6 +52,7 @@ export class RecoverPasswordModule {
     return {
       ngModule: RecoverPasswordModule,
       providers: [ 
+        RecoverPasswordService
       ]
     }
   }
