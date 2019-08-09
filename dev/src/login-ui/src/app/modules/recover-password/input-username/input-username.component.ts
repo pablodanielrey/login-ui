@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-input-username',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InputUsernameComponent implements OnInit {
 
-  constructor() { }
+  accediendo = false;
+  form: FormGroup;
+
+  constructor(private fb: FormBuilder) { 
+
+    this.form = fb.group({
+      usuario: ['', [Validators.required, Validators.minLength(8), Validators.pattern("[a-zA-Z0-9]+")]]
+    })    
+
+  }
 
   ngOnInit() {
+  }
+
+  verificar() {
+    if (!this.form.valid) {
+      return;
+    }
   }
 
 }

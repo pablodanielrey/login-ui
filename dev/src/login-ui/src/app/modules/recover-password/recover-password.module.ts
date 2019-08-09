@@ -1,7 +1,12 @@
 import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { RecoverPasswordMaterialModule } from './recover-password-material-module';
 import { RecoverPasswordRoutingModule } from './recover-password-routing.module';
+
 import { RegisterDeviceComponent } from './register-device/register-device.component';
 import { InputUsernameComponent } from './input-username/input-username.component';
 import { VerifyCodeComponent } from './verify-code/verify-code.component';
@@ -9,6 +14,7 @@ import { InputCredentialsComponent } from './input-credentials/input-credentials
 import { ErrorComponent } from './error/error.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { FinalizeComponent } from './finalize/finalize.component';
+
 
 
 
@@ -24,7 +30,10 @@ import { FinalizeComponent } from './finalize/finalize.component';
   ],
   imports: [
     CommonModule,
-    RecoverPasswordRoutingModule
+    RecoverPasswordRoutingModule,
+    RecoverPasswordMaterialModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   exports: [
     RecoverPasswordRoutingModule
