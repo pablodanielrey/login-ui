@@ -4,6 +4,11 @@
     justify-content: center;
     align-items: center;
     height: 100%;
+    @media screen and (max-width: 768px){
+        padding: 10px;
+        align-items:flex-start;
+
+    }
 
  }
 
@@ -12,6 +17,10 @@
  .qr {
      padding: 40px;
      margin-right: 50px;
+     @media screen and (max-width: 768px){
+        margin-right: 0px;
+
+    }
  }
 
 .contenedorQR {
@@ -31,12 +40,21 @@
 
  .imgQR {
      width: 250px;
+     @media screen and (max-width: 768px){
+         width: 100%;
+     }
  }
 
  .btnQR {
      margin: 0 auto;
  }
 
+
+ .info {
+    @media screen and (max-width: 768px){
+         display: none;
+    }
+ }
 
 
 .contenedorTitulo {
