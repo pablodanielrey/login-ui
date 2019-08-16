@@ -6,6 +6,9 @@
                 <div class="contenedorQR">
                     <img class="imgLogo" src="/assets/img/logo_fce.png">
                     <img class="imgQR" src='{{qr.qr_datauri}}'/>
+                    <div class="cargando">
+                            <mat-progress-bar mode="indeterminate" class="spiner" ></mat-progress-bar>
+                    </div>
                     <button class="btnQR" mat-raised-button (click)='generar_codigo_qr()'>GENERAR OTRO QR</button>
                 </div>  
             </mat-card>

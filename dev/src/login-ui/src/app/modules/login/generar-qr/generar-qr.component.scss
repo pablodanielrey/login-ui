@@ -28,6 +28,17 @@
     flex-direction: column;
 }
 
+.cargando {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.spiner {
+   width: 100%;
+   opacity: .5;
+
+}
+
 .imgLogo {
     width: 250px;
     margin: 0 auto;
@@ -46,6 +57,7 @@
  }
 
  .btnQR {
+     margin-top: 10px !important;
      margin: 0 auto;
  }
 
