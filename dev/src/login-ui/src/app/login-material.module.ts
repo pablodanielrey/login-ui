@@ -12,7 +12,8 @@ import {
   MatIconModule,
   MatButtonModule,
   MatCheckboxModule,
-  MatDividerModule
+  MatDividerModule,
+  
 
 
 } from '@angular/material';
@@ -29,7 +30,7 @@ import {
     MatIconModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatDividerModule
+    MatDividerModule,
   ],
   exports: [
     MatProgressSpinnerModule,

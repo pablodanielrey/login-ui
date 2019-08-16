@@ -1,0 +1,72 @@
+.pantalla {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+ }
+
+ 
+
+ .qr {
+     padding: 40px;
+     margin-right: 50px;
+ }
+
+.contenedorQR {
+    display: flex;
+    flex-direction: column;
+}
+
+.imgLogo {
+    width: 250px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    opacity: .9;
+    @media screen and (max-width: 768px){
+       width: 70%;
+   }
+}
+
+ .imgQR {
+     width: 250px;
+ }
+
+ .btnQR {
+     margin: 0 auto;
+ }
+
+
+
+.contenedorTitulo {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+.titulo {
+    font-size: 30px;
+    color: #353535;
+    margin-bottom: 10px;
+}
+
+
+ .imgCelular {
+     margin-left: -20px;
+     width: 150px;
+ }
+
+ .textoOpcion {
+     margin: 20px 0 10px 0;
+ }
+
+ .parrafo {
+     font-weight: 100;
+ }
+
+ .activacionManual {
+     text-decoration: none;
+     margin: 10px;
+     color: grey;
+ }
