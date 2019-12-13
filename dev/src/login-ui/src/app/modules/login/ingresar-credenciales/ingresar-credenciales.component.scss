@@ -3,6 +3,7 @@
     justify-content: center;
     align-items: center;
     height: 100%;
+    flex-direction: column;
 
  }
 
@@ -46,8 +47,14 @@ input:-webkit-autofill:active  {
     //  min-width: 300px;
      display: flex;
      flex-direction: column;
-     padding: 20px;
+     padding: 20px 20px 0 20px;
 
+
+ }
+
+ .contenedorDivisor {
+      margin-bottom: 10px;
+      border-top: 1px solid #E0E0E0;
 
  }
 
@@ -114,6 +121,14 @@ input:-webkit-autofill:active  {
 
  .btnqr {
      padding: 8px;
+ }
+
+ .btnPassword {
+   font-weight: 300;
+ }
+
+ .iconoPass {
+   opacity: 0.5;
  }
 
 
