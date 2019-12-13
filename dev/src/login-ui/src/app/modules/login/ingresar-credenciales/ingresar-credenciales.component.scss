@@ -4,6 +4,10 @@
     align-items: center;
     height: 100%;
     flex-direction: column;
+    background-image: url("/assets/img/fondo2.jpeg");
+    @media screen and (min-width: 1600px){
+    zoom: 1.2;
+    }
 
  }
 
@@ -131,6 +135,10 @@ input:-webkit-autofill:active  {
    opacity: 0.5;
  }
 
-
-
  
+.footer {
+  color:#5b5b5b;
+ font-size: 11px;
+ margin-top: 10px;
+}
+

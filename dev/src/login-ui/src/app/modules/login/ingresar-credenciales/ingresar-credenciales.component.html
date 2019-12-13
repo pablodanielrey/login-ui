@@ -10,8 +10,8 @@
     <mat-form-field appearance="outline">
         <mat-label>Usuario</mat-label>
         <input matInput placeholder="DNI o Legajo sin puntos" formControlName='usuario'>
-        <mat-error *ngIf="credenciales.get('usuario').hasError('minlength')">Debe ingresar mas de 7 caracteres</mat-error>
-        <mat-error *ngIf="credenciales.get('usuario').hasError('required')">Debe ingresar algún valor</mat-error>
+        <mat-error *ngIf="credenciales.get('usuario').hasError('minlength')">Usuario inexistente</mat-error>
+        <mat-error *ngIf="credenciales.get('usuario').hasError('required')">Ingrese su usuario (DNI o Legajo sin puntos)</mat-error>
         <mat-error *ngIf="credenciales.get('usuario').hasError('pattern')">Caractéres no permitidos</mat-error>
     </mat-form-field>
 
@@ -19,8 +19,8 @@
             <mat-label>Contraseña</mat-label>
             <input *ngIf='!ver_clave' matInput pvblaceholder="Contraseña" formControlName='clave' type="password">
             <input *ngIf='ver_clave' matInput pvblaceholder="Contraseña" formControlName='clave' type="text">
-            <mat-error *ngIf="credenciales.get('clave').hasError('minlength')">Debe ingresar mas de 5 caracteres</mat-error>
-            <mat-error *ngIf="credenciales.get('clave').hasError('required')">Debe ingresar algún valor</mat-error>
+            <mat-error *ngIf="credenciales.get('clave').hasError('minlength')">Contraseña invalida</mat-error>
+            <mat-error *ngIf="credenciales.get('clave').hasError('required')">Ingrese su contraseña</mat-error>
             <button type='button' mat-icon-button matSuffix (click)="ver_clave = !ver_clave" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="ver_clave">
                 <mat-icon>{{ver_clave ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
@@ -48,6 +48,10 @@
 
 
 </mat-card>
+
+<div class="footer animacionLateral">
+    DiTeSI | Dirección de Tecnologías y Sistemas Informáticos
+</div>
 
 
 </div>
