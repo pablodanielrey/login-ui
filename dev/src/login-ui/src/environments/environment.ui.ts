@@ -32,7 +32,7 @@ export const environment = {
   */
   auth: {
     issuer: 'https://oidc.testing.econo.unlp.edu.ar/',
-    redirectUri: 'https://login.testing.econo.unlp.edu.ar/auth/oauth2',
+    redirectUri: 'http://localhost:10005/auth/oauth2',
     clientId: 'login-ui',
     scope: 'openid profile email algo',
     waitForTokenInMsec: 2000,

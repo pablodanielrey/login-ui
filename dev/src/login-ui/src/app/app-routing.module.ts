@@ -48,7 +48,7 @@ const routes: Routes = [
   {
     path: 'system',
     children: [
-      { path: 'start', component: StartComponent, canActivate: [AuthGuardService] },
+      { path: 'start', component: StartComponent },
       { path: '**', redirectTo: 'start' }
     ]
   },
