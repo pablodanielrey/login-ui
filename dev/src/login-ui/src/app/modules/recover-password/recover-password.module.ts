@@ -12,7 +12,6 @@ import { InputUsernameComponent } from './components/input-username/input-userna
 import { VerifyCodeComponent } from './components/verify-code/verify-code.component';
 import { InputCredentialsComponent } from './components/input-credentials/input-credentials.component';
 import { ErrorComponent } from './components/error/error.component';
-import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { FinalizeComponent } from './components/finalize/finalize.component';
 import { RecoverPasswordService } from './services/recover-password.service';
 
@@ -24,7 +23,6 @@ import { RecoverPasswordService } from './services/recover-password.service';
     VerifyCodeComponent, 
     InputCredentialsComponent, 
     ErrorComponent, 
-    VerifyEmailComponent, 
     FinalizeComponent
   ],
   imports: [

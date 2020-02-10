@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-verify-code',
@@ -11,6 +12,7 @@ export class VerifyCodeComponent implements OnInit {
 
   accediendo = false;
   form: FormGroup;
+  correo$ : Observable<String>;
 
   constructor(private fb: FormBuilder, private router:Router) { 
 
@@ -21,6 +23,7 @@ export class VerifyCodeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.correo$ = of('pepe....@econ....');
   }
 
   verificar() {
