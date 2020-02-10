@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-verify-email',
@@ -11,12 +12,10 @@ export class VerifyEmailComponent implements OnInit {
   accediendo = false;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) { 
-
+  constructor(private fb: FormBuilder, private router:Router) { 
     this.form = fb.group({
       email: ['', [Validators.required, Validators.email]]
     })    
-
   }
 
   ngOnInit() {
@@ -27,6 +26,7 @@ export class VerifyEmailComponent implements OnInit {
       return;
     }
     this.accediendo = true;
+    this.router.navigate(['/recover/code']);
   }
 
 }

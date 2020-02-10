@@ -12,6 +12,7 @@ const routes: Routes = [
     {
         path: 'recover',
         children: [
+            { path: 'start', redirectTo: 'register' },
             { path:'register', component: RegisterDeviceComponent },
             { path:'username', component: InputUsernameComponent },
             { path:'email', component: VerifyEmailComponent },
@@ -20,7 +21,7 @@ const routes: Routes = [
             { path:'finalize', component: FinalizeComponent },
             { path:'error', component: ErrorComponent}
         ]
-      }    
+    }   
 ];
 
 @NgModule({

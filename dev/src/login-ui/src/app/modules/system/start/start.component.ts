@@ -15,6 +15,7 @@ export class StartComponent implements OnInit {
   }
 
   salir() {
+    console.log('saliendo');
     this.auth.logout();
   }
 

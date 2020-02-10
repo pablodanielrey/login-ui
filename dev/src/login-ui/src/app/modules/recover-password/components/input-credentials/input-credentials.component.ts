@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-input-credentials',
@@ -12,13 +13,11 @@ export class InputCredentialsComponent implements OnInit {
   accediendo = false;
   credenciales: FormGroup;
 
-  constructor(private fb: FormBuilder) { 
-
+  constructor(private fb: FormBuilder, private router:Router) { 
     this.credenciales = fb.group({
       password: ['', [Validators.required, Validators.minLength(8), Validators.pattern("[a-zA-Z0-9]+")]],
       password2: ['', [Validators.required, Validators.minLength(8), Validators.pattern("[a-zA-Z0-9]+")]]
     })    
-
   }
 
   ngOnInit() {
@@ -28,6 +27,7 @@ export class InputCredentialsComponent implements OnInit {
     if (!this.credenciales.valid) {
       return;
     }
+    this.router.navigate(['/recover/finalize']);
   }
 
 }
