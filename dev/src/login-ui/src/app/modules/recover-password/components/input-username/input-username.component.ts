@@ -27,7 +27,7 @@ export class InputUsernameComponent implements OnInit {
     if (!this.form.valid) {
       return;
     }
-    this.router.navigate(['/recover/email']);
+    this.router.navigate(['/recover/code']);
   }
 
 }

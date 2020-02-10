@@ -8,7 +8,7 @@
         <form [formGroup]='form' (ngSubmit)='verificar()' class="formulario">
             <mat-form-field appearance="outline">
                 <mat-label>Correo</mat-label>
-                <input matInput placeholder="Ingrese el correo indicado arriba completo..." formControlName='email' type="text">
+                <input matInput placeholder="Complete el correo indicado arriba completo..." formControlName='email' type="text">
                 <mat-error *ngIf="form.get('email').hasError('required')">Debe ingresar algún valor</mat-error>
                 <mat-error *ngIf="form.get('email').hasError('email')">Correo no válido</mat-error>
             </mat-form-field>
