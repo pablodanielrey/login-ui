@@ -23,7 +23,7 @@ export class VerifyCodeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.correo$ = of('pepe....@econ....');
+    this.correo$ = of('pab******ey@gm****');
   }
 
   verificar() {
