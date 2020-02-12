@@ -5,6 +5,10 @@
     height: 100%;
     flex-direction: column;
     background-image: url("/assets/img/fondo2.jpeg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     @media screen and (min-width: 1600px){
     zoom: 1.2;
     }
