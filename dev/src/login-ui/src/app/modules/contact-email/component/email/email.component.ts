@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-email',
@@ -7,9 +10,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmailComponent implements OnInit {
 
-  constructor() { }
+  accediendo = false;
+  form: FormGroup;
 
-  ngOnInit(): void {
+  constructor(private fb: FormBuilder, private router:Router) { 
+
+    this.form = fb.group({
+      email: ['', [Validators.required, Validators.email ]],
+      email2: ['', [Validators.required, Validators.email ]]
+    })    
+
+  }
+
+  ngOnInit() {
+  }
+
+  verificar() {
+    if (!this.form.valid) {
+      return;
+    }
+    this.router.navigate(['/recover/code']);
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

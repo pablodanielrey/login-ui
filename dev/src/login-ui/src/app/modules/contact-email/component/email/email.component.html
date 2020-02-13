@@ -1,1 +1,35 @@
-<p>email works!</p>
+<div class="pantalla">
+
+        <mat-card class="card animacionLateral">
+    
+            <form [formGroup]='form' (ngSubmit)='verificar()' class="formulario">
+    
+                <img class="imgLogo" src="/assets/img/logo_fce.png">
+                <div><b>CORREO ELECTRÓNICO DE CONTACTO</b></div>
+                <div class="contenedorDivisor"></div>
+                <div class="subTitulo">Es necesario configurar una cuenta de correo electrónico de contacto para continuar.</div>
+                
+                <mat-form-field appearance="outline">
+                    <mat-label>Correo Electrónico</mat-label>
+                    <input matInput placeholder="Ingrese su DNI..." formControlName='email' type="text">
+                    <mat-error *ngIf="form.get('email').hasError('email')">formato incorrecto</mat-error>
+                    <mat-error *ngIf="form.get('email').hasError('required')">requerido</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                        <mat-label>Repetir Correo Electrónico </mat-label>
+                        <input matInput placeholder="Ingrese su DNI..." formControlName='email2' type="text">
+                        <mat-error *ngIf="form.get('email2').hasError('email')">formato incorrecto</mat-error>
+                        <mat-error *ngIf="form.get('email2').hasError('required')">requerido</mat-error>
+                    </mat-form-field>
+    
+                <button *ngIf='!accediendo' class="btnAcceder" mat-flat-button color="primary" type='submit'>SIGUIENTE</button>
+                <button *ngIf='accediendo' class="btnAcceder" mat-flat-button color="primary" type='submit'><mat-progress-bar mode="indeterminate" class="spiner" ></mat-progress-bar></button>
+            
+            </form>
+            
+        </mat-card>
+           
+        <div class="footer animacionLateral"> DiTeSI | Dirección de Tecnologías y Sistemas Informáticos</div>
+            
+    </div>
