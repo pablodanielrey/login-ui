@@ -27,6 +27,8 @@ import { ActivarQrUserComponent } from './modules/login/activar-qr-user/activar-
 import { SeleccionarUsuarioQrComponent } from './modules/login/seleccionar-usuario-qr/seleccionar-usuario-qr.component';
 import { ActivarQrComponent } from './modules/login/activar-qr/activar-qr.component';
 import { RecoverPasswordModule } from './modules/recover-password/recover-password.module';
+import { ContactEmailModule } from './modules/contact-email/contact-email.module';
+import { TemporalCredentialsModule } from './modules/temporal-credentials/temporal-credentials.module';
 
 
 const oauthconf: OAuth2Config = environment.auth;
@@ -52,6 +54,8 @@ const oauthconf: OAuth2Config = environment.auth;
     AuthModule.forRoot(oauthconf),
     AppRoutingModule,
     RecoverPasswordModule.forRoot(),
+    ContactEmailModule.forRoot(),
+    TemporalCredentialsModule.forRoot(),
     LoginMaterialModule,
     ReactiveFormsModule,
     HttpClientModule,

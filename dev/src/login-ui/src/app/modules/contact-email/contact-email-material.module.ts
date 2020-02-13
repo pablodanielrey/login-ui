@@ -36,4 +36,4 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatCheckboxModule
   ]
 })
-export class RecoverPasswordMaterialModule { }
+export class ContactEmailMaterialModule { }

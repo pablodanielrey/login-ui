@@ -18,6 +18,8 @@ import { GenerarQrComponent } from './modules/login/generar-qr/generar-qr.compon
 import { ActivarQrUserComponent } from './modules/login/activar-qr-user/activar-qr-user.component';
 import { SeleccionarUsuarioQrComponent } from './modules/login/seleccionar-usuario-qr/seleccionar-usuario-qr.component';
 import { ActivarQrComponent } from './modules/login/activar-qr/activar-qr.component';
+import { TemporalCredentialsRoutingModule } from './modules/temporal-credentials/temporal-credentials-routing.module';
+import { ContactEmailRoutingModule } from './modules/contact-email/contact-email-routing.module';
 
 
 
@@ -61,7 +63,9 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     AuthRoutingModule,
-    RecoverPasswordRoutingModule
+    RecoverPasswordRoutingModule,
+    TemporalCredentialsRoutingModule,
+    ContactEmailRoutingModule
   ],
   exports: [RouterModule]
 })
