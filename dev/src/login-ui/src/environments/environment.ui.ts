@@ -1,8 +1,10 @@
 export const environment = {
   production: false,
+  /*
   loginApiUrl: 'https://login.testing.econo.unlp.edu.ar/login/api/v1.0',
   recoverApiUrl: 'https://login.testing.econo.unlp.edu.ar/login/api/v1.0',
   hardwareApiUrl: 'https://login.testing.econo.unlp.edu.ar/login/api/v1.0',
+  */
 
   wardenApiUrl: 'https://api.econo.unlp.edu.ar/warden/api/v1.0',
   oidp_issuer: 'https://oidc.testing.econo.unlp.edu.ar/',
@@ -37,6 +39,11 @@ export const environment = {
     scope: 'openid profile email algo',
     waitForTokenInMsec: 2000,
     requireHttps: false
-  }  
+  },
+
+  loginApiUrl: 'https://localhost:10012/login/api/v1.0',
+  recoverApiUrl: 'https://localhost:10012/recover/api/v1.0',
+  hardwareApiUrl: 'https://localhost:10012/login/api/v1.0',
+
 
 };
