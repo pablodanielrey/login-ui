@@ -14,8 +14,8 @@ const routes: Routes = [
             { path: 'start', redirectTo: 'register' },
             { path:'register', component: RegisterDeviceComponent },
             { path:'username', component: InputUsernameComponent },
-            { path:'code', component: VerifyCodeComponent },
-            { path:'credentials', component: InputCredentialsComponent },
+            { path:'code/:hash', component: VerifyCodeComponent },
+            { path:'credentials/:hash', component: InputCredentialsComponent },
             { path:'finalize', component: FinalizeComponent },
             { path:'error', component: ErrorComponent}
         ]

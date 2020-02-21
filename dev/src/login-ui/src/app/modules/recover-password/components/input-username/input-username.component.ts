@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
 import { Observable } from 'rxjs';
 import { RecoverPasswordService } from '../../services/recover-password.service';
-import { map, catchError, switchMap } from 'rxjs/operators';
+import { map, catchError, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-input-username',
@@ -45,11 +45,14 @@ export class InputUsernameComponent implements OnInit {
       return;
     }
     this.device_hash$.pipe(
-      switchMap(hash => this.service.recover_for(this.form.value['user'], hash))
+      switchMap(hash => this.service.recover_for(this.form.value['user'], hash)),
+      tap(v => console.log(v))
     ).subscribe(
       r => {
         console.log(r);
-        this.router.navigate(['/recover/code']);
+        let hash = encodeURI(btoa(r.session + ":" + r.email));
+        console.log(hash);
+        this.router.navigate([`/recover/code/${hash}`]);
       },
       e => console.log(e)
     );

@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
 import { Observable, throwError, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap, switchMap } from 'rxjs/operators';
 
 export interface Response {
   status:number,
@@ -31,10 +31,26 @@ export class RecoverPasswordService {
     return this.http.post<Response>(url, data, {
       headers: new HttpHeaders().set('content-type', 'application/json')
     }).pipe(
-      map(r => {
-        return of(r.response) ? r.status == 200 : throwError(new Error(r.response));
-      })
+      switchMap(r => {
+        return (r.status == 200) ? of(r.response) : throwError(new Error(r.response));
+      }),
     );    
   }
 
+  verify_code(code:string, session:string, device:string) {
+    let url = `${this.url}/verify_code/${code}`;
+    let data = {
+      "session": session,
+      "device": device
+    }
+    return this.http.post<Response>(url, data, {
+      headers: new HttpHeaders().set('content-type', 'application/json')
+    }).pipe(
+      tap(v => console.log(v)),
+      switchMap(r => {
+        return (r.status == 200) ? of(r.response) : throwError(new Error(r.response));
+      }),
+      tap(v => console.log(v))
+    );    
+  }
 }

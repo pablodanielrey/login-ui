@@ -7,7 +7,7 @@
             <img class="imgLogo" src="/assets/img/logo_fce.png">
             <div><b>VERIFICAR CÓDIGO</b></div>
             <div class="contenedorDivisor"></div>
-            <div class="subTitulo">Te hemos enviado un código a <b>{{correo$|async}}</b>, copia y pega el código.</div>
+            <div class="subTitulo">Te hemos enviado un código a <b>{{correo}}</b>, copia y pega el código.</div>
             <div class="subTituloAlternativo">Recuerda revisar la bandeja de correo no deseado (Spam) es probable que los correos electrónicos que te enviamos se encuentren allí.</div>
 
             <mat-form-field appearance="outline">
@@ -17,7 +17,9 @@
                 <mat-error *ngIf="form.get('code').hasError('required')">Debe ingresar algún valor</mat-error>
                 <mat-error *ngIf="form.get('code').hasError('pattern')">Caractéres no permitidos</mat-error>
             </mat-form-field>
- 
+
+            <mat-error *ngIf="error">código erróneo</mat-error>
+
             <button *ngIf='!accediendo' class="btnAcceder" mat-flat-button color="primary" type='submit'>SIGUIENTE</button>
             <button *ngIf='accediendo' class="btnAcceder" mat-flat-button color="primary" type='submit'><mat-progress-bar mode="indeterminate" class="spiner" ></mat-progress-bar></button>
             
