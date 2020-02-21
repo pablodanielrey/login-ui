@@ -33,7 +33,7 @@ export const environment = {
   } 
   */
   auth: {
-    issuer: 'https://oidc.testing.econo.unlp.edu.ar/',
+    issuer: 'https://oidc.econo.unlp.edu.ar/',
     redirectUri: 'http://localhost:10005/auth/oauth2',
     clientId: 'login-ui',
     scope: 'openid profile email algo',
