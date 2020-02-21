@@ -29,6 +29,7 @@ import { ActivarQrComponent } from './modules/login/activar-qr/activar-qr.compon
 import { RecoverPasswordModule } from './modules/recover-password/recover-password.module';
 import { ContactEmailModule } from './modules/contact-email/contact-email.module';
 import { TemporalCredentialsModule } from './modules/temporal-credentials/temporal-credentials.module';
+import { UpdatingModule } from './modules/updating/updating.module';
 
 
 const oauthconf: OAuth2Config = environment.auth;
@@ -56,6 +57,7 @@ const oauthconf: OAuth2Config = environment.auth;
     RecoverPasswordModule.forRoot(),
     ContactEmailModule.forRoot(),
     TemporalCredentialsModule.forRoot(),
+    UpdatingModule.forRoot(),
     LoginMaterialModule,
     ReactiveFormsModule,
     HttpClientModule,

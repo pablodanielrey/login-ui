@@ -20,6 +20,7 @@ import { SeleccionarUsuarioQrComponent } from './modules/login/seleccionar-usuar
 import { ActivarQrComponent } from './modules/login/activar-qr/activar-qr.component';
 import { TemporalCredentialsRoutingModule } from './modules/temporal-credentials/temporal-credentials-routing.module';
 import { ContactEmailRoutingModule } from './modules/contact-email/contact-email-routing.module';
+import { UpdatingRoutingModule } from './modules/updating/updating-routing.module';
 
 
 
@@ -65,7 +66,8 @@ const routes: Routes = [
     AuthRoutingModule,
     RecoverPasswordRoutingModule,
     TemporalCredentialsRoutingModule,
-    ContactEmailRoutingModule
+    ContactEmailRoutingModule,
+    UpdatingRoutingModule
   ],
   exports: [RouterModule]
 })
