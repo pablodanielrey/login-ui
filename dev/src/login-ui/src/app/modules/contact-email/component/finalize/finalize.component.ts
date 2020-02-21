@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-finalize',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FinalizeComponent implements OnInit {
 
-  constructor() { }
+  private subs = [];
 
-  ngOnInit(): void {
+  ngOnDestroy(): void {
+    this.subs.forEach(s => s.unsubscribe());
+  }
+
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+    this.subs.push(
+      timer(5000).subscribe(_ => this.router.navigate(['/']))
+    );
   }
 
 }

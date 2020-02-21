@@ -29,7 +29,7 @@ export class EmailComponent implements OnInit {
     if (!this.form.valid) {
       return;
     }
-    this.router.navigate(['/recover/code']);
+    this.router.navigate(['/email/verify_code']);
   }
 
 }

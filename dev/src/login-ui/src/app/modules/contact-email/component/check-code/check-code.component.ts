@@ -24,7 +24,7 @@ export class CheckCodeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.correo$ = of('pab******ey@gm****');
+    this.correo$ = of('pablodanielrey@gmail.com');
   }
 
   verificar() {
@@ -32,7 +32,7 @@ export class CheckCodeComponent implements OnInit {
       return;
     }
     this.accediendo = true;
-    this.router.navigate(['/recover/credentials']);
+    this.router.navigate(['/email/finalize']);
   }
 
 
