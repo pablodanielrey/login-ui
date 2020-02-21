@@ -47,11 +47,8 @@ export class VerifyCodeComponent implements OnInit {
     this.device_hash$ = this.hardware.get_device_id();
     let _hash$ = this.route.paramMap.pipe(
       map(params => params.get('hash')),
-      tap(v => console.log(v)),
       map(h => atob(decodeURI(h))),
-      tap(v => console.log(v)),
       map(hash => hash.split(':')),
-      tap(v => console.log(v)),
       map(hashes => {
         return {'session':hashes[0], 'email':hashes[1]};
       })
