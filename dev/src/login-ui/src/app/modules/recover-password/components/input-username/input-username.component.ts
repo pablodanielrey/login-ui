@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { RecoverPasswordService } from '../../services/recover-password.service';
 import { map, catchError, switchMap, tap } from 'rxjs/operators';
 
@@ -46,15 +46,18 @@ export class InputUsernameComponent implements OnInit {
     }
     this.device_hash$.pipe(
       switchMap(hash => this.service.recover_for(this.form.value['user'], hash)),
+      map(r => encodeURI(btoa(r.session + ":" + r.email))),
+      switchMap(hash => from(this.router.navigate([`/recover/code/${hash}`]))),
       tap(v => console.log(v))
     ).subscribe(
-      r => {
-        console.log(r);
-        let hash = encodeURI(btoa(r.session + ":" + r.email));
-        console.log(hash);
-        this.router.navigate([`/recover/code/${hash}`]);
+      ok => {
+        this.accediendo = false;
+        console.log(ok);
       },
-      e => console.log(e)
+      e => {
+        this.accediendo = false;
+        console.log(e);
+      }
     );
   }
 
