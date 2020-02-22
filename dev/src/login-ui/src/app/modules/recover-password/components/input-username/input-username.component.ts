@@ -16,6 +16,7 @@ export class InputUsernameComponent implements OnInit {
   accediendo = false;
   form: FormGroup;
   device_hash$: Observable<string>
+  error: string = null;
 
   private subs = [];
 
@@ -44,17 +45,20 @@ export class InputUsernameComponent implements OnInit {
       console.log('error formulário inválido');
       return;
     }
+    this.error = null;
     this.device_hash$.pipe(
       switchMap(hash => this.service.recover_for(this.form.value['user'], hash)),
-      map(r => encodeURI(btoa(r.session + ":" + r.email))),
+      map(r => encodeURI(btoa(r.user + ":" + r.email))),
       switchMap(hash => from(this.router.navigate([`/recover/code/${hash}`]))),
       tap(v => console.log(v))
     ).subscribe(
       ok => {
+        this.error = null;
         this.accediendo = false;
         console.log(ok);
       },
       e => {
+        this.error = e.message;
         this.accediendo = false;
         console.log(e);
       }

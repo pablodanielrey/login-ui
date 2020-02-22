@@ -17,6 +17,8 @@
                 <mat-error *ngIf="form.get('user').hasError('pattern')">Caractéres no permitidos</mat-error>
             </mat-form-field>
 
+            <mat-error *ngIf="error">{{error}}</mat-error>
+
             <button *ngIf='!accediendo' class="btnAcceder" mat-flat-button color="primary" type='submit'>SIGUIENTE</button>
             <button *ngIf='accediendo' class="btnAcceder" mat-flat-button color="primary" type='submit'><mat-progress-bar mode="indeterminate" class="spiner" ></mat-progress-bar></button>
         

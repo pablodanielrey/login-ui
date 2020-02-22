@@ -37,10 +37,10 @@ export class RecoverPasswordService {
     );    
   }
 
-  verify_code(code:string, session:string, device:string) {
+  verify_code(code:string, user:string, device:string) {
     let url = `${this.url}/verify_code/${code}`;
     let data = {
-      "session": session,
+      "user": user,
       "device": device
     }
     return this.http.post<Response>(url, data, {

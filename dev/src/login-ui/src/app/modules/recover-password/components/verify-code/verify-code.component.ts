@@ -27,7 +27,7 @@ export class VerifyCodeComponent implements OnInit {
   accediendo = false;
   form: FormGroup;
   correo: string;
-  session: string;
+  user: string;
   device_hash$: Observable<string>;
   error: boolean = false;
 
@@ -38,7 +38,7 @@ export class VerifyCodeComponent implements OnInit {
               private hardware: HardwareService) { 
 
     this.form = fb.group({
-      code: ['', [Validators.required, Validators.minLength(8), Validators.pattern("[a-zA-Z0-9]+")]]
+      code: ['', [Validators.required, Validators.minLength(4), Validators.pattern("[0-9]+")]]
     })    
 
   }
@@ -50,12 +50,12 @@ export class VerifyCodeComponent implements OnInit {
       map(h => atob(decodeURI(h))),
       map(hash => hash.split(':')),
       map(hashes => {
-        return {'session':hashes[0], 'email':hashes[1]};
+        return {'user':hashes[0], 'email':hashes[1]};
       })
     )
     this.subs.push(_hash$.subscribe(h => {
       this.correo = h['email'];
-      this.session = h['session'];
+      this.user = h['user'];
     }));
   }
 
@@ -65,7 +65,10 @@ export class VerifyCodeComponent implements OnInit {
     }
     this.accediendo = true;
     this.subs.push(this.device_hash$.pipe(
-      switchMap(device => {this.error = false; return this.service.verify_code(this.form.value['code'], this.session, device)}),
+      switchMap(device => {
+        this.error = false;
+        return this.service.verify_code(this.form.value['code'], this.user, device);
+      }),
       map(r => encodeURI(btoa(r.session))),
       switchMap(hash => from(this.router.navigate([`/recover/credentials/${hash}`])))
     ).subscribe(
