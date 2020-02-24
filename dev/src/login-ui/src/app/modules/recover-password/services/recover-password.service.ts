@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
 import { Observable, throwError, of } from 'rxjs';
-import { map, tap, switchMap } from 'rxjs/operators';
+import { map, tap, switchMap, catchError } from 'rxjs/operators';
 
 export interface Response {
   status:number,
@@ -31,6 +31,7 @@ export class RecoverPasswordService {
     return this.http.post<Response>(url, data, {
       headers: new HttpHeaders().set('content-type', 'application/json')
     }).pipe(
+      catchError(e => of({status:500,response:''})),
       switchMap(r => {
         if (r.status >= 500 && r.status <= 600) {
           return throwError(new Error('Ups!. algo ha salido mal'));
@@ -52,6 +53,7 @@ export class RecoverPasswordService {
     return this.http.post<Response>(url, data, {
       headers: new HttpHeaders().set('content-type', 'application/json')
     }).pipe(
+      catchError(e => of({status:500,response:''})),
       switchMap(r => {
         if (r.status >= 500 && r.status <= 600) {
           return throwError(new Error('Ups!. algo ha salido mal'));
@@ -74,6 +76,7 @@ export class RecoverPasswordService {
     return this.http.post<Response>(url, data, {
       headers: new HttpHeaders().set('content-type', 'application/json')
     }).pipe(
+      catchError(e => of({status:500,response:''})),
       switchMap(r => {
         if (r.status >= 500 && r.status <= 600) {
           return throwError(new Error('Ups!. algo ha salido mal'));
