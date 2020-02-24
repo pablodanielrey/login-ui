@@ -8,11 +8,11 @@ export const environment = {
   oidp_issuer: 'https://oidc.econo.unlp.edu.ar/',
 
   client_id: 'login-ui',
-  version: '0.1.0',
+  version: '1.0.0',
 
   loader: {
     cabecera: 'LOGIN | FCE',
-    version: '0.1.0',
+    version: '1.0.0',
     tituloSistema: 'LOGIN',
     subtituloSistema: '',
     desarrolloSistema: 'DiTeSI | Dirección de Tecnologías y Sistemas Informáticos',
