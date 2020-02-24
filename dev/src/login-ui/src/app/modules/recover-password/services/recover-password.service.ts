@@ -32,7 +32,13 @@ export class RecoverPasswordService {
       headers: new HttpHeaders().set('content-type', 'application/json')
     }).pipe(
       switchMap(r => {
-        return (r.status == 200) ? of(r.response) : throwError(new Error(r.response));
+        if (r.status == 500) {
+          return throwError(new Error('Ups!. algo ha salido mal'));
+        }
+        if (r.status != 200) {
+          return throwError(new Error(r.response));
+        }
+        return of(r.response);
       }),
     );    
   }
@@ -46,11 +52,15 @@ export class RecoverPasswordService {
     return this.http.post<Response>(url, data, {
       headers: new HttpHeaders().set('content-type', 'application/json')
     }).pipe(
-      tap(v => console.log(v)),
       switchMap(r => {
-        return (r.status == 200) ? of(r.response) : throwError(new Error(r.response));
+        if (r.status == 500) {
+          return throwError(new Error('Ups!. algo ha salido mal'));
+        }
+        if (r.status != 200) {
+          return throwError(new Error(r.response));
+        }
+        return of(r.response);
       }),
-      tap(v => console.log(v))
     );    
   }
 
@@ -64,11 +74,15 @@ export class RecoverPasswordService {
     return this.http.post<Response>(url, data, {
       headers: new HttpHeaders().set('content-type', 'application/json')
     }).pipe(
-      tap(v => console.log(v)),
       switchMap(r => {
-        return (r.status == 200) ? of(r.response) : throwError(new Error(r.response));
+        if (r.status == 500) {
+          return throwError(new Error('Ups!. algo ha salido mal'));
+        }
+        if (r.status != 200) {
+          return throwError(new Error(r.response));
+        }
+        return of(r.response);
       }),
-      tap(v => console.log(v))
     );    
   }  
 }
