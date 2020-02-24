@@ -32,7 +32,7 @@ export class RecoverPasswordService {
       headers: new HttpHeaders().set('content-type', 'application/json')
     }).pipe(
       switchMap(r => {
-        if (r.status >= 500 && r.status <= 500) {
+        if (r.status >= 500 && r.status <= 600) {
           return throwError(new Error('Ups!. algo ha salido mal'));
         }
         if (r.status != 200) {
@@ -53,7 +53,7 @@ export class RecoverPasswordService {
       headers: new HttpHeaders().set('content-type', 'application/json')
     }).pipe(
       switchMap(r => {
-        if (r.status >= 500 && r.status <= 500) {
+        if (r.status >= 500 && r.status <= 600) {
           return throwError(new Error('Ups!. algo ha salido mal'));
         }
         if (r.status != 200) {
@@ -75,7 +75,7 @@ export class RecoverPasswordService {
       headers: new HttpHeaders().set('content-type', 'application/json')
     }).pipe(
       switchMap(r => {
-        if (r.status >= 500 && r.status <= 500) {
+        if (r.status >= 500 && r.status <= 600) {
           return throwError(new Error('Ups!. algo ha salido mal'));
         }
         if (r.status != 200) {
