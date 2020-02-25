@@ -20,11 +20,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.route.queryParamMap.subscribe(p => {
+    this.subs.push(this.route.queryParamMap.subscribe(p => {
       let challenge = p.get('login_challenge');
       if (challenge) {
         this.router.navigate([`/login/verificar/${challenge}`]);
       }
-    })
+    }))
   }
 }
