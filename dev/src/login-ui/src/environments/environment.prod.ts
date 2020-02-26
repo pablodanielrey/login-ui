@@ -8,16 +8,7 @@ export const environment = {
   oidp_issuer: 'https://oidc.econo.unlp.edu.ar/',
 
   client_id: 'login-ui',
-  version: '1.0.0',
-
-  loader: {
-    cabecera: 'LOGIN | FCE',
-    version: '1.0.0',
-    tituloSistema: 'LOGIN',
-    subtituloSistema: '',
-    desarrolloSistema: 'DiTeSI | Dirección de Tecnologías y Sistemas Informáticos',
-    logoSistema: '/assets/img/fce/logofce2018.png',
-  },
+  version: '0.2.0',
   
   url_to_activate_qr: 'http://login:10005/login/qrcode/activar',
   

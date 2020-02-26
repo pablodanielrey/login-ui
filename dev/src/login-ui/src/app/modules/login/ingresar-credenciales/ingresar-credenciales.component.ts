@@ -7,6 +7,8 @@ import { switchMap, map } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
 import { GeolocationService } from 'src/app/shared/services/geolocation.service';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-ingresar-credenciales',
@@ -24,6 +26,7 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
     this.subs.forEach(s => s.unsubscribe());
   }
 
+  environment = environment;
   error: string = '';
   mostrar: boolean = true;
   credenciales: FormGroup;
@@ -56,6 +59,7 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
   acceder() {
 
     if (!this.credenciales.valid) {
+      console.log('formulario inválido');
       return;
     }
 

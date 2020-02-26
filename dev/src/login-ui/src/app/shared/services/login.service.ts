@@ -94,6 +94,38 @@ export class LoginService {
   login(usuario:string, clave:string, device_id:string, challenge:string): Observable<Response> {
     let url = `${this.url}/login`;
 
+    let data = {
+      user: usuario,
+      password: clave,
+      challenge: challenge,
+      device_id: device_id,
+      position: null
+    }
+    return this.http.post<Response>(url, data).pipe(
+      /*
+      catchError((err:HttpErrorResponse) => {
+        let r:Response = err.error;
+        return of(r);
+      }),*/
+      map(r => {
+        let resp = r.response;
+        // almacena el hash en localstore.
+        let h = resp['hash'];
+        if (h != null) {
+          let _hs = [];
+          _hs.push({user:usuario, hash:h});
+          this._set_users_hashes(_hs);
+        }
+        return resp;
+      })
+
+    );
+  }
+
+
+  login_anterior(usuario:string, clave:string, device_id:string, challenge:string): Observable<Response> {
+    let url = `${this.url}/login`;
+
     return this.geolocation.get_geolocation().pipe(
       switchMap(pos => {
 
