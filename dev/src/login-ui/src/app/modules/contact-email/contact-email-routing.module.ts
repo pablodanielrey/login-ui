@@ -13,7 +13,7 @@ const routes: Routes = [
             { path: 'start', redirectTo: 'email' },
             { path: 'error', component: ErrorComponent },
             { path: 'email', component: EmailComponent },
-            { path: 'verify_code', component: CheckCodeComponent },
+            { path: 'verify_code/:hash', component: CheckCodeComponent },
             { path: 'finalize', component: FinalizeComponent }
         ]
     }   

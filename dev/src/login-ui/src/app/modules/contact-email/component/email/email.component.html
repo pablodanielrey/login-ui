@@ -2,7 +2,7 @@
 
         <mat-card class="card animacionLateral">
     
-            <form [formGroup]='form' (ngSubmit)='verificar()' class="formulario">
+            <form [formGroup]='form' (ngSubmit)='verify()' class="formulario">
     
                 <img class="imgLogo" src="/assets/img/logo_fce.png">
                 <div><b>CORREO ELECTRÓNICO DE CONTACTO</b></div>
@@ -11,17 +11,19 @@
                 
                 <mat-form-field appearance="outline">
                     <mat-label>Correo Electrónico</mat-label>
-                    <input matInput placeholder="Ingrese su DNI..." formControlName='email' type="text">
+                    <input matInput placeholder="Ingrese su correo..." formControlName='email' type="text">
                     <mat-error *ngIf="form.get('email').hasError('email')">formato incorrecto</mat-error>
                     <mat-error *ngIf="form.get('email').hasError('required')">requerido</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                         <mat-label>Repetir Correo Electrónico </mat-label>
-                        <input matInput placeholder="Ingrese su DNI..." formControlName='email2' type="text">
+                        <input matInput placeholder="Ingrese su correo..." formControlName='email2' type="text">
                         <mat-error *ngIf="form.get('email2').hasError('email')">formato incorrecto</mat-error>
                         <mat-error *ngIf="form.get('email2').hasError('required')">requerido</mat-error>
-                    </mat-form-field>
+                </mat-form-field>
+
+                <mat-error *ngIf="error">{{error}}</mat-error>
     
                 <button *ngIf='!accediendo' class="btnAcceder" mat-flat-button color="primary" type='submit'>SIGUIENTE</button>
                 <button *ngIf='accediendo' class="btnAcceder" mat-flat-button color="primary" type='submit'><mat-progress-bar mode="indeterminate" class="spiner" ></mat-progress-bar></button>

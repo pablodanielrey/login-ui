@@ -15,7 +15,7 @@ export class InputUsernameComponent implements OnInit {
 
   accediendo = false;
   form: FormGroup;
-  device_hash$: Observable<string>
+  device_hash$: Observable<string>;
   error: string = null;
 
   private subs = [];

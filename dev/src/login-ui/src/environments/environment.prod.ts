@@ -8,7 +8,7 @@ export const environment = {
   oidp_issuer: 'https://oidc.econo.unlp.edu.ar/',
 
   client_id: 'login-ui',
-  version: '0.2.0',
+  version: '0.2.1',
   
   url_to_activate_qr: 'http://login:10005/login/qrcode/activar',
   
