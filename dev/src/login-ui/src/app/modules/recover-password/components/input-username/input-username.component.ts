@@ -5,6 +5,7 @@ import { HardwareService } from 'src/app/shared/services/hardware.service';
 import { Observable, from } from 'rxjs';
 import { RecoverPasswordService } from '../../services/recover-password.service';
 import { map, catchError, switchMap, tap } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-input-username',
@@ -16,7 +17,6 @@ export class InputUsernameComponent implements OnInit {
   accediendo = false;
   form: FormGroup;
   device_hash$: Observable<string>;
-  error: string = null;
 
   private subs = [];
 
@@ -28,7 +28,8 @@ export class InputUsernameComponent implements OnInit {
   constructor(private fb: FormBuilder, 
               private router:Router,
               private hardware: HardwareService,
-              private service: RecoverPasswordService) { 
+              private service: RecoverPasswordService,
+              private _snackBar: MatSnackBar) { 
 
     this.form = fb.group({
       user: ['', [Validators.required, Validators.minLength(5), Validators.pattern("[a-zA-Z0-9]+")]]
@@ -45,20 +46,20 @@ export class InputUsernameComponent implements OnInit {
       console.log('error formulário inválido');
       return;
     }
-    this.error = null;
     this.device_hash$.pipe(
       switchMap(hash => this.service.recover_for(this.form.value['user'], hash)),
       map(r => encodeURI(btoa(r.user + ":" + r.email))),
       switchMap(hash => from(this.router.navigate([`/recover/code/${hash}`]))),
-      tap(v => console.log(v))
+      tap(v => console.log(v)),
+      map(v => false),
     ).subscribe(
       ok => {
-        this.error = null;
         this.accediendo = false;
         console.log(ok);
       },
       e => {
-        this.error = e.message;
+        let error = e.message;
+        this._snackBar.open(error,'cerrar');
         this.accediendo = false;
         console.log(e);
       }
