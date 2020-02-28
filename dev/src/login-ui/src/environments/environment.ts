@@ -7,6 +7,7 @@ export const environment = {
   loginApiUrl: 'http://127.0.0.1:10002/login/api/v1.0',
   recoverApiUrl: 'http://127.0.0.1:10002/login/api/v1.0',
   hardwareApiUrl: 'http://127.0.0.1:10002/login/api/v1.0',
+  emailApiUrl: 'http://localhost:10012/email/api/v1.0',
 
   wardenApiUrl: 'https://api.econo.unlp.edu.ar/warden/api/v1.0',
   oidp_issuer: 'https://oidc.econo.unlp.edu.ar/',

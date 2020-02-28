@@ -35,6 +35,7 @@ export const environment = {
   loginApiUrl: 'http://localhost:10012/login/api/v1.0',
   //recoverApiUrl: 'https://login.econo.unlp.edu.ar/recover/api/v1.0',
   recoverApiUrl: 'http://localhost:10012/recover/api/v1.0',
+  emailApiUrl: 'http://localhost:10012/email/api/v1.0',
   hardwareApiUrl: 'http://localhost:10012/login/api/v1.0',
 
 

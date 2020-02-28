@@ -4,11 +4,13 @@ import { ErrorComponent } from './component/error/error.component';
 import { EmailComponent } from './component/email/email.component';
 import { CheckCodeComponent } from './component/check-code/check-code.component';
 import { FinalizeComponent } from './component/finalize/finalize.component';
+import { PermissionAuthGuardService } from '../auth/permission-auth-guard.service';
 
 
 const routes: Routes = [
     {
         path: 'email',
+        canActivate: [PermissionAuthGuardService],
         children: [
             { path: 'start', redirectTo: 'email' },
             { path: 'error', component: ErrorComponent },

@@ -10,7 +10,6 @@ import { ContactEmailMaterialModule } from './contact-email-material.module';
 import { ContactEmailRoutingModule } from './contact-email-routing.module';
 
 
-
 @NgModule({
   declarations: [
     EmailComponent, 
@@ -23,7 +22,7 @@ import { ContactEmailRoutingModule } from './contact-email-routing.module';
     ContactEmailMaterialModule,
     ContactEmailRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule    
+    HttpClientModule
   ],
   exports: [
     ContactEmailRoutingModule
