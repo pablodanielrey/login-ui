@@ -4,18 +4,18 @@ import { ErrorComponent } from './component/error/error.component';
 import { EmailComponent } from './component/email/email.component';
 import { CheckCodeComponent } from './component/check-code/check-code.component';
 import { FinalizeComponent } from './component/finalize/finalize.component';
-import { PermissionAuthGuardService } from '../auth/permission-auth-guard.service';
+import { AnalizeComponent } from './component/analize/analize.component';
 
 
 const routes: Routes = [
     {
         path: 'email',
-        canActivate: [PermissionAuthGuardService],
         children: [
-            { path: 'start', redirectTo: 'email' },
-            { path: 'error', component: ErrorComponent },
-            { path: 'email', component: EmailComponent },
+            { path: 'start', redirectTo: 'analize' },
+            { path: 'analize/:challenge', component: AnalizeComponent },
+            { path: 'email/:challenge', component: EmailComponent },
             { path: 'verify_code/:hash', component: CheckCodeComponent },
+            { path: 'error', component: ErrorComponent },
             { path: 'finalize', component: FinalizeComponent }
         ]
     }   

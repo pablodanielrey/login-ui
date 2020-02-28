@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
 import { Observable, from } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
@@ -18,10 +18,12 @@ export class EmailComponent implements OnInit {
   accediendo = false;
   form: FormGroup;
   device_hash$: Observable<string>;
+  challenge$: Observable<string>;
   error: string = null;
 
   constructor(private fb: FormBuilder, 
-              private router:Router,
+              private router: Router,
+              private route: ActivatedRoute,
               private hardware: HardwareService,
               private service: EmailService) { 
 
@@ -34,6 +36,7 @@ export class EmailComponent implements OnInit {
 
   ngOnInit() {
     this.device_hash$ = this.hardware.get_device_id();
+    this.challenge$ = this.route.paramMap.pipe(map(params => params.get('challenge')));
   }
 
   verify() {

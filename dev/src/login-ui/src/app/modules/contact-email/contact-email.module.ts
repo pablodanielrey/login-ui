@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ContactEmailMaterialModule } from './contact-email-material.module';
 import { ContactEmailRoutingModule } from './contact-email-routing.module';
+import { AnalizeComponent } from './component/analize/analize.component';
 
 
 @NgModule({
@@ -15,7 +16,7 @@ import { ContactEmailRoutingModule } from './contact-email-routing.module';
     EmailComponent, 
     CheckCodeComponent, 
     FinalizeComponent, 
-    ErrorComponent
+    ErrorComponent, AnalizeComponent
   ],
   imports: [
     CommonModule,

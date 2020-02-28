@@ -26,6 +26,27 @@ export class EmailService {
     this.url = environment.emailApiUrl;
   }
 
+
+  analize(challenge:string): Observable<Response> {
+    let url = `${this.url}/analize/${challenge}`;
+    let data = {
+    }
+    return this.http.post<Response>(url, data, {
+      headers: new HttpHeaders().set('content-type', 'application/json')
+    }).pipe(
+      catchError(e => of({status:500,response:''})),
+      switchMap(r => {
+        if (r.status >= 500 && r.status <= 600) {
+          return throwError(new Error('Ups!. algo ha salido mal'));
+        }
+        if (r.status != 200) {
+          return throwError(new Error(r.response));
+        }
+        return of(r.response);
+      })      
+    ); 
+  }
+
   configure(email:string, device:string): Observable<any> {
     return this.auth.claims().pipe(
       map(claims => claims['preferred_username']),

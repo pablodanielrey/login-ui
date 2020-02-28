@@ -180,17 +180,12 @@ export class LoginService {
     return JSON.parse(hs);
   }
 
-  get_consent_challenge(route:ActivatedRoute): Observable<any> {
-    return route.paramMap.pipe(
-      switchMap(p => {
-        let challenge = p.get('challenge');
-        let url = `${this.url}/consent/${challenge}`;
-        return this.http.get<Response>(url).pipe(
-          map(r => r.response),
-          tap(v => console.log(v))
-        );
-      })
-    )
+  get_consent_challenge(challenge:string): Observable<any> {
+    let url = `${this.url}/consent/${challenge}`;
+    return this.http.get<Response>(url).pipe(
+      map(r => r.response),
+      tap(v => console.log(v))
+    );
   }
   
 }
