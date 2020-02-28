@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, of, from } from 'rxjs';
+import { Observable, of, from, throwError } from 'rxjs';
 import { EmailService } from '../../services/email.service';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
-import { map, switchMap, mergeMap, share, tap } from 'rxjs/operators';
+import { map, switchMap, mergeMap, share, tap, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-check-code',
@@ -25,7 +25,6 @@ export class CheckCodeComponent implements OnInit {
   correo$ : Observable<String>;
   device_hash$: Observable<string>;
   _hash$: Observable<any>;
-  error: boolean = false;
 
   constructor(private fb: FormBuilder, 
               private router:Router,
@@ -61,34 +60,26 @@ export class CheckCodeComponent implements OnInit {
       return;
     }
     this.accediendo = true;
-    this.subs.push(this.device_hash$.pipe(
+    let check$ = this.device_hash$.pipe(
       mergeMap(device => this._hash$.pipe(
         map(hash => {
-          this.error = false;
           return {device:device, hash:hash.eid};
         })
       )),
       tap(v => console.log(v)),
-      switchMap(params => {
-          console.log(params);
-          return this.service.verify_code(this.form.value['code'], params.hash, params.device);
-      }),
+      switchMap(params => this.service.verify_code(this.form.value['code'], params.hash, params.device)),
       tap(v => console.log(v)),
-      mergeMap(ok => {
-        if (ok) {
-          return from(this.router.navigate([`/email/finalize`]));
-        } else {
-          return from(this.router.navigate(['/email/error']));
-        }
-      }),
-      tap(v => console.log(v)),
-    ).subscribe(
+      mergeMap(ok => ok ? of(true) : throwError('Ups!!. algo ha salido mal')),
+      map(v => from(this.router.navigate([`/email/finalize`]))),
+      catchError(e => from(this.router.navigate(['/email/error'])))
+    );
+
+    this.subs.push(check$.subscribe(
       ok => {
         this.accediendo = false;
         console.log(ok);
       },
       e => {
-        this.error = true;
         this.accediendo = false;
         console.log(e)
       }
