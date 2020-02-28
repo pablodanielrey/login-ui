@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, mergeMap } from 'rxjs/operators';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-verificar-challenge',
@@ -33,6 +34,7 @@ export class VerificarChallengeComponent implements OnInit, OnDestroy {
       switchMap(challenge => this.service.get_consent_challenge(challenge))
     )
 
+      /*
     this.subs.push(
       challenge$.subscribe(r => {
         console.log(r);
@@ -40,6 +42,18 @@ export class VerificarChallengeComponent implements OnInit, OnDestroy {
         this.document.location.href = redirect_url;
       })
     );
+    */
+
+    this.subs.push(challenge$.pipe(
+      mergeMap(_ => from(this.router.navigate(['/email/start'])))
+    ).subscribe(
+      r => {
+        // no realizo nada. ya que se navegó correctamente
+      },  
+      e => {
+        console.log(e);
+      }
+    ));
   }
 
 }
