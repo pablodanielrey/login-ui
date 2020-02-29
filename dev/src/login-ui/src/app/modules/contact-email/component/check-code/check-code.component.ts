@@ -33,7 +33,7 @@ export class CheckCodeComponent implements OnInit {
               private service: EmailService) { 
 
     this.form = fb.group({
-      code: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern("[0-9]+")]]
+      code: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern("[a-zA-Z0-9]+")]]
     })    
 
   }

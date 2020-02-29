@@ -29,7 +29,6 @@ export class AnalizeComponent implements OnInit {
 
     let analize$ = this.route.paramMap.pipe(
       map(params => params.get('challenge')),
-      delay(5000),
       switchMap(challenge => this.service.analize(challenge))
     )
 
