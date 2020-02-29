@@ -47,38 +47,35 @@ export class EmailService {
     ); 
   }
 
-  configure(email:string, device:string): Observable<any> {
-    return this.auth.claims().pipe(
-      map(claims => claims['preferred_username']),
-      switchMap(user => {
-        let url = `${this.url}/configure/${user}`;
-        let data = {
-          device: device,
-          email: email,
-          user: user
-        }
-        return this.http.post<Response>(url, data, {
-          headers: new HttpHeaders().set('content-type', 'application/json')
+  configure(challenge: string, email:string, device:string): Observable<any> {
+      let url = `${this.url}/configure`;
+      let data = {
+        device: device,
+        email: email,
+        challenge: challenge
+      }
+      return this.http.post<Response>(url, data, {
+        headers: new HttpHeaders().set('content-type', 'application/json')
+      }).pipe(
+        catchError(e => of({status:500,response:''})),
+        switchMap(r => {
+          if (r.status >= 500 && r.status <= 600) {
+            return throwError(new Error('Ups!. algo ha salido mal'));
+          }
+          if (r.status != 200) {
+            return throwError(new Error(r.response));
+          }
+          return of(r.response);
         })
-      }),
-      catchError(e => of({status:500,response:''})),
-      switchMap(r => {
-        if (r.status >= 500 && r.status <= 600) {
-          return throwError(new Error('Ups!. algo ha salido mal'));
-        }
-        if (r.status != 200) {
-          return throwError(new Error(r.response));
-        }
-        return of(r.response);
-      })
-    );
+      );
   }
 
-  verify_code(code:string, eid:string, device:string): Observable<any> {
+  verify_code(code:string, eid:string, challenge: string, device:string): Observable<any> {
     let url = `${this.url}/verify_code/${code}`;
     let data = {
       device: device,
-      eid: eid
+      eid: eid,
+      challenge: challenge
     }
     return this.http.post<Response>(url, data, {
       headers: new HttpHeaders().set('content-type', 'application/json')

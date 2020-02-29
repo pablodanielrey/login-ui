@@ -41,7 +41,6 @@ export class ContactEmailModule {
     return {
       ngModule: ContactEmailModule,
       providers: [ 
-        //RecoverPasswordService
       ]
     }
   }

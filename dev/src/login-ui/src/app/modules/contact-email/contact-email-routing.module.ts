@@ -11,7 +11,6 @@ const routes: Routes = [
     {
         path: 'email',
         children: [
-            { path: 'start', redirectTo: 'analize' },
             { path: 'analize/:challenge', component: AnalizeComponent },
             { path: 'email/:challenge', component: EmailComponent },
             { path: 'verify_code/:hash', component: CheckCodeComponent },

@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
 import { EmailService } from '../../services/email.service';
 import { map, switchMap, catchError } from 'rxjs/operators';
@@ -22,8 +21,7 @@ export class AnalizeComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private hardware: HardwareService,
-              private service: EmailService,
-              @Inject(DOCUMENT) private document: any) { 
+              private service: EmailService) { 
       
   }
 
@@ -36,12 +34,11 @@ export class AnalizeComponent implements OnInit {
 
     this.subs.push(analize$.subscribe(
       r => {
+        let challenge = r['challenge'];
         if (r['configure']) {
-          let challenge = r['challenge'];
           this.router.navigate([`/email/email/${challenge}`]);
         } else {
-          let redirect_url = r['redirect_to'];
-          this.document.location.href = redirect_url;
+          this.router.navigate([`/consent/verify/${challenge}`]);
         }
       },
       e => {

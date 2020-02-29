@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
-import { Observable, from } from 'rxjs';
+import { Observable, from, combineLatest } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { EmailService } from '../../services/email.service';
 import { strict } from 'assert';
@@ -19,7 +19,6 @@ export class EmailComponent implements OnInit {
   form: FormGroup;
   device_hash$: Observable<string>;
   challenge$: Observable<string>;
-  error: string = null;
 
   constructor(private fb: FormBuilder, 
               private router: Router,
@@ -44,20 +43,22 @@ export class EmailComponent implements OnInit {
       console.log('formulario inválido')
       return;
     }
-    this.error = null;
-    this.device_hash$.pipe(
-      switchMap(device => this.service.configure(this.form.value['email'], device)),
-      map(r => encodeURI(btoa(r + ':' + this.form.value['email']))),
+    combineLatest(this.device_hash$, this.challenge$).pipe(
+      switchMap(data => {
+        let device = data[0];
+        let challenge = data[1];
+        return this.service.configure(challenge, this.form.value['email'], device).pipe(
+          map(r => encodeURI(btoa(r + ':' + challenge + ':' + this.form.value['email'])))
+        )
+      }),
       switchMap(hash => from(this.router.navigate([`/email/verify_code/${hash}`]))),
       tap(v => console.log(v))
     ).subscribe(
       ok => {
-        this.error = null;
         this.accediendo = false;
         console.log(ok);
       },
       e => {
-        this.error = e.message;
         this.accediendo = false;
         console.log(e);
       }

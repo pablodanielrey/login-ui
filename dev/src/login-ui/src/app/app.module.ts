@@ -30,6 +30,7 @@ import { RecoverPasswordModule } from './modules/recover-password/recover-passwo
 import { ContactEmailModule } from './modules/contact-email/contact-email.module';
 import { TemporalCredentialsModule } from './modules/temporal-credentials/temporal-credentials.module';
 import { UpdatingModule } from './modules/updating/updating.module';
+import { PreconditionsComponent } from './modules/consent/components/preconditions/preconditions.component';
 
 
 const oauthconf: OAuth2Config = environment.auth;
@@ -48,7 +49,7 @@ const oauthconf: OAuth2Config = environment.auth;
     GenerarQrComponent, 
     ActivarQrUserComponent, 
     SeleccionarUsuarioQrComponent, 
-    ActivarQrComponent
+    ActivarQrComponent, PreconditionsComponent
   ],
   imports: [
     BrowserModule,

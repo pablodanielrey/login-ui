@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, of, from, throwError } from 'rxjs';
+import { Observable, of, from, throwError, combineLatest } from 'rxjs';
 import { EmailService } from '../../services/email.service';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
 import { map, switchMap, mergeMap, share, tap, catchError } from 'rxjs/operators';
@@ -45,7 +45,7 @@ export class CheckCodeComponent implements OnInit {
         let h = params.get('hash');
         let h2 = atob(decodeURI(h));
         let h3 = h2.split(':');
-        return {eid:h3[0], email:h3[1]};
+        return {eid:h3[0], challenge:h3[1], email:h3[2]};
       })
     );
     this.correo$ = this._hash$.pipe(
@@ -60,28 +60,29 @@ export class CheckCodeComponent implements OnInit {
       return;
     }
     this.accediendo = true;
-    let check$ = this.device_hash$.pipe(
-      mergeMap(device => this._hash$.pipe(
-        map(hash => {
-          return {device:device, hash:hash.eid};
-        })
-      )),
+    let check$ = combineLatest(this.device_hash$, this._hash$).pipe(
       tap(v => console.log(v)),
-      switchMap(params => this.service.verify_code(this.form.value['code'], params.hash, params.device)),
-      tap(v => console.log(v)),
-      mergeMap(ok => ok ? of(true) : throwError('Ups!!. algo ha salido mal')),
-      map(v => from(this.router.navigate([`/email/finalize`]))),
-      catchError(e => from(this.router.navigate(['/email/error'])))
+      switchMap(params => this.service.verify_code(this.form.value['code'], params[1].eid, params[1].challenge, params[0])),
+      tap(v => console.log(v))
     );
 
     this.subs.push(check$.subscribe(
-      ok => {
+      r => {
         this.accediendo = false;
-        console.log(ok);
+        console.log(r);
+        let ok = r.verified;
+        let challenge = r.challenge;
+        if (ok) {
+          //this.router.navigate([`/email/finalize`]);
+          this.router.navigate([`/consent/verify/${challenge}`]);
+        } else {
+          console.log('código erróneo');
+        }
       },
       e => {
         this.accediendo = false;
-        console.log(e)
+        console.log(e);
+        this.router.navigate(['/email/error']);
       }
     ));
   }

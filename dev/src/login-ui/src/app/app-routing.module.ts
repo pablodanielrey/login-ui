@@ -21,6 +21,7 @@ import { ActivarQrComponent } from './modules/login/activar-qr/activar-qr.compon
 import { TemporalCredentialsRoutingModule } from './modules/temporal-credentials/temporal-credentials-routing.module';
 import { ContactEmailRoutingModule } from './modules/contact-email/contact-email-routing.module';
 import { UpdatingRoutingModule } from './modules/updating/updating-routing.module';
+import { PermissionAuthGuardService } from './modules/auth/permission-auth-guard.service';
 
 
 
@@ -45,11 +46,12 @@ const routes: Routes = [
     path: 'consent',
     component: ConsentComponent,
     children: [
-      { path: 'verificar/:challenge', component: VerificarChallengeComponent }
+      { path: 'verify/:challenge', component: VerificarChallengeComponent }
     ]
   },
   {
     path: 'system',
+    canActivate: [ PermissionAuthGuardService ],
     children: [
       { path: 'start', component: StartComponent },
       { path: '**', redirectTo: 'start' }

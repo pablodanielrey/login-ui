@@ -3,7 +3,7 @@ import { LoginService } from 'src/app/shared/services/login.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { map, switchMap, mergeMap } from 'rxjs/operators';
-import { from } from 'rxjs';
+import { from, of, combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-verificar-challenge',
@@ -29,10 +29,8 @@ export class VerificarChallengeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    let challenge$ = this.route.paramMap.pipe(
-      map(params => params.get('challenge')),
-      switchMap(challenge => this.service.get_consent_challenge(challenge))
-    )
+    let challenge$ = this.route.paramMap.pipe(map(params => params.get('challenge')));
+    let accept$ = challenge$.pipe(switchMap(c => this.service.get_consent_challenge(c)));
 
       /*
     this.subs.push(
@@ -44,11 +42,10 @@ export class VerificarChallengeComponent implements OnInit, OnDestroy {
     );
     */
 
-    this.subs.push(challenge$.pipe(
-      mergeMap(_ => from(this.router.navigate(['/email/start'])))
-    ).subscribe(
+    this.subs.push(accept$.subscribe(
       r => {
-        // no realizo nada. ya que se navegó correctamente
+        let redirect_url = r['redirect_to'];
+        this.document.location.href = redirect_url;
       },  
       e => {
         console.log(e);

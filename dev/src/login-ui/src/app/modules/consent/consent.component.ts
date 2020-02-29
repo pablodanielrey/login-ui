@@ -18,7 +18,9 @@ export class ConsentComponent implements OnInit {
     this.route.queryParamMap.subscribe(p => {
       let challenge = p.get('consent_challenge');
       if (challenge) {
-        this.router.navigate([`/consent/verificar/${challenge}`]);
+        //this.router.navigate([`/consent/verificar/${challenge}`]);
+        // es necesario que tengan el mail alternativo confirmado.
+        this.router.navigate([`/email/analize/${challenge}`]);
       }
     })
   }
