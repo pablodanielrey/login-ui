@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
 import { EmailService } from '../../services/email.service';
-import { map, switchMap, catchError } from 'rxjs/operators';
+import { map, switchMap, catchError, delay } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 @Component({
@@ -29,6 +29,7 @@ export class AnalizeComponent implements OnInit {
 
     let analize$ = this.route.paramMap.pipe(
       map(params => params.get('challenge')),
+      delay(5000),
       switchMap(challenge => this.service.analize(challenge))
     )
 
