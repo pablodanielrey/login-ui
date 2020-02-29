@@ -6,6 +6,7 @@ import { Observable, from, combineLatest } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { EmailService } from '../../services/email.service';
 import { strict } from 'assert';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class EmailComponent implements OnInit {
   challenge$: Observable<string>;
 
   constructor(private fb: FormBuilder, 
+              private snack: MatSnackBar,
               private router: Router,
               private route: ActivatedRoute,
               private hardware: HardwareService,
@@ -43,6 +45,15 @@ export class EmailComponent implements OnInit {
       console.log('formulario inválido')
       return;
     }
+
+    let email1 = this.form.value['email'];
+    let email2 = this.form.value['email2'];
+    if (email1 != email2) {
+      this.snack.open('Verfique el correo ingresado','Cerrar');
+      return;
+    }
+
+
     combineLatest(this.device_hash$, this.challenge$).pipe(
       switchMap(data => {
         let device = data[0];
@@ -61,6 +72,7 @@ export class EmailComponent implements OnInit {
       e => {
         this.accediendo = false;
         console.log(e);
+        this.snack.open(e.message,'Cerrar');
       }
     );
   }
