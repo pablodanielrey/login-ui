@@ -64,7 +64,7 @@ export class CheckCodeComponent implements OnInit {
     this.accediendo = true;
     let check$ = combineLatest(this.device_hash$, this._hash$).pipe(
       tap(v => console.log(v)),
-      switchMap(params => this.service.verify_code(this.form.value['code'], params[1].eid, params[1].challenge, params[0])),
+      switchMap(params => this.service.verify_code(this.form.value['code'], params[1].eid, params[1].challenge, params[0], params[1].email)),
       tap(v => console.log(v))
     );
 

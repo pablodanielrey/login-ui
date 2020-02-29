@@ -70,12 +70,13 @@ export class EmailService {
       );
   }
 
-  verify_code(code:string, eid:string, challenge: string, device:string): Observable<any> {
+  verify_code(code:string, eid:string, challenge: string, device:string, email:string): Observable<any> {
     let url = `${this.url}/verify_code/${code}`;
     let data = {
       device: device,
       eid: eid,
-      challenge: challenge
+      challenge: challenge,
+      email:email
     }
     return this.http.post<Response>(url, data, {
       headers: new HttpHeaders().set('content-type', 'application/json')
