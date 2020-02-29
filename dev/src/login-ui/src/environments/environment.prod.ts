@@ -1,6 +1,7 @@
 export const environment = {
   production: false,
   loginApiUrl: 'https://login.econo.unlp.edu.ar/login/api/v1.0',
+  emailApiUrl: 'http://login.econo.unlp.edu.ar/email/api/v1.0',
   recoverApiUrl: 'https://login.econo.unlp.edu.ar/recover/api/v1.0',
   hardwareApiUrl: 'https://login.econo.unlp.edu.ar/login/api/v1.0',
 
@@ -8,7 +9,7 @@ export const environment = {
   oidp_issuer: 'https://oidc.econo.unlp.edu.ar/',
 
   client_id: 'login-ui',
-  version: '0.2.1',
+  version: '0.3.0',
   
   url_to_activate_qr: 'http://login:10005/login/qrcode/activar',
   
