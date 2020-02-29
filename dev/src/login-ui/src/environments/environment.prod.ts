@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   loginApiUrl: 'https://login.econo.unlp.edu.ar/login/api/v1.0',
-  emailApiUrl: 'http://login.econo.unlp.edu.ar/email/api/v1.0',
+  emailApiUrl: 'https://login.econo.unlp.edu.ar/email/api/v1.0',
   recoverApiUrl: 'https://login.econo.unlp.edu.ar/recover/api/v1.0',
   hardwareApiUrl: 'https://login.econo.unlp.edu.ar/login/api/v1.0',
 
