@@ -38,6 +38,7 @@ export class AnalizeComponent implements OnInit {
         if (r['configure']) {
           this.router.navigate([`/email/email/${challenge}`]);
         } else {
+          // no hace falta configurar correo, asi que se sigue con el proceso de aceptación.
           this.router.navigate([`/consent/verify/${challenge}`]);
         }
       },

@@ -32,16 +32,6 @@ export class VerificarChallengeComponent implements OnInit, OnDestroy {
     let challenge$ = this.route.paramMap.pipe(map(params => params.get('challenge')));
     let accept$ = challenge$.pipe(switchMap(c => this.service.get_consent_challenge(c)));
 
-      /*
-    this.subs.push(
-      challenge$.subscribe(r => {
-        console.log(r);
-        let redirect_url = r['redirect_to'];
-        this.document.location.href = redirect_url;
-      })
-    );
-    */
-
     this.subs.push(accept$.subscribe(
       r => {
         let redirect_url = r['redirect_to'];

@@ -73,7 +73,7 @@ export class CheckCodeComponent implements OnInit {
         let ok = r.verified;
         let challenge = r.challenge;
         if (ok) {
-          //this.router.navigate([`/email/finalize`]);
+          // sigo con el flujo de aceptación del consent
           this.router.navigate([`/consent/verify/${challenge}`]);
         } else {
           console.log('código erróneo');
