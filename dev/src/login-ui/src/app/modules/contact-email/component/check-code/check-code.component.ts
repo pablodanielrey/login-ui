@@ -5,6 +5,7 @@ import { Observable, of, from, throwError, combineLatest } from 'rxjs';
 import { EmailService } from '../../services/email.service';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
 import { map, switchMap, mergeMap, share, tap, catchError } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-check-code',
@@ -26,7 +27,8 @@ export class CheckCodeComponent implements OnInit {
   device_hash$: Observable<string>;
   _hash$: Observable<any>;
 
-  constructor(private fb: FormBuilder, 
+  constructor(private fb: FormBuilder,
+              private snack: MatSnackBar, 
               private router:Router,
               private route: ActivatedRoute,
               private hardware: HardwareService,
@@ -77,6 +79,7 @@ export class CheckCodeComponent implements OnInit {
           this.router.navigate([`/consent/verify/${challenge}`]);
         } else {
           console.log('código erróneo');
+          this.snack.open('Código Erróneo', 'Cerrar');
         }
       },
       e => {
