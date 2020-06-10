@@ -46,7 +46,7 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
 
     this.credenciales = fb.group({
       usuario: ['', [Validators.required, Validators.minLength(5), Validators.pattern("[a-zA-Z0-9]+")]],
-      clave: ['', [Validators.required, Validators.minLength(5)]]
+      clave: ['', [Validators.required, Validators.minLength(8)]]
     })
 
     this.challenge$ = this.route.paramMap.pipe(map(params => params.get('challenge')));
