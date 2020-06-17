@@ -22,8 +22,7 @@ services:
     environment:
       SYSTEM_SECRET: 1210926c4d161111111111111111111111111
       DATABASE_URL: postgres://hydra:5b4eefc@192.168.10.3:5432/hydra?sslmode=disable
-      OAUTH2_ISSUER_URL: https://oidc.econo.unlp.edu.ar
-      urls.self.issuer: https://oidc.econo.unlp.edu.ar
+      urls.self.issuer: http://oidc:4444
       OAUTH2_LOGIN_URL: http://localhost:1005/login/
       OAUTH2_CONSENT_URL: http://localhost:1005/consent/
       OAUTH2_CONSENT_PROVIDER: http://localhost:1005/consent/

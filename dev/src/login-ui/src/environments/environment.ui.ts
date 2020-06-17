@@ -6,7 +6,8 @@ export const environment = {
   hardwareApiUrl: 'https://hydra.login.econo.unlp.edu.ar/login/api/v1.0',
 
   wardenApiUrl: 'https://warden.econo.unlp.edu.ar/warden/api/v1.0',
-  oidp_issuer: 'https://oidc.econo.unlp.edu.ar/',
+  //oidp_issuer: 'https://oidc.econo.unlp.edu.ar/',
+  oidp_issuer: 'http://oidc:4444/',
 
   client_id: 'login-ui',
   version: '0.6.0',
@@ -14,12 +15,13 @@ export const environment = {
   url_to_activate_qr: 'http://login:10005/login/qrcode/activar',
   
   auth: {
-    issuer: 'https://oidc.econo.unlp.edu.ar/',
+    //issuer: 'https://oidc.econo.unlp.edu.ar/',
+    issuer: 'http://oidc:4444/',
     redirectUri: 'https://login.econo.unlp.edu.ar/auth/oauth2',
     clientId: 'login-ui',
     scope: 'openid profile email',
     waitForTokenInMsec: 2000,
-    requireHttps: true
+    requireHttps: false
   }
 
 };

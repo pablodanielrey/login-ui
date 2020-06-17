@@ -10,7 +10,7 @@ export const environment = {
   hardwareApiUrl: 'https://hydra.login.econo.unlp.edu.ar/login/api/v1.0',
 
   wardenApiUrl: 'https://warden.econo.unlp.edu.ar/warden/api/v1.0',
-  oidp_issuer: 'https://oidc.econo.unlp.edu.ar/',
+  oidp_issuer: 'http://oidc',
 
   client_id: 'login-ui',
   version: '0.6.0',
@@ -36,7 +36,7 @@ export const environment = {
   }
   */
   auth: {
-    issuer: 'http://oidc.econo.unlp.edu.ar/',
+    issuer: 'http://oidc/',
     redirectUri: window.location.origin + '/auth/oauth2',
     clientId: 'login-ui',
     scope: 'openid profile email algo',
