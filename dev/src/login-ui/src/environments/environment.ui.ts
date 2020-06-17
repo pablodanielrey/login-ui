@@ -7,7 +7,7 @@ export const environment = {
 
   wardenApiUrl: 'https://warden.econo.unlp.edu.ar/warden/api/v1.0',
   //oidp_issuer: 'https://oidc.econo.unlp.edu.ar/',
-  oidp_issuer: 'http://oidc:4444/',
+  //oidp_issuer: 'http://oidc:4444/',
 
   client_id: 'login-ui',
   version: '0.6.0',
