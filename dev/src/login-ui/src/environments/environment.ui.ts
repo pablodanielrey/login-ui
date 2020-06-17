@@ -17,7 +17,7 @@ export const environment = {
   auth: {
     //issuer: 'https://oidc.econo.unlp.edu.ar/',
     issuer: 'http://oidc:4444/',
-    redirectUri: 'https://localhost:10005/auth/oauth2',
+    redirectUri: 'http://localhost:10005/auth/oauth2',
     clientId: 'login-ui',
     scope: 'openid profile email',
     waitForTokenInMsec: 2000,
