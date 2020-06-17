@@ -1,0 +1,47 @@
+version: "3.5"
+services:
+  db_hydra:
+    image: postgres
+    ports:
+      - 5432:5432/tcp
+    volumes:
+      - data-volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: hydra
+      POSTGRES_USER: hydra
+      POSTGRES_PASSWORD: 5b4eefc1fa96e316a773ce8f778814a3832337
+    network_mode: "host"
+
+  hydra:
+    image: oryd/hydra:v1.5
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    ports:
+      - 4444:4444/tcp
+      - 4445:4445/tcp
+    environment:
+      SYSTEM_SECRET: 1210926c4d16c556396625312354a5d81bd357
+      DATABASE_URL: postgres://hydra:5b4eefc1fa96e316a773ce8f778814a3832337@localhost:5432/hydra?sslmode=disable
+      OAUTH2_ISSUER_URL: https://oidc.econo.unlp.edu.ar
+      urls.self.issuer: https://oidc.econo.unlp.edu.ar
+      OAUTH2_LOGIN_URL: http://localhost:1005/login/
+      OAUTH2_CONSENT_URL: http://localhost:1005/consent/
+      OAUTH2_CONSENT_PROVIDER: http://localhost:1005/consent/
+      OAUTH2_ERROR_URL: http://localhost:1005/oauth_error
+      LOGOUT_REDIRECT_URL: http://localhost:1005
+      OAUTH2_LOGOUT_REDIRECT_URL: http://localhost:1005
+      HTTPS_ALLOW_TERMINATION_FROM: 0.0.0.0/0
+      key serve.tls.allow_termination_from: 0.0.0.0/0
+      ADMIN_PORT: 4445
+      ADMIN_HOST: 0.0.0.0
+      PUBLIC_PORT: 4444
+      PUBLIC_HOST: 0.0.0.0
+      serve.public.host: 0.0.0.0
+      serve.public.port: 4444
+      LOG_LEVEL:  debug
+    network_mode: "host"
+
+volumes:
+  data-volume:
