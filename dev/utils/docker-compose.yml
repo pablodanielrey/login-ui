@@ -23,7 +23,7 @@ services:
       - 4445:4445/tcp
     environment:
       SYSTEM_SECRET: 1210926c4d16
-      DATABASE_URL: postgres://hydra:5b4eefc@localhost:5432/hydra?sslmode=disable
+      DATABASE_URL: postgres://hydra:5b4eefc@192.168.10.3:5432/hydra?sslmode=disable
       OAUTH2_ISSUER_URL: https://oidc.econo.unlp.edu.ar
       urls.self.issuer: https://oidc.econo.unlp.edu.ar
       OAUTH2_LOGIN_URL: http://localhost:1005/login/
