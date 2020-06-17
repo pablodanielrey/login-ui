@@ -24,8 +24,6 @@ import { UpdatingRoutingModule } from './modules/updating/updating-routing.modul
 import { PermissionAuthGuardService } from './modules/auth/permission-auth-guard.service';
 
 
-
-
 const routes: Routes = [
   { 
     path: 'login',

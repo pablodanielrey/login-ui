@@ -21,6 +21,8 @@ export class ConsentComponent implements OnInit {
         //this.router.navigate([`/consent/verificar/${challenge}`]);
         // es necesario que tengan el mail alternativo confirmado.
         this.router.navigate([`/email/analize/${challenge}`]);
+      } else {
+        window.location.href = 'https://www.au24.econo.unlp.edu.ar';
       }
     })
   }
