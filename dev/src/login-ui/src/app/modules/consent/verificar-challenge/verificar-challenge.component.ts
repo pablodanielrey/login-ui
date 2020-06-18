@@ -3,7 +3,7 @@ import { LoginService } from 'src/app/shared/services/login.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { map, switchMap, mergeMap } from 'rxjs/operators';
-import { from, of, combineLatest } from 'rxjs';
+import { from, of, combineLatest, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-verificar-challenge',
@@ -29,8 +29,16 @@ export class VerificarChallengeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    let challenge$ = this.route.paramMap.pipe(map(params => params.get('challenge')));
-    let accept$ = challenge$.pipe(switchMap(c => this.service.get_consent_challenge(c)));
+    let accept$ = this.route.paramMap.pipe(
+      map(params => params.get('challenge')),
+      switchMap(c => this.service.get_consent_challenge(c)),
+      map(r => {
+        if (r.status != 200) {
+          throwError('Error verificadno el challenge del consent');
+        }
+        return r.response;
+      })
+    );
 
     this.subs.push(accept$.subscribe(
       r => {
@@ -38,7 +46,7 @@ export class VerificarChallengeComponent implements OnInit, OnDestroy {
         this.document.location.href = redirect_url;
       },  
       e => {
-        console.log(e);
+        throwError(e);
       }
     ));
   }

@@ -2,9 +2,11 @@ import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
-import { of, Observable, combineLatest } from 'rxjs';
+import { of, Observable, combineLatest, throwError } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
+import { Http2ServerRequest } from 'http2';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-verificar-dispositivo',
@@ -29,6 +31,7 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
               private hardware:HardwareService,
               private router:Router, 
               private route:ActivatedRoute,
+              private http:HttpClient,
               @Inject(DOCUMENT) private document: any) { 
 
     /*
@@ -45,7 +48,8 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
       })
     )
     */
-   this.login_challenge$ = this.route.paramMap.pipe(
+
+    this.login_challenge$ = this.route.paramMap.pipe(
       map(params => params.get('challenge')),
       switchMap(challenge => this.service.get_login_challenge(null, challenge))
     )
@@ -54,7 +58,21 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.mensaje = 'Verificando Dispositivo';
     this.subs.push(
-      this.login_challenge$.subscribe(c => {
+      this.login_challenge$.pipe(
+        map(r => { 
+          if(r.status == 409) {
+            // challenge ya usado
+            throwError('Challenge ya usado');
+          }
+          if (r.status == 404) {
+            throwError('Challenge no válido');
+          }
+          if (r.status == 500) {
+            throwError('Error interno procesando el challenge de login')
+          }
+          return r.response;
+        })
+      ).subscribe(c => {
         this.mensaje = 'Analizando Requerimiento';
         if (c['skip']) {
           // se aceptó el challenge implicitamente, hay que saltar todo el paso de login.

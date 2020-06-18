@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../../../shared/services/login.service';
-import { of, Observable, combineLatest, BehaviorSubject, from } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { of, Observable, combineLatest, BehaviorSubject, from, throwError } from 'rxjs';
+import { switchMap, map, tap } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
 import { GeolocationService } from 'src/app/shared/services/geolocation.service';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
@@ -50,7 +50,7 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
     })
 
     this.challenge$ = this.route.paramMap.pipe(map(params => params.get('challenge')));
-    this.device_id$ = this.hardware.get_device_id();
+    //this.device_id$ = this.hardware.get_device_id();
   }
 
   ngOnInit() {
@@ -63,6 +63,7 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
       return;
     }
 
+    /*
     this.subs.push(
       combineLatest(
         this.device_id$,
@@ -92,6 +93,48 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
         }
       })
     );
+    */
+
+    combineLatest(
+      this.challenge$,
+      of({u: this.credenciales.value['usuario'], c: this.credenciales.value['clave']})
+    ).pipe(
+      tap(_ => this.accediendo = true),
+      switchMap(rs => {
+        let challenge = rs[0];
+        let creds = rs[1];
+        return this.service.login(creds.u, creds.c, null, challenge);
+      }),
+      tap(_ => this.accediendo = false),
+      map(r => {
+        if (r.status == 500) {
+          throwError('error inesperado en el servidor cuando se procesaban las credenciales');
+        }
+        if (r.status == 400) {
+          throwError('formato incorrecto de envío de credenciales');
+        }
+        if(r.status == 409) {
+          // challenge ya usado
+          throwError('Challenge ya usado');
+        }
+        if (r.status == 404) {
+          throwError('Challenge no válido');
+        }        
+        return r.response;
+      })
+    ).subscribe(r => {
+      let redirect_url = r['redirect_to'];
+      this.document.location.href = redirect_url;
+    }, e => {
+      let err = e.error;
+      if (err.response['redirect_to'] != undefined) {
+        let redirect_url = err.response['redirect_to'];
+        this.document.location.href = redirect_url;
+      } else {
+        this.router.navigate(['/login/error']);
+      }
+    })
+
   }
 
   login_hash() {

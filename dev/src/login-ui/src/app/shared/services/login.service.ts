@@ -40,9 +40,7 @@ export class LoginService {
   get_login_challenge(device_hash:string, challenge:string): Observable<any> {
     let did = {'device_hash':device_hash};
     let url = `${this.url}/challenge/${challenge}`;
-    return this.http.post<Response>(url, did).pipe(
-      map(r => r.response)
-    );
+    return this.http.post<Response>(url, did);
   }
 
   get_user_hash(user:string): Observable<string> {
@@ -101,12 +99,13 @@ export class LoginService {
       device_id: device_id,
       position: null
     }
-    return this.http.post<Response>(url, data).pipe(
+    return this.http.post<Response>(url, data);
       /*
       catchError((err:HttpErrorResponse) => {
         let r:Response = err.error;
         return of(r);
       }),*/
+      /*
       map(r => {
         let resp = r.response;
         // almacena el hash en localstore.
@@ -116,10 +115,9 @@ export class LoginService {
           _hs.push({user:usuario, hash:h});
           this._set_users_hashes(_hs);
         }
-        return resp;
+        return r;
       })
-
-    );
+      */
   }
 
 
@@ -182,10 +180,7 @@ export class LoginService {
 
   get_consent_challenge(challenge:string): Observable<any> {
     let url = `${this.url}/consent/${challenge}`;
-    return this.http.get<Response>(url).pipe(
-      map(r => r.response),
-      tap(v => console.log(v))
-    );
+    return this.http.get<Response>(url);
   }
   
 }
