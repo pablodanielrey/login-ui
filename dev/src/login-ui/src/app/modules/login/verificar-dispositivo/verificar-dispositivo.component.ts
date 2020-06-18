@@ -31,6 +31,7 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
               private route:ActivatedRoute,
               @Inject(DOCUMENT) private document: any) { 
 
+    /*
     this.device_hash$ = this.hardware.get_device_id();
     this.challenge$ = this.route.paramMap.pipe(map(params => params.get('challenge')));
     this.login_challenge$ = combineLatest(
@@ -42,6 +43,11 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
         let did = rs[1];
         return this.service.get_login_challenge(did, challenge);
       })
+    )
+    */
+   this.login_challenge$ = this.route.paramMap.pipe(
+      map(params => params.get('challenge')),
+      switchMap(challenge => this.service.get_login_challenge(null, challenge))
     )
   }
   
