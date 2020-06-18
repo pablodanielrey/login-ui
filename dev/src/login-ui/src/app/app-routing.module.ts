@@ -49,7 +49,7 @@ const routes: Routes = [
   },
   {
     path: 'system',
-    canActivate: [ PermissionAuthGuardService ],
+    //canActivate: [ PermissionAuthGuardService ],
     children: [
       { path: 'start', component: StartComponent },
       { path: '**', redirectTo: 'start' }

@@ -12,6 +12,10 @@ export class StartComponent implements OnInit {
   }
 
   ngOnInit() {
+    /*
+      TODO: ACA WALTER BLANCO TENES QUE METER LA PANTALLA DE LAS APLICACIONES
+    */
+    window.location.href = "https://www.au24.econo.unlp.edu.ar";
   }
 
   salir() {
