@@ -1,9 +1,14 @@
 export const environment = {
   production: false,
-  loginApiUrl: 'https://hydra.login.econo.unlp.edu.ar/login/api/v1.0',
-  emailApiUrl: 'https://hydra.login.econo.unlp.edu.ar/email/api/v1.0',
-  recoverApiUrl: 'https://api.login.econo.unlp.edu.ar/recover/api/v1.0',
-  hardwareApiUrl: 'https://hydra.login.econo.unlp.edu.ar/login/api/v1.0',
+  //loginApiUrl: 'https://hydra.login.econo.unlp.edu.ar/login/api/v1.0',
+  //emailApiUrl: 'https://hydra.login.econo.unlp.edu.ar/email/api/v1.0',
+  //recoverApiUrl: 'https://api.login.econo.unlp.edu.ar/recover/api/v1.0',
+  //hardwareApiUrl: 'https://hydra.login.econo.unlp.edu.ar/login/api/v1.0',
+  loginApiUrl: 'http://localhost:10002/login/api/v1.0',
+  emailApiUrl: 'http://localhost:10002/email/api/v1.0',
+  recoverApiUrl: 'http://localhost:10002/recover/api/v1.0',
+  hardwareApiUrl: 'http://localhost:10002/login/api/v1.0',
+
 
   wardenApiUrl: 'https://warden.econo.unlp.edu.ar/warden/api/v1.0',
   //oidp_issuer: 'https://oidc.econo.unlp.edu.ar/',

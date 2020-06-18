@@ -43,7 +43,6 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
         return this.service.get_login_challenge(did, challenge);
       })
     )
-
   }
   
   ngOnInit() {
