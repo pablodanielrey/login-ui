@@ -77,7 +77,7 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
       this.login_challenge$.pipe(
         catchError(err => {
           if (err.status == 0) {
-            err.statusText = 'Servidor no accesible';
+            err.error = 'Servidor no accesible';
           }
           throw err;
         })
@@ -95,7 +95,7 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
       },
       e => {
         console.log(e);
-        let message = e.statusText;
+        let message = e.error;
         this.router.navigate([`/login/error/${message}`]).then(v => console.log('navegación exitosa'));
 
         /*
