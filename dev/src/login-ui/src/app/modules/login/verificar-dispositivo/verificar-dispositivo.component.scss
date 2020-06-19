@@ -14,3 +14,16 @@
    opacity: .5;
 
 }
+
+.version {
+   display: flex;
+   align-items: center;
+   color:#ACACAC;
+   font-size: 11px;
+   margin-top: 5px;
+   font-weight: bold;
+   opacity: 0.5;
+   @media screen and (max-width: 768px){
+     display: none;
+   }
+ }

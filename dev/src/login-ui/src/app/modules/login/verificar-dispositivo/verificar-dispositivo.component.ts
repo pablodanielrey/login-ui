@@ -6,6 +6,7 @@ import { of, Observable, combineLatest, throwError } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-verificar-dispositivo',
@@ -14,6 +15,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class VerificarDispositivoComponent implements OnInit, OnDestroy {
 
+  private version = environment.version;
   private subs = [];
 
   ngOnDestroy(): void {
