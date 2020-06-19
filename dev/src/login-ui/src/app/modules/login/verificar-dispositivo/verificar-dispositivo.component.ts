@@ -83,16 +83,23 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
           }
           throw err;
         })
-      ).subscribe(c => {
+      ).subscribe(r => {
         this.mensaje = 'Analizando Requerimiento';
-        if (c['skip']) {
-          // se aceptó el challenge implicitamente, hay que saltar todo el paso de login.
-          let redirect_url = c['redirect_to'];
-          this.document.location.href = redirect_url;
-        } else {
-          // el usuario tiene que loguearse.
-          let challenge = c['challenge'];
-          this.router.navigate([`/login/login/${challenge}`]);
+        let c = r.response;
+        try {
+          if (c['skip']) {
+            // se aceptó el challenge implicitamente, hay que saltar todo el paso de login.
+            let redirect_url = c['redirect_to'];
+            this.document.location.href = redirect_url;
+          } else {
+            // el usuario tiene que loguearse.
+            let challenge = c['challenge'];
+            this.router.navigate([`/login/login/${challenge}`]);
+          }
+        } catch(e) {
+          console.log(e);
+          let message = 'Formato de retorno incorrecto';
+          this.router.navigate([`/login/error/${message}`]).then(v => console.log('navegación exitosa'));
         }
       },
       e => {
