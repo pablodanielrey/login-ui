@@ -9,6 +9,7 @@ import { environment } from '../../../environments/environment';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
+  private version = environment.version;
   private subs = [];
 
   ngOnDestroy(): void {
