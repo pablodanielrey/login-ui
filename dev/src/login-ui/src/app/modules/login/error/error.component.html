@@ -7,7 +7,7 @@
 
             <div class="mensaje">SE PRODUJO UN</div>
             <div class="mensaje"><b>ERROR</b></div>
-            <div class="mensaje">INESPERADO</div>
+            <div class="mensaje">{{message$ | async}}</div>
                
 
             <div class="contenedorDivisor"></div>
@@ -25,5 +25,9 @@
     </mat-card>
             
     <div class="footer animacionLateral"> DiTeSI | Dirección de Tecnologías y Sistemas Informáticos</div>
-   
+    <div class="version animacionLateral">
+        <div><i class="material-icons">bubble_chart</i></div>
+        <div>Versión {{version}}</div>  
+    </div>
+
  </div>

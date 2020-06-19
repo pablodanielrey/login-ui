@@ -37,6 +37,7 @@ const routes: Routes = [
       { path: 'qrcode/activar/:code', component: ActivarQrComponent },
       { path: 'qrcode/activar/:user/:code', component: ActivarQrUserComponent },
       { path: 'qrcode/seleccionar-usuario/:code', component: SeleccionarUsuarioQrComponent },
+      { path: 'error/:message', component: ErrorComponent },
       { path: 'error', component: ErrorComponent }
     ]
   },

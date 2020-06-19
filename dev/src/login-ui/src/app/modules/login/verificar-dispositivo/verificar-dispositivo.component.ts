@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, catchError } from 'rxjs/operators';
 import { of, Observable, combineLatest, throwError } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
@@ -53,15 +53,13 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
       switchMap(challenge => this.service.get_login_challenge(null, challenge))
     )
   }
+
   
-  ngOnInit() {
-    this.mensaje = 'Verificando Dispositivo';
-    this.subs.push(
-      this.login_challenge$.pipe(
+        /*
         map(r => { 
           if(r.status == 409) {
             // challenge ya usado
-            throwError('Challenge ya usado');
+            throwError(' ya usado');
           }
           if (r.status == 404) {
             throwError('Challenge no válido');
@@ -70,6 +68,18 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
             throwError('Error interno procesando el challenge de login')
           }
           return r.response;
+        })*/
+
+
+  ngOnInit() {
+    this.mensaje = 'Verificando Dispositivo';
+    this.subs.push(
+      this.login_challenge$.pipe(
+        catchError(err => {
+          if (err.status == 0) {
+            err.statusText = 'Servidor no accesible';
+          }
+          throw err;
         })
       ).subscribe(c => {
         this.mensaje = 'Analizando Requerimiento';
@@ -84,13 +94,19 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
         }
       },
       e => {
+        console.log(e);
+        let message = e.statusText;
+        this.router.navigate([`/login/error/${message}`]).then(v => console.log('navegación exitosa'));
+
+        /*
         let err = e.error;
         if (err.response['redirect_to'] != undefined) {
           let redirect_url = err.response['redirect_to'];
           this.document.location.href = redirect_url;
         } else {
-          this.router.navigate(['/login/error']);
+          this.router.navigate([`/login/error/]);
         }
+        */
       }
      )
     )
