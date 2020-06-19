@@ -5,7 +5,6 @@ import { map, switchMap } from 'rxjs/operators';
 import { of, Observable, combineLatest, throwError } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
-import { Http2ServerRequest } from 'http2';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
