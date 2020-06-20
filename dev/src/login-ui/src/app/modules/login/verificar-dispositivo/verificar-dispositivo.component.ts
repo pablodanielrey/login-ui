@@ -5,7 +5,7 @@ import { map, switchMap, catchError, tap, retry } from 'rxjs/operators';
 import { of, Observable, combineLatest, throwError } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -56,42 +56,27 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
     )
   }
 
-  
-        /*
-        map(r => { 
-          if(r.status == 409) {
-            // challenge ya usado
-            throwError(' ya usado');
-          }
-          if (r.status == 404) {
-            throwError('Challenge no válido');
-          }
-          if (r.status == 500) {
-            throwError('Error interno procesando el challenge de login')
-          }
-          return r.response;
-        })*/
-
-
-  handleError(error, c): Observable<any> {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      error.message = error.error.message;
-    } else {
-      if (error.status == 0) {
-        error.message = 'Servidor no accesible';
-      }
+  handleError(error) {
+    console.log(error);
+    let message = '';
+    if (error instanceof Error) {
+      message = error.message ? error.message : error.toString();
+    } else if (error instanceof HttpErrorResponse) {
+      message = error.statusText;
     }
-    throw error;
+    if (message == null || message == '') {
+      message = error.toString();
+    }
+    this.router.navigate([`/login/error/${message}`]).then(v => console.log('navegación exitosa'));
   }
+  
+
+  
 
   ngOnInit() {
     this.mensaje = 'Verificando Dispositivo';
     this.subs.push(
-      this.login_challenge$.pipe(
-        catchError(this.handleError),
-      ).subscribe(r => {
+      this.login_challenge$.subscribe(r => {
         this.mensaje = 'Analizando Requerimiento';
         let c = r.response;
         try {
@@ -111,21 +96,8 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
         }
       },
       e => {
-        console.log(e);
-        let message = e.message
-        this.router.navigate([`/login/error/${message}`]).then(v => console.log('navegación exitosa'));
-
-        /*
-        let err = e.error;
-        if (err.response['redirect_to'] != undefined) {
-          let redirect_url = err.response['redirect_to'];
-          this.document.location.href = redirect_url;
-        } else {
-          this.router.navigate([`/login/error/]);
-        }
-        */
-      }
-     )
+        this.handleError(e);
+      })
     )
   }
 
