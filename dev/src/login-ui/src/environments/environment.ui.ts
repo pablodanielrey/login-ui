@@ -15,7 +15,7 @@ export const environment = {
   //oidp_issuer: 'http://oidc:4444/',
 
   client_id: 'login-ui',
-  version: '0.6.0',
+  version: '0.7.0',
   
   url_to_activate_qr: 'http://login:10005/login/qrcode/activar',
   

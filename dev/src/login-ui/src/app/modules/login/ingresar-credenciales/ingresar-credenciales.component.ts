@@ -115,7 +115,7 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
       })
       */
 
-    combineLatest(
+    this.subs.push(combineLatest(
       this.challenge$,
       of({u: this.credenciales.value['usuario'], c: this.credenciales.value['clave']})
     ).pipe(
@@ -136,7 +136,6 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
       let c = r.response;
       let redirect_url = c['redirect_to'];
       this.document.location.href = redirect_url;
-
     }, e => {
       if (e.status == 401) {
         let redirect_url = e.error;
@@ -146,7 +145,7 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
       let message = e.error;
       console.log(e);
       this.router.navigate([`/login/error/${message}`]);
-    })
+    }));
 
   }
 
