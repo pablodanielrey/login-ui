@@ -104,7 +104,12 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
       },
       e => {
         console.log(e);
-        let message = e.error;
+        let message = '';
+        if (typeof e.error === 'undefined') {
+          message = e;
+        } else {
+          message = e.error;
+        }
         this.router.navigate([`/login/error/${message}`]).then(v => console.log('navegación exitosa'));
 
         /*

@@ -13,11 +13,10 @@ export const environment = {
   oidp_issuer: 'http://oidc',
 
   client_id: 'login-ui',
-  version: '0.7.0',
+  version: '0.7.1',
 
   loader: {
     cabecera: 'LOGIN | FCE',
-    version: '0.7.0',
     tituloSistema: 'LOGIN',
     subtituloSistema: '',
     desarrolloSistema: 'DiTeSI | Dirección de Tecnologías y Sistemas Informáticos',
