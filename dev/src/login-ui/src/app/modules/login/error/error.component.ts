@@ -11,8 +11,8 @@ import { environment } from 'src/environments/environment';
 })
 export class ErrorComponent implements OnInit {
 
-  private version: String;
-  private message$: Observable<String>;
+  version: String;
+  message$: Observable<String>;
 
   constructor(private route:ActivatedRoute) {
     this.version = environment.version;

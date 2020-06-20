@@ -15,7 +15,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class VerificarDispositivoComponent implements OnInit, OnDestroy {
 
-  private version = environment.version;
+  version = environment.version;
   private subs = [];
 
   ngOnDestroy(): void {
