@@ -13,7 +13,7 @@ export const environment = {
   oidp_issuer: 'http://oidc',
 
   client_id: 'login-ui',
-  version: '0.7.1',
+  version: '0.7.4',
 
   loader: {
     cabecera: 'LOGIN | FCE',

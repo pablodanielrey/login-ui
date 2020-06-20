@@ -73,16 +73,24 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
         })*/
 
 
+  handleError(error, c): Observable<any> {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      error.message = error.error.message;
+    } else {
+      if (error.status == 0) {
+        error.message = 'Servidor no accesible';
+      }
+    }
+    throw error;
+  }
+
   ngOnInit() {
     this.mensaje = 'Verificando Dispositivo';
     this.subs.push(
       this.login_challenge$.pipe(
-        catchError(err => {
-          if (err.status == 0) {
-            err.error = 'Servidor no accesible';
-          }
-          throw err;
-        })
+        catchError(this.handleError),
       ).subscribe(r => {
         this.mensaje = 'Analizando Requerimiento';
         let c = r.response;
@@ -104,12 +112,7 @@ export class VerificarDispositivoComponent implements OnInit, OnDestroy {
       },
       e => {
         console.log(e);
-        let message = '';
-        if (typeof e.error === 'undefined') {
-          message = e;
-        } else {
-          message = e.error;
-        }
+        let message = e.message
         this.router.navigate([`/login/error/${message}`]).then(v => console.log('navegación exitosa'));
 
         /*
