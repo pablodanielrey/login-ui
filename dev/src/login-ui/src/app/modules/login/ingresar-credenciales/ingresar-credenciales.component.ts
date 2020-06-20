@@ -3,7 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../../../shared/services/login.service';
 import { of, Observable, combineLatest, BehaviorSubject, from, throwError } from 'rxjs';
-import { switchMap, map, tap } from 'rxjs/operators';
+import { switchMap, map, tap, catchError } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
 import { GeolocationService } from 'src/app/shared/services/geolocation.service';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
@@ -95,17 +95,8 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
     );
     */
 
-    combineLatest(
-      this.challenge$,
-      of({u: this.credenciales.value['usuario'], c: this.credenciales.value['clave']})
-    ).pipe(
-      tap(_ => this.accediendo = true),
-      switchMap(rs => {
-        let challenge = rs[0];
-        let creds = rs[1];
-        return this.service.login(creds.u, creds.c, null, challenge);
-      }),
-      tap(_ => this.accediendo = false),
+
+      /*
       map(r => {
         if (r.status == 500) {
           throwError('error inesperado en el servidor cuando se procesaban las credenciales');
@@ -122,17 +113,39 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
         }        
         return r.response;
       })
+      */
+
+    combineLatest(
+      this.challenge$,
+      of({u: this.credenciales.value['usuario'], c: this.credenciales.value['clave']})
+    ).pipe(
+      tap(_ => this.accediendo = true),
+      switchMap(rs => {
+        let challenge = rs[0];
+        let creds = rs[1];
+        return this.service.login(creds.u, creds.c, null, challenge);
+      }),
+      tap(_ => this.accediendo = false),
+      catchError(err => {
+        if (err.status == 0) {
+          err.error = 'Servidor no accesible';
+        }
+        throw err;
+      })
     ).subscribe(r => {
-      let redirect_url = r['redirect_to'];
+      let c = r.response;
+      let redirect_url = c['redirect_to'];
       this.document.location.href = redirect_url;
+
     }, e => {
-      let err = e.error;
-      if (err.response['redirect_to'] != undefined) {
-        let redirect_url = err.response['redirect_to'];
+      if (e.status == 401) {
+        let redirect_url = e.error;
         this.document.location.href = redirect_url;
-      } else {
-        this.router.navigate(['/login/error']);
       }
+
+      let message = e.error;
+      console.log(e);
+      this.router.navigate([`/login/error/${message}`]);
     })
 
   }

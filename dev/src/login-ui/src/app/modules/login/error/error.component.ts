@@ -18,7 +18,7 @@ export class ErrorComponent implements OnInit {
     this.version = environment.version;
     this.message$ = route.paramMap.pipe(
       map(params => params.get('message')),
-      map(message => (message == null) ? '' : message)
+      map(message => (message == null) ? '' : message)      
     )
   }
 
