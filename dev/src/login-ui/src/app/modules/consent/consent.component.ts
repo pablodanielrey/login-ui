@@ -1,34 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, map, tap } from 'rxjs/operators';
+import { Observable, of, Subscription } from 'rxjs';
+import { CompileTemplateMetadata } from '@angular/compiler';
 
 @Component({
   selector: 'app-consent',
   templateUrl: './consent.component.html',
   styleUrls: ['./consent.component.scss']
 })
-export class ConsentComponent implements OnInit {
+export class ConsentComponent implements OnInit, OnDestroy {
+
+  private subs: Subscription[] = [];
+  private challenge$: Observable<String>;
 
   constructor(private route:ActivatedRoute,
               private router:Router) { 
+  }
 
+  ngOnDestroy(): void {
+    this.subs.forEach(s => s.unsubscribe());
   }
 
   ngOnInit() {
-    this.route.queryParamMap.subscribe(p => {
+    this.subs.push(this.route.queryParamMap.subscribe(p => {
       let challenge = p.get('consent_challenge');
-
-      if (!challenge) {
-        /*
-          TODO: WAlter aca hay que mostrar algun error de requerimineto inválido en vez de redirigir.,
-        */
-        window.location.href = 'https://www.au24.econo.unlp.edu.ar';
+      if (challenge) {
+        this.router.navigate([`/email/analize/${challenge}`]).then(v => console.log('navegación existosa'));
       }
-
-      //this.router.navigate([`/consent/verify/${challenge}`]);
-      // es necesario que tengan el mail alternativo confirmado.
-      this.router.navigate([`/email/analize/${challenge}`]);
-    })
+    }));
   }
 
 }

@@ -3,7 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../../../shared/services/login.service';
 import { of, Observable, combineLatest, BehaviorSubject, from, throwError } from 'rxjs';
-import { switchMap, map, tap } from 'rxjs/operators';
+import { switchMap, map, tap, catchError } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
 import { GeolocationService } from 'src/app/shared/services/geolocation.service';
 import { HardwareService } from 'src/app/shared/services/hardware.service';
@@ -56,6 +56,21 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
+
+  handleError(error, c): Observable<any> {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      error.message = error.error.message;
+    } else {
+      // error retornado por httpClient cuando no se conecta al servidor.
+      if (error.status == 0) {
+        error.message = 'Servidor no accesible';
+      }
+    }
+    throw error;
+  }
+
   acceder() {
 
     if (!this.credenciales.valid) {
@@ -63,39 +78,7 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
       return;
     }
 
-    /*
-    this.subs.push(
-      combineLatest(
-        this.device_id$,
-        this.challenge$,
-        of({u: this.credenciales.value['usuario'], c: this.credenciales.value['clave']})
-      ).pipe(
-        switchMap(rs => {
-          let did = rs[0];
-          let challenge = rs[1];
-          let creds = rs[2];
-          this.accediendo = true;
-          return this.service.login(creds.u, creds.c, did, challenge);
-        })
-      ).subscribe(r => {
-        this.accediendo = false;
-        console.log(r);
-        let redirect_url = r['redirect_to'];
-        this.document.location.href = redirect_url;
-      }, e => {
-        this.accediendo = false;
-        let err = e.error;
-        if (err.response['redirect_to'] != undefined) {
-          let redirect_url = err.response['redirect_to'];
-          this.document.location.href = redirect_url;
-        } else {
-          this.router.navigate(['/login/error']);
-        }
-      })
-    );
-    */
-
-    combineLatest(
+    this.subs.push(combineLatest(
       this.challenge$,
       of({u: this.credenciales.value['usuario'], c: this.credenciales.value['clave']})
     ).pipe(
@@ -106,34 +89,21 @@ export class IngresarCredencialesComponent implements OnInit, OnDestroy {
         return this.service.login(creds.u, creds.c, null, challenge);
       }),
       tap(_ => this.accediendo = false),
-      map(r => {
-        if (r.status == 500) {
-          throwError('error inesperado en el servidor cuando se procesaban las credenciales');
-        }
-        if (r.status == 400) {
-          throwError('formato incorrecto de envío de credenciales');
-        }
-        if(r.status == 409) {
-          // challenge ya usado
-          throwError('Challenge ya usado');
-        }
-        if (r.status == 404) {
-          throwError('Challenge no válido');
-        }        
-        return r.response;
-      })
+      catchError(this.handleError)
     ).subscribe(r => {
-      let redirect_url = r['redirect_to'];
+      let c = r.response;
+      let redirect_url = c['redirect_to'];
       this.document.location.href = redirect_url;
     }, e => {
-      let err = e.error;
-      if (err.response['redirect_to'] != undefined) {
-        let redirect_url = err.response['redirect_to'];
+      if (e.status !== 'undefined' && e.status == 401) {
+        let redirect_url = e.error;
         this.document.location.href = redirect_url;
       } else {
-        this.router.navigate(['/login/error']);
+        let message = e.message;
+        console.log(e);
+        this.router.navigate([`/login/error/${message}`]);
       }
-    })
+    }));
 
   }
 
